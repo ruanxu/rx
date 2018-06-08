@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rx_javaScript", "rx_javaScript\rx_javaScript.csproj", "{3D89FE66-955F-4F61-B26C-ACCFDA117B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rx", "rx\rx.csproj", "{645D950D-A709-4831-AA10-B24240CDFAD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rx_orm_addin", "rx_orm_addin\rx_orm_addin.csproj", "{54C786E5-FD14-4036-92AE-E9F25B71534B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D89FE66-955F-4F61-B26C-ACCFDA117B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D89FE66-955F-4F61-B26C-ACCFDA117B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D89FE66-955F-4F61-B26C-ACCFDA117B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D89FE66-955F-4F61-B26C-ACCFDA117B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645D950D-A709-4831-AA10-B24240CDFAD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645D950D-A709-4831-AA10-B24240CDFAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645D950D-A709-4831-AA10-B24240CDFAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645D950D-A709-4831-AA10-B24240CDFAD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

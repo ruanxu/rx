@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{645D950D-A709-4831-AA10-B24240CDFAD3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>rx</RootNamespace>
+    <AssemblyName>rx</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\rx.XML</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\rx.xml</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="date_time_converter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rx_attribute\rx_risk_procAttribute.cs" />
+    <Compile Include="rx_attribute\rx_riskAttribute.cs" />
+    <Compile Include="rx_attribute\rx_risk_deleteAttribute.cs" />
+    <Compile Include="rx_attribute\rx_risk_insertAttribute.cs" />
+    <Compile Include="rx_attribute\rx_risk_updateAttribute.cs" />
+    <Compile Include="rx_entity\dml_result.cs" />
+    <Compile Include="rx_entity\rx_entity.cs" />
+    <Compile Include="rx_entity\rx_field.cs" />
+    <Compile Include="rx_entity\rx_model.cs" />
+    <Compile Include="rx_entity\rx_model_base.cs" />
+    <Compile Include="rx_entity\rx_strong_type.cs" />
+    <Compile Include="rx_entity\rx_table_entity.cs" />
+    <Compile Include="rx_entity\rx_view.cs" />
+    <Compile Include="rx_entity\rx_view_base.cs" />
+    <Compile Include="rx_handle\rx_handle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_interface\i_rx_model.cs" />
+    <Compile Include="rx_interface\i_rx_risk.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_interface\i_rx_risk_delete.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_interface\i_rx_risk_insert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_interface\i_rx_risk_proc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_interface\i_rx_risk_update.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_interface\i_rx_view.cs" />
+    <Compile Include="rx_manager.cs" />
+    <Compile Include="rx_mvc_controller\rx_mvc_api_controller.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_mvc_controller\rx_mvc_controller.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rx_web_form\rx_web_form.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SqlMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Newtonsoft.Json.dll" />
+    <Content Include="lib\System.Net.Http.Formatting.dll" />
+    <Content Include="lib\System.Web.Http.dll" />
+    <Content Include="lib\System.Web.Http.WebHost.dll" />
+    <Content Include="lib\System.Web.Mvc.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

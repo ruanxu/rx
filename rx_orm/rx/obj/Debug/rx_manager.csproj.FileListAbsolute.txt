@@ -1,0 +1,6 @@
+E:\c#\rx_javaScript\rx_manager\obj\Debug\rx_manager.csprojResolveAssemblyReference.cache
+E:\c#\rx_javaScript\rx_manager\bin\Debug\rx_manager.dll
+E:\c#\rx_javaScript\rx_manager\bin\Debug\rx_manager.pdb
+E:\c#\rx_javaScript\rx_manager\bin\Debug\System.Web.Mvc.dll
+E:\c#\rx_javaScript\rx_manager\obj\Debug\rx_manager.dll
+E:\c#\rx_javaScript\rx_manager\obj\Debug\rx_manager.pdb

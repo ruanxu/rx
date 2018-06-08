@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>rx_orm_addin</name>
+    </assembly>
+    <members>
+        <member name="T:rx_orm_addin.Connect">
+            <summary>用于实现外接程序的对象。</summary>
+            <seealso class='IDTExtensibility2' />
+        </member>
+        <member name="M:rx_orm_addin.Connect.#ctor">
+            <summary>实现外接程序对象的构造函数。请将您的初始化代码置于此方法内。</summary>
+        </member>
+        <member name="M:rx_orm_addin.Connect.OnConnection(System.Object,Extensibility.ext_ConnectMode,System.Object,System.Array@)">
+            <summary>实现 IDTExtensibility2 接口的 OnConnection 方法。接收正在加载外接程序的通知。</summary>
+            <param term='application'>宿主应用程序的根对象。</param>
+            <param term='connectMode'>描述外接程序的加载方式。</param>
+            <param term='addInInst'>表示此外接程序的对象。</param>
+            <seealso class='IDTExtensibility2' />
+        </member>
+        <member name="M:rx_orm_addin.Connect.OnDisconnection(Extensibility.ext_DisconnectMode,System.Array@)">
+            <summary>实现 IDTExtensibility2 接口的 OnDisconnection 方法。接收正在卸载外接程序的通知。</summary>
+            <param term='disconnectMode'>描述外接程序的卸载方式。</param>
+            <param term='custom'>特定于宿主应用程序的参数数组。</param>
+            <seealso class='IDTExtensibility2' />
+        </member>
+        <member name="M:rx_orm_addin.Connect.OnAddInsUpdate(System.Array@)">
+            <summary>实现 IDTExtensibility2 接口的 OnAddInsUpdate 方法。当外接程序集合已发生更改时接收通知。</summary>
+            <param term='custom'>特定于宿主应用程序的参数数组。</param>
+            <seealso class='IDTExtensibility2' />		
+        </member>
+        <member name="M:rx_orm_addin.Connect.OnStartupComplete(System.Array@)">
+            <summary>实现 IDTExtensibility2 接口的 OnStartupComplete 方法。接收宿主应用程序已完成加载的通知。</summary>
+            <param term='custom'>特定于宿主应用程序的参数数组。</param>
+            <seealso class='IDTExtensibility2' />
+        </member>
+        <member name="M:rx_orm_addin.Connect.OnBeginShutdown(System.Array@)">
+            <summary>实现 IDTExtensibility2 接口的 OnBeginShutdown 方法。接收正在卸载宿主应用程序的通知。</summary>
+            <param term='custom'>特定于宿主应用程序的参数数组。</param>
+            <seealso class='IDTExtensibility2' />
+        </member>
+        <member name="M:rx_orm_addin.Connect.QueryStatus(System.String,EnvDTE.vsCommandStatusTextWanted,EnvDTE.vsCommandStatus@,System.Object@)">
+            <summary>实现 IDTCommandTarget 接口的 QueryStatus 方法。此方法在更新该命令的可用性时调用</summary>
+            <param term='commandName'>要确定其状态的命令的名称。</param>
+            <param term='neededText'>该命令所需的文本。</param>
+            <param term='status'>该命令在用户界面中的状态。</param>
+            <param term='commandText'>neededText 参数所要求的文本。</param>
+            <seealso class='Exec' />
+        </member>
+        <member name="M:rx_orm_addin.Connect.Exec(System.String,EnvDTE.vsCommandExecOption,System.Object@,System.Object@,System.Boolean@)">
+            <summary>实现 IDTCommandTarget 接口的 Exec 方法。此方法在调用该命令时调用。</summary>
+            <param term='commandName'>要执行的命令的名称。</param>
+            <param term='executeOption'>描述该命令应如何运行。</param>
+            <param term='varIn'>从调用方传递到命令处理程序的参数。</param>
+            <param term='varOut'>从命令处理程序传递到调用方的参数。</param>
+            <param term='handled'>通知调用方此命令是否已被处理。</param>
+            <seealso class='Exec' />
+        </member>
+        <member name="F:rx_orm_addin.GenerateCodeFrom.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:rx_orm_addin.GenerateCodeFrom.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:rx_orm_addin.GenerateCodeFrom.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:rx_orm_addin.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:rx_orm_addin.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:rx_orm_addin.Properties.Resources.Culture">
+            <summary>
+              使用此强类型资源类，为所有资源查找
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:rx_orm_addin.Properties.Resources.Newtonsoft_Json">
+            <summary>
+              查找 System.Byte[] 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:rx_orm_addin.Properties.Resources.rx">
+            <summary>
+              查找 System.Byte[] 类型的本地化资源。
+            </summary>
+        </member>
+        <!-- 对于成员“P:rx_orm_addin.Properties.Resources.rx_assembly”忽略有格式错误的 XML 注释 -->
+        <member name="P:rx_orm_addin.Properties.Resources.rx_assembly_config">
+            <summary>
+              查找类似 var rx_assembly_config =
+               {
+                   &quot;class&quot;:
+                       {
+                           &quot;default&quot;:
+                               {
+                                   rx_table:
+                                       {
+                                           //table的class
+                                           table: &quot;rx-table&quot;,
+                                           //table的页码工具的class（本身也是table）
+                                           page_bar: &quot;rx-table&quot;,
+                                           //table的页码工具的总行数的span的class
+                                           row_count: &quot;rx-tabl [字符串的其余部分被截断]&quot;; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:rx_orm_addin.Properties.Resources.rx_csharp">
+             <summary>
+               查找类似 //C#_____String
+            String.Format = function (text) {
+                for (var i = 1; i &lt; arguments.length; i++) {
+                    text = text.replace(&quot;{&quot; + (i - 1) + &quot;}&quot;, arguments[i]);
+                }
+                return text;
+            }
+            
+            String.IsNullOrEmpty = function (text) {
+                return (text == null || text == &quot;&quot;) ? true : false;
+            }
+            
+            String.IsNullOrWhiteSpace = function (text) {
+                return (text == null || text.trim() == &quot;&quot;) ? true : false;
+            }
+            
+            String.Join = function (separator, list) {
+                var str = &quot;&quot;;
+                var index = 0;
+                for (var [字符串的其余部分被截断]&quot;; 的本地化字符串。
+             </summary>
+        </member>
+        <!-- 对于成员“P:rx_orm_addin.Properties.Resources.rx_js”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“P:rx_orm_addin.Properties.Resources.rx_manager”忽略有格式错误的 XML 注释 -->
+        <member name="P:rx_orm_addin.Properties.Resources.rx_xml">
+             <summary>
+               查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+            &lt;doc&gt;
+                &lt;assembly&gt;
+                    &lt;name&gt;rx&lt;/name&gt;
+                &lt;/assembly&gt;
+                &lt;members&gt;
+                    &lt;member name=&quot;T:rx.dml_result&quot;&gt;
+                        &lt;summary&gt;
+                        dml操作的结果类型
+                        &lt;/summary&gt;
+                    &lt;/member&gt;
+                    &lt;member name=&quot;M:rx.dml_result.#ctor(System.String,rx.dml_command_type)&quot;&gt;
+                        &lt;summary&gt;
+                        实例化一个dml操作结果对象
+                        &lt;/summary&gt;
+                        &lt;param name=&quot;entity_name&quot;&gt;实体名称&lt;/param&gt;
+                        &lt;param name=&quot;result_type&quot;&gt;dml操作结果类型&lt;/param&gt;
+                    &lt;/me [字符串的其余部分被截断]&quot;; 的本地化字符串。
+             </summary>
+        </member>
+    </members>
+</doc>

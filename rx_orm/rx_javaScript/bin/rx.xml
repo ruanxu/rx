@@ -1,0 +1,2819 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>rx</name>
+    </assembly>
+    <members>
+        <member name="T:rx.rx_risk_procAttribute">
+            <summary>
+            允许执行存储过程的特性
+            </summary>
+        </member>
+        <member name="T:rx.rx_risk_deleteAttribute">
+            <summary>
+            允许删除的特性
+            </summary>
+        </member>
+        <member name="T:rx.rx_risk_insertAttribute">
+            <summary>
+            允许添加的特性
+            </summary>
+        </member>
+        <member name="T:rx.rx_risk_updateAttribute">
+            <summary>
+            允许更新的特性
+            </summary>
+        </member>
+        <member name="T:rx.dml_result">
+            <summary>
+            dml操作的结果类型
+            </summary>
+        </member>
+        <member name="M:rx.dml_result.#ctor(System.String,rx.dml_command_type)">
+            <summary>
+            实例化一个dml操作结果对象
+            </summary>
+            <param name="entity_name">实体名称</param>
+            <param name="result_type">dml操作结果类型</param>
+        </member>
+        <member name="P:rx.dml_result.result_code">
+            <summary>
+            dml操作结果的枚举值，success, fail, error, vague 
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.code">
+            <summary>
+            获取dml操作结果的枚举值字符串，"success", "fail", "error", "vague" 
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.len">
+            <summary>
+            dml操作的影响行数
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.message">
+            <summary>
+            dml操作的信息
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.entity_name">
+            <summary>
+            dml操作的实体名称，与数据库中对应的标明一致
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.command_type">
+            <summary>
+            执行dml操作的类型枚举值，update, delete, insert, vague
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.command">
+            <summary>
+            获取执行dml操作的类型枚举值的字符串，"update", "delete", "insert", "vague"
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.date">
+            <summary>
+            信息产生的时间
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.sql_query">
+            <summary>
+            被执行的sql语句
+            </summary>
+        </member>
+        <member name="P:rx.dml_result.tag">
+            <summary>
+            任意存储容器属性
+            </summary>
+        </member>
+        <member name="T:rx.dml_result_code">
+            <summary>
+            dml操作结果的枚举类型
+            success：成功
+            fail：失败
+            error：异常
+            vague：不明确的
+            </summary>
+        </member>
+        <member name="T:rx.rx_entity">
+            <summary>
+            rx_orm中的基础实体类，弱类型
+            <para>键值对规则</para>
+            <para>直接使用rx_manager进行弱类型开发，性能搞</para>
+            <para>rx_manager要求物理表中必须存在字段id，类型int，自增</para>
+            </summary>
+        </member>
+        <!-- 对于成员“M:rx.rx_entity.#ctor(System.String)”忽略有格式错误的 XML 注释 -->
+        <member name="M:rx.rx_entity.set_rx_field(System.String,System.Nullable{rx.compare_symbol},System.Nullable{rx.logic_symbol},System.Nullable{rx.date_format_type},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Object)">
+            <summary>
+            这个方法是为了一次性链式操作设置指定key的rx_field属性而存在的
+            <para>【注意】执行这个方法会直接在where_key中加入这个key,已经存在同名key将不会重复加入</para>
+            <para>链式操作，不需要再实例化对象的时候声明局部变量了</para>
+            <para>命名参数，可以使用命名参数的方式进行传值更加简化传参操作（例子: compare: compare_symbol.contain）</para>
+            </summary>
+            <param name="key">rx_field的key</param>
+            <param name="compare">sql语句中的条件运算符，compare_symbol枚举</param>
+            <param name="logic">sql语句中的逻辑运算符，logic_symbol枚举</param>
+            <param name="date_format_type">base_value对时间数据的格式化方式</param>
+            <param name="auto_remove">在生成sql语句时这个字段是否会自动被删除</param>
+            <param name="build_quote">在生成sql语句时这个字段是否会生成单引号(')</param>
+            <param name="value">条件语句(in或者not in)操作时因为属性id是强类型的，可能不能赋值你要求的值，这个时候可以使用这个参数来解决</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.set_where_keys(System.String[])">
+            <summary>
+            设置实体的where_key属性
+            指定的key要存在与实体的key中
+            </summary>
+            <param name="where_keys"></param>
+        </member>
+        <member name="M:rx.rx_entity.clear_where_keys">
+            <summary>
+            删除所有的where_keys
+            </summary>
+        </member>
+        <member name="M:rx.rx_entity.set_select_display_keys(System.String[])">
+            <summary>
+            <para>设置实体的select_display_keys属性</para>
+            <para>指定的key要存在与实体的key中</para>
+            <para>连式操作</para>
+            </summary>
+            <param name="select_display_keys"></param>
+        </member>
+        <member name="M:rx.rx_entity.clear_select_display_keys">
+            <summary>
+            删除所有的select_display_keys
+            <para>连式操作</para>
+            </summary>
+        </member>
+        <member name="M:rx.rx_entity.clone">
+            <summary>
+            克隆当前这个实体的对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.to_dictionary">
+            <summary>
+            转换为Dictionary&lt;string, object&gt;，便于进行json序列化或者其他序列化
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.to_dictionary(System.Boolean)">
+            <summary>
+            转换为Dictionary&lt;string, object&gt;，便于进行json序列化或者其他序列化
+            </summary>
+            <param name="is_base_value">转换时是否使用base_value，主要针对时间字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.request_fill(System.Web.HttpRequest)">
+            <summary>
+            将web请求的request对象中的的值填充置这个实体的对象中
+            request中的key要和当前对象中的key对应才能正确填充，不一致的key将会忽略
+            <para>连式操作</para>
+            </summary>
+        </member>
+        <member name="M:rx.rx_entity.request_fill(System.Web.HttpRequestBase)">
+            <summary>
+            将web请求的request对象中的的值填充置这个实体的对象中
+            request中的key要和当前对象中的key对应才能正确填充，不一致的key将会忽略
+            <para>连式操作</para>
+            </summary>
+            <param name="request">MVC项目某些情况下会使用到</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.Add(System.String,rx.rx_field)">
+            <summary>
+            替换父类方法
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+            <param name="field">rx_field</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.Remove(System.String)">
+            <summary>
+            替换父类方法
+            <para>链式操作</para>
+            <para>如果发生异常ArgumentNullException,将会返回null</para>
+            </summary>
+            <param name="key">key</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_entity.Clear">
+            <summary>
+            替换父类方法
+            <para>链式操作</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:rx.rx_entity.entity_name">
+            <summary>
+            entity_name名称与数据库对应的表名或者视图名是一致的
+            </summary>
+        </member>
+        <member name="P:rx.rx_entity.command_type">
+            <summary>
+            在执行指定dml操作时候需要指定的枚举值
+            vague是默认值
+            update执行更新操作
+            delete执行删除操作
+            insert执行添加操作
+            </summary>
+        </member>
+        <member name="P:rx.rx_entity.is_use_null">
+            <summary>
+            <para>sql指定执行【dml insert与update】操作时是否使用null值</para>
+            <para>true:使用</para>
+            <para>false:不使用</para>
+            <para>默认值为false</para>
+            <para>例子: key为"login_name",value为null,如果is_use_null为false，则不使用该字段。</para>
+            </summary>
+        </member>
+        <member name="P:rx.rx_entity.where_keys">
+            <summary>
+            <para>获取实体的where_key属性</para>
+            <para>强制指定在执行各类sql语句参与where子句条件查询时使用实体的哪些key</para>
+            <para>会受到is_use_null属性的影响</para>
+            </summary>
+        </member>
+        <member name="P:rx.rx_entity.select_display_keys">
+            <summary>
+            <para>获取需要查询的字段字符串</para>
+            <para>没有使用set_select_display_keys进行设置结果为*</para>
+            /// <para>连式操作</para>
+            </summary>
+        </member>
+        <member name="T:rx.dml_command_type">
+            <summary>
+            dml操作的枚举类型
+            </summary>
+        </member>
+        <member name="F:rx.dml_command_type.update">
+            <summary>
+            更新操作
+            </summary>
+        </member>
+        <member name="F:rx.dml_command_type.delete">
+            <summary>
+            删除操作
+            </summary>
+        </member>
+        <member name="F:rx.dml_command_type.insert">
+            <summary>
+            添加操作
+            </summary>
+        </member>
+        <member name="F:rx.dml_command_type.vague">
+            <summary>
+            不明确的,默认值
+            </summary>
+        </member>
+        <member name="M:rx.rx_object.to_dictionary_list(System.Collections.Generic.List{rx.rx_entity})">
+            <summary>
+            将rx_entity类型List集合 转换为List集合的字典
+            </summary>
+            <param name="rx_entity_list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_dictionary_array(System.Collections.Generic.List{rx.rx_entity})">
+            <summary>
+            将rx_entity类型List集合 转换为数组的字典
+            </summary>
+            <param name="rx_entity_list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_dictionary_list(rx.rx_entity[])">
+            <summary>
+            将rx_entity类型数组 转换为List集合的字典
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_dictionary_array(rx.rx_entity[])">
+            <summary>
+            将rx_entity对象数字 转换字典数字
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_json_string(rx.rx_entity)">
+            <summary>
+            转换为JSON字符串
+            </summary>
+            <param name="rx_entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_json_string(System.Collections.Generic.List{rx.rx_entity})">
+            <summary>
+            转换为JSON字符串
+            </summary>
+            <param name="rx_entity_list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_json_string(rx.rx_entity[])">
+            <summary>
+            转换为JSON字符串
+            </summary>
+            <param name="rx_entity_array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_object.to_json_string(rx.rx_table_entity)">
+            <summary>
+            转换为JSON字符串
+            </summary>
+            <param name="rx_table_entity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:rx.rx_field">
+            <summary>
+            rx系列orm中【字段的】类型
+            </summary>
+        </member>
+        <member name="M:rx.rx_field.build_query(System.Boolean)">
+            <summary>
+            运算符转换where字符串的方法
+            </summary>
+            <param name="show_entity_name">是否在生成SQL语句的字段时加入实体名称。 false：[字段名]   true:[表名].[字段名]</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_field.build_query_not_symbol(System.Boolean)">
+            <summary>
+            转换key=value字符串的方法
+            </summary>
+            <param name="show_entity_name">是否在生成SQL语句的字段时加入实体名称。 false：[字段名]   true:[表名].[字段名]</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_field.empty(System.String,rx.rx_entity)">
+            <summary>
+            生成一个空的rx_field
+            </summary>
+            <param name="key"></param>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_field.ToString">
+            <summary>
+            直接ToString()这个rx_field会返回value.ToString()
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:rx.rx_field.base_value">
+            <summary>
+            本质value
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.value">
+            <summary>
+            字段存放的值，与base_value区别只要体现在DateTime类型的值，base_value不受date_format_type的影响，value会受date_format_type的影响
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.base_value_class_name">
+            <summary>
+            base_value的class类型名称
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.auto_remove">
+            <summary>
+            在处理时是否自动删除该字段，默认值true,可以防止某些特殊情况下id字段被删除
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.compare_symbol">
+            <summary>
+            字段的where比较条件运算符枚举，equal, not_equal, greater, greater_equal, less, less_equal, like, contain, not_contain
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.logic_symbol">
+            <summary>
+            字段的逻辑运算符，and，or
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.build_quote">
+            <summary>
+            该字段生成时是否生成单引号（'），如：where field = 'value' 或者 set field = 'value'，默认值为true
+            </summary>
+        </member>
+        <member name="P:rx.rx_field.date_format_type">
+            <summary>
+            时间格式化枚举，value为DateTime类型时会格式化为指定格式的时间字符串
+            </summary>
+        </member>
+        <member name="T:rx.compare_symbol">
+            <summary>
+            字段的sql条件匹配符号
+            equal: 等于
+            not_equal: 不等于
+            greater: 大于
+            greater_equal: 大于等于
+            less： 小于
+            less_equal: 小于等于
+            like: like '%value%'
+            begin_like: like 'value%'
+            end_like: like '%value'
+            null_like: like 'value' 通配符自己写
+            contain: in (value)
+            not_contain: not in (value)
+            contain_arr:特殊的数组包含比较
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.equal">
+            <summary>
+            等值匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.not_equal">
+            <summary>
+            不等值匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.greater">
+            <summary>
+            大于匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.greater_equal">
+            <summary>
+            大于等于匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.less">
+            <summary>
+            小于匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.less_equal">
+            <summary>
+            小于等于匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.like">
+            <summary>
+            模糊匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.begin_like">
+            <summary>
+            头模糊匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.end_like">
+            <summary>
+            尾模糊匹配
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.null_like">
+            <summary>
+            无通配符匹配，需要自行在value写入通配符
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.contain">
+            <summary>
+            包含匹配（in）
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.not_contain">
+            <summary>
+            不包含匹配（not in）
+            </summary>
+        </member>
+        <member name="F:rx.compare_symbol.contain_arr">
+            <summary>
+            特殊包含匹配（数组与数组的交集匹配）
+            </summary>
+        </member>
+        <member name="T:rx.logic_symbol">
+            <summary>
+            字段sql逻辑运算符
+            and: 并且
+            or: 或者
+            </summary>
+        </member>
+        <member name="T:rx.date_format_type">
+            <summary>
+            时间格式化类型枚举
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.date_time">
+            <summary>
+            yyyy-MM-dd HH:mm:ss
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.date">
+            <summary>
+            yyyy-MM-dd
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.time">
+            <summary>
+            HH:mm:ss
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.year_month_day_hour_minute">
+            <summary>
+            yyyy-MM-dd HH:mm
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.year_month_day_hour">
+            <summary>
+            yyyy-MM-dd HH
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.year_month">
+            <summary>
+            yyyy-MM
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.hour_minute">
+            <summary>
+            HH:mm
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.year">
+            <summary>
+            yyyy
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.month">
+            <summary>
+            MM
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.day">
+            <summary>
+            dd
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.hour">
+            <summary>
+            HH
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.minute">
+            <summary>
+            mm
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.second">
+            <summary>
+            ss
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.day_of_week">
+            <summary>
+            这一天是星期几
+            </summary>
+        </member>
+        <member name="F:rx.date_format_type.day_of_year">
+            <summary>
+            这一年的第几天
+            </summary>
+        </member>
+        <member name="T:rx.rx_model`1">
+            <summary>
+            这个类是rx类型orm强实体类【表 table】的父类
+            </summary>
+        </member>
+        <member name="T:rx.rx_model_base">
+            <summary>
+            这个类是rx类型orm强实体类【表 table】的最终基类
+            </summary>
+        </member>
+        <member name="T:rx.rx_strong_type">
+            <summary>
+            这个类是rx类型orm强类型的公共父类
+            </summary>
+        </member>
+        <member name="M:rx.rx_strong_type.set_where_keys(System.String[])">
+            <summary>
+            设置实体的where_key属性
+            指定的key要存在与实体的key中
+            </summary>
+            <param name="where_keys"></param>
+        </member>
+        <member name="M:rx.rx_strong_type.clear_where_keys">
+            <summary>
+            删除所有的where_keys
+            </summary>
+        </member>
+        <member name="M:rx.rx_strong_type.clone``1">
+            <summary>
+            原型克隆方法
+            </summary>
+            <typeparam name="T">rx_model&lt;T&gt;</typeparam>
+            <returns>rx_model&lt;T&gt;</returns>
+        </member>
+        <member name="M:rx.rx_strong_type.add``1(System.String,rx.rx_field)">
+            <summary>
+            为实体类强行添加一个rx_field，被添加rx_field只能通过rx_entity的键值对进行访问
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+            <param name="field">rx_field</param>
+        </member>
+        <member name="M:rx.rx_strong_type.remove``1(System.String)">
+            <summary>
+            为实体类强行删除一个rx_field，如果删除的是一个强属性，那么这个属性在使用时会发生异常
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="P:rx.rx_strong_type.rx_entity">
+            <summary>
+            实体本质rx_entity对象
+            </summary>
+        </member>
+        <member name="P:rx.rx_strong_type.Keys">
+            <summary>
+            rx_entity的Keys
+            </summary>
+        </member>
+        <member name="P:rx.rx_strong_type.Item(System.String)">
+            <summary>
+            直接通过键值对访问rx_entity中的rx_field
+            </summary>
+            <param name="key">key</param>
+            <returns>rx_field</returns>
+        </member>
+        <member name="P:rx.rx_strong_type.command_type">
+            <summary>
+            在执行指定dml操作时候需要指定的枚举值
+            vague是默认值
+            update执行更新操作
+            delete执行删除操作
+            insert执行添加操作
+            </summary>
+        </member>
+        <member name="P:rx.rx_strong_type.is_use_null">
+            <summary>
+            <para>sql指定执行【dml insert与update】操作时是否使用null值</para>
+            <para>true:使用</para>
+            <para>false:不使用</para>
+            <para>默认值为false</para>
+            <para>例子: key为"login_name",value为null,如果is_use_null为false，则不使用该字段。</para>
+            </summary>
+        </member>
+        <member name="P:rx.rx_strong_type.where_keys">
+            <summary>
+            <para>获取实体的where_key属性</para>
+            <para>强制指定在执行各类sql语句参与where子句条件查询时使用实体的哪些key</para>
+            <para>会受到is_use_null属性的影响</para>
+            </summary>
+        </member>
+        <member name="M:rx.rx_model_base.add``1(System.String,rx.rx_field)">
+            <summary>
+            为实体类强行添加一个rx_field，被添加rx_field只能通过rx_entity的键值对进行访问
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+            <param name="field">rx_field</param>
+        </member>
+        <member name="M:rx.rx_model_base.remove``1(System.String)">
+            <summary>
+            为实体类强行删除一个rx_field，如果删除的是一个强属性，那么这个属性在使用时会发生异常
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="M:rx.rx_model_base.set_where_keys(System.String[])">
+            <summary>
+            设置实体的where_key属性
+            指定的key要存在与实体的key中
+            </summary>
+            <param name="where_keys"></param>
+        </member>
+        <member name="M:rx.rx_model_base.clear_where_keys">
+            <summary>
+            删除所有的where_keys
+            </summary>
+        </member>
+        <member name="M:rx.rx_model`1.#ctor">
+            <summary>
+            如果你继承了这个类型，那么子类必须是存在表或者视图的名字，否则会发生异常
+            </summary>
+        </member>
+        <member name="M:rx.rx_model`1.clone">
+            <summary>
+            泛型克隆当前这个实体的对象
+            </summary>
+            <returns>T</returns>
+        </member>
+        <member name="M:rx.rx_model`1.request_fill(System.Web.HttpRequest)">
+            <summary>
+            将web请求的request对象中的的值填充置这个model的rx_entity的对象中
+            request中的key要和当前对象中的key对应才能正确填充，不一致的key将会忽略
+            </summary>
+        </member>
+        <member name="M:rx.rx_model`1.request_fill(System.Web.HttpRequestBase)">
+            <summary>
+            将web请求的request对象中的的值填充置这个model的rx_entity的对象中
+            request中的key要和当前对象中的key对应才能正确填充，不一致的key将会忽略
+            </summary>
+            <param name="request">MVC项目某些情况下会使用到</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_model`1.get_entitys(System.String[])">
+            <summary>
+            默认根据实体中不为null的属性进行条件查询,也可以根据当前实体对象的where_keys属性进行指定key的where条件查询
+            <para>where_keys参数可以多次指定参与where条件运算的key，并且可以指定顺序</para>
+            <param name="where_keys">不传该参数就会使用所有不为null的属性进行条件查询，可以使用参数设置where_keys需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常</param>
+            </summary>
+            <returns>满足查询条件的当前实体对象的集合</returns>
+        </member>
+        <member name="M:rx.rx_model`1.insert_or_update_entity">
+            <summary>
+            <para>直接根据实体对象进行添加或者修改操作</para>
+            <para>对象的id为0或者null进行添加操作，否则会根据id进行修改操作</para>
+            <para>添加操作时id会进行out</para>
+            <para>如果实体is_use_null为true时，无论是添加还是修改操作null属性都会参与，默认为false</para>
+            </summary>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_model`1.update_entity(System.String[])">
+            <summary>
+            更新当前的实体对象至数据库
+            <para>默认根据id进行更新，实体的is_user_null为false将不会使用null值的属性参与更新操作，默认为false</para>
+            <para>如果where_key不为空就根据where_key指定字段进行where条件更新</para>
+            <para>可以使用参数设置where_keys</para>
+            <para>where_keys参数可以多次指定参与where条件运算的key，并且可以指定顺序</para>
+            <param name="where_keys">需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常,该参数不指定则按照id进行更新操作</param>
+            </summary>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_model`1.insert_entity">
+            <summary>
+            将当前的实体对象添加至数据库，添加成功后id会进行out
+            <para>实体的is_user_null为false将不会使用null值的属性进行添加操作，默认为false</para>
+            </summary>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_model`1.delete_entity(System.String[])">
+            <summary>
+            删除当前实体在数据库中的行数据
+            <para>默认根据id进行删除</para>
+            <para>如果where_key不为空就根据where_key指定字段进行where条件删除</para>
+            <para>可以使用参数设置where_keys</para>
+            <para>where_keys参数可以多次指定参与where条件运算的key，并且可以指定顺序</para>
+            <param name="where_keys">需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常,该参数不指定则按照id进行删除操作</param>
+            </summary>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_model`1.set_rx_field(System.String,System.Nullable{rx.compare_symbol},System.Nullable{rx.logic_symbol},System.Nullable{rx.date_format_type},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Object)">
+            <summary>
+            这个方法是为了方便这个对象通过key设置rx_field对象的成员进行属性和枚举的再赋值，常用于一次性where条件查询、删除、更新
+            <para>链式操作，不需要再实例化对象的时候声明局部变量了</para>
+            <para>命名参数，可以使用命名参数的方式进行传值更加简化传参操作（例子: compare: compare_symbol.contain）</para>
+            </summary>
+            <param name="key">sql语句中的条件运算符，compare_symbol枚举</param>
+            <param name="compare">sql语句中的条件运算符，compare_symbol枚举</param>
+            <param name="logic">sql语句中的逻辑运算符，logic_symbol枚举</param>
+            <param name="date_format_type">base_value对时间数据的格式化方式</param>
+            <param name="auto_remove">在生成sql语句时这个字段是否会自动被删除</param>
+            <param name="build_quote">在生成sql语句时这个字段是否会生成单引号(')</param>
+            <param name="value">条件语句(in或者not in)操作时因为属性id是强类型的，可能不能赋值你要求的值，这个时候可以使用这个参数来解决</param>
+            <returns>正在被操作的实体对象</returns>
+        </member>
+        <member name="M:rx.rx_model`1.get_all_entitys">
+            <summary>
+            获取这个实体所有的对象集合
+            </summary>
+            <returns>实体的List集合</returns>
+        </member>
+        <member name="M:rx.rx_model`1.get_entity_by_id(System.Int32)">
+            <summary>
+            根据id获取一个实体对象,未找到数据返回结果为null
+            </summary>
+            <param name="id">实体的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_model`1.get_entitys_in_id(System.Int32[])">
+            <summary>
+            根据id的集合获取多个实体对象,未找到数据返回结果集合长度为0，id_array为传入返回结果为null
+            </summary>
+            <param name="id_array">实体的id的数组，params传参</param>
+        </member>
+        <member name="M:rx.rx_model`1.get_entitys_by_where_string(System.String)">
+            <summary>
+            根据where条件字符串来查询这个表
+            </summary>
+            <param name="where_string">例子：and id = 1 or name = 'jack'</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_model`1.insert_entitys(`0[])">
+            <summary>
+            批量添加当前的实体对象
+            </summary>
+            <param name="entitys">实体的数组对象，params传参</param>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_model`1.delete_entity_in_id(System.Int32[])">
+            <summary>
+            根据id的数组进行多行in删除操作
+            <para>单行删除可以只传一个id</para>
+            </summary>
+            <param name="id_array">id的int类型数组，params传参</param>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_model`1.get_entitys_by_page(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            分页获取实体对象的集合
+            </summary>
+            <param name="page_index">页码（0开始）</param>
+            <param name="page_size">该页数据的行数</param>
+            <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
+            <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
+            <param name="date_time_format">date_format_type的枚举，用于对时间字段值进行指定的字符串输出格式化</param>
+        </member>
+        <member name="M:rx.rx_model`1.get_entitys_by_page(System.Int32,System.Int32,System.Int32@,System.String,System.String)">
+            <summary>
+            分页获取实体对象的集合，可以ref总行数
+            </summary>
+            <param name="page_index">页码（0开始）</param>
+            <param name="page_size">该页数据的行数</param>
+            <param name="row_count">总数据的条数，ref引用传递</param>
+            <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
+            <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
+            <param name="date_time_format">date_format_type的枚举，用于对时间字段值进行指定的字符串输出格式化</param>
+        </member>
+        <member name="M:rx.rx_model`1.add(System.String,System.Object)">
+            <summary>
+            为实体类强行添加一个rx_field，被添加rx_field只能通过rx_entity的键值对进行访问
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:rx.rx_model`1.remove(System.String)">
+            <summary>
+            为实体类强行删除一个rx_field，如果删除的是一个强属性，那么这个属性在使用时会发生异常
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="M:rx.rx_model`1.set_where_keys(System.String[])">
+            <summary>
+            设置实体的where_key属性
+            指定的key要存在与实体的key中
+            </summary>
+            <param name="where_keys"></param>
+        </member>
+        <member name="M:rx.rx_model`1.clear_where_keys">
+            <summary>
+            删除所有的where_keys
+            </summary>
+        </member>
+        <member name="P:rx.rx_model`1.entity_name">
+            <summary>
+            实体名称
+            </summary>
+        </member>
+        <member name="T:rx.rx_view`1">
+            <summary>
+            这个类是rx类型orm强实体类【视图 view】的父类
+            </summary>
+        </member>
+        <member name="T:rx.rx_view_base">
+            <summary>
+            这个类是rx类型orm强实体类【视图 view】的最终基类
+            </summary>
+        </member>
+        <member name="M:rx.rx_view_base.add``1(System.String,rx.rx_field)">
+            <summary>
+            为实体类强行添加一个rx_field，被添加rx_field只能通过rx_entity的键值对进行访问
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+            <param name="field">rx_field</param>
+        </member>
+        <member name="M:rx.rx_view_base.remove``1(System.String)">
+            <summary>
+            为实体类强行删除一个rx_field，如果删除的是一个强属性，那么这个属性在使用时会发生异常
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="M:rx.rx_view_base.set_where_keys(System.String[])">
+            <summary>
+            设置实体的where_key属性
+            指定的key要存在与实体的key中
+            </summary>
+            <param name="where_keys"></param>
+        </member>
+        <member name="M:rx.rx_view_base.clear_where_keys">
+            <summary>
+            删除所有的where_keys
+            </summary>
+        </member>
+        <member name="M:rx.rx_view`1.#ctor">
+            <summary>
+            如果你继承了这个类型，那么子类必须是存在表或者视图的名字，否则会发生异常
+            </summary>
+        </member>
+        <member name="M:rx.rx_view`1.clone">
+            <summary>
+            泛型克隆当前这个实体的对象
+            </summary>
+            <returns>T</returns>
+        </member>
+        <member name="M:rx.rx_view`1.request_fill(System.Web.HttpRequest)">
+            <summary>
+            将web请求的request对象中的的值填充置这个model的rx_entity的对象中
+            request中的key要和当前对象中的key对应才能正确填充，不一致的key将会忽略
+            </summary>
+        </member>
+        <member name="M:rx.rx_view`1.request_fill(System.Web.HttpRequestBase)">
+            <summary>
+            将web请求的request对象中的的值填充置这个model的rx_entity的对象中
+            request中的key要和当前对象中的key对应才能正确填充，不一致的key将会忽略
+            </summary>
+            <param name="request">MVC项目某些情况下会使用到</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_view`1.get_entitys(System.String[])">
+            <summary>
+            默认根据实体中不为null的属性进行条件查询,也可以根据当前实体对象的where_keys属性进行指定key的where条件查询
+            <para>where_keys参数可以多次指定参与where条件运算的key，并且可以指定顺序</para>
+            <param name="where_keys">不传该参数就会使用所有不为null的属性进行条件查询，可以使用参数设置where_keys需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常</param>
+            </summary>
+            <returns>满足查询条件的当前实体对象的集合</returns>
+        </member>
+        <member name="M:rx.rx_view`1.set_rx_field(System.String,System.Nullable{rx.compare_symbol},System.Nullable{rx.logic_symbol},System.Nullable{rx.date_format_type},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Object)">
+            <summary>
+            这个方法是为了方便这个对象通过key设置rx_field对象的成员进行属性和枚举的再赋值，常用于一次性where条件查询、删除、更新
+            <para>链式操作，不需要再实例化对象的时候声明局部变量了</para>
+            <para>命名参数，可以使用命名参数的方式进行传值更加简化传参操作（例子: compare: compare_symbol.contain）</para>
+            </summary>
+            <param name="key">sql语句中的条件运算符，compare_symbol枚举</param>
+            <param name="compare">sql语句中的条件运算符，compare_symbol枚举</param>
+            <param name="logic">sql语句中的逻辑运算符，logic_symbol枚举</param>
+            <param name="date_format_type">base_value对时间数据的格式化方式</param>
+            <param name="auto_remove">在生成sql语句时这个字段是否会自动被删除</param>
+            <param name="build_quote">在生成sql语句时这个字段是否会生成单引号(')</param>
+            <param name="value">条件语句(in或者not in)操作时因为属性id是强类型的，可能不能赋值你要求的值，这个时候可以使用这个参数来解决</param>
+            <returns>正在被操作的实体对象</returns>
+        </member>
+        <member name="M:rx.rx_view`1.get_entitys_by_where_string(System.String)">
+            <summary>
+            根据where条件字符串来查询这个视图
+            </summary>
+            <param name="where_string">例子：and id = 1 or name = 'jack'</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_view`1.get_all_entitys">
+            <summary>
+            这个实体所有的对象集合
+            </summary>
+            <returns>实体web_user的List集合</returns>
+        </member>
+        <member name="M:rx.rx_view`1.get_entitys_by_page(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            分页获取实体对象的集合
+            </summary>
+            <param name="page_index">页码（0开始）</param>
+            <param name="page_size">该页数据的行数</param>
+            <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
+            <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
+        </member>
+        <member name="M:rx.rx_view`1.get_entitys_by_page(System.Int32,System.Int32,System.Int32@,System.String,System.String)">
+            <summary>
+            分页获取实体对象的集合，可以ref总行数
+            </summary>
+            <param name="page_index">页码（0开始）</param>
+            <param name="page_size">该页数据的行数</param>
+            <param name="row_count">总数据的条数，ref引用传递</param>
+            <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
+            <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
+        </member>
+        <member name="M:rx.rx_view`1.add(System.String,System.Object)">
+            <summary>
+            为实体类强行添加一个rx_field，被添加rx_field只能通过rx_entity的键值对进行访问
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+            <param name="value">rx_field</param>
+        </member>
+        <member name="M:rx.rx_view`1.remove(System.String)">
+            <summary>
+            为实体类强行删除一个rx_field，如果删除的是一个强属性，那么这个属性在使用时会发生异常
+            <para>链式操作</para>
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="M:rx.rx_view`1.set_where_keys(System.String[])">
+            <summary>
+            设置实体的where_key属性
+            指定的key要存在与实体的key中
+            </summary>
+            <param name="where_keys"></param>
+        </member>
+        <member name="M:rx.rx_view`1.clear_where_keys">
+            <summary>
+            删除所有的where_keys
+            </summary>
+        </member>
+        <member name="P:rx.rx_view`1.entity_name">
+            <summary>
+            实体名称
+            </summary>
+        </member>
+        <member name="P:rx.rx_view`1.view_first_column">
+            <summary>
+            视图第一个列的名称
+            </summary>
+        </member>
+        <member name="T:rx.rx_handle">
+            <summary>
+            rx_handle
+            <para>操作数据库的所以方法都是在js中进行完成</para>
+            <para>sql防注入机制请自行编写，可以在Global中进行过滤编写</para>
+            </summary>
+        </member>
+        <member name="M:rx.rx_handle.rx_obj_build(System.Object@)">
+            <summary>
+            将RX系列的实体对象转换成易被json序列化的对象
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:rx.rx_handle.response_write_json(System.Object)">
+            <summary>
+            该方法适应了rx系列的所有对象json序列化
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="T:rx.i_rx_risk">
+            <summary>
+            rx系列控制器或者handle中开启前端orm基础功能的接口
+            <para>这个接口本身没有任何需要实现的成员</para>
+            </summary>
+        </member>
+        <member name="T:rx.i_rx_risk_delete">
+            <summary>
+            rx系列控制器或者handle中危险Action的【删除】操作的使用权
+            <para>继承这个接口才能使用危险Action</para>
+            <para>这个接口本身没有任何需要实现的成员</para>
+            </summary>
+        </member>
+        <member name="T:rx.i_rx_risk_insert">
+            <summary>
+            rx系列控制器或者handle中危险Action的【添加】操作的使用权
+            <para>继承这个接口才能使用危险Action</para>
+            <para>这个接口本身没有任何需要实现的成员</para>
+            </summary>
+        </member>
+        <member name="T:rx.i_rx_risk_proc">
+            <summary>
+            rx系列控制器或者handle中危险Action的【存储过程】操作的使用权
+            <para>继承这个接口才能使用危险Action</para>
+            <para>这个接口本身没有任何需要实现的成员</para>
+            </summary>
+        </member>
+        <member name="T:rx.i_rx_risk_update">
+            <summary>
+            rx系列控制器或者handle中危险Action的【更新】操作的使用权
+            <para>继承这个接口才能使用危险Action</para>
+            <para>这个接口本身没有任何需要实现的成员</para>
+            </summary>
+        </member>
+        <member name="T:rx.rx_manager">
+            <summary>
+            <para>rx_manager要求数据库的任何一张表必须有（int）主键</para>
+            <para>主键字段名必须是小写的id</para>
+            <para>主键必须是自增的</para>
+            <para>----------数据库配置----------</para>
+            <para>rx_dbhelper配置方法</para>  
+            <para>配置文件appSettings配置添加一个项，key="rx_db_type" value="sql或者access"</para>
+            <para>(sqlserver)配置文件connectionStrings配置添加一个项，name="rx_ms_sql_conn_str" value="连接字符串"</para>
+            <para>(access)配置文件connectionStrings配置添加一个项，name="rx_ms_access_conn_str" value="连接字符串"</para>
+            <para>sqlserver或者access 二选一即可</para>
+            </summary>
+        </member>
+        <member name="F:rx.rx_manager.init">
+            <summary>
+            rx_manager初始化
+            </summary>
+        </member>
+        <member name="F:rx.rx_manager.rx_managers">
+            <summary>
+            rx_manager子类对象的缓存
+            </summary>
+        </member>
+        <member name="M:rx.rx_manager.rx_manager_init">
+            <summary>
+            rx_manager初始化
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.instance_entity(System.String)">
+            <summary>
+            根据表名创建空实体entity_dictionary的对象,key的值是表的字段，value的值是null
+            </summary>
+            <param name="entity_name">表名必须是当前数据库中存在的</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.create_rx_sql_object">
+            <summary>
+            创建rx_manager所需的所有数据库对象
+            </summary>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_by_page(System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.String,rx.date_format_type)">
+            <summary>
+            通用分页查询方法
+            </summary>
+            <param name="page_index">页码（从0开始）</param>
+            <param name="page_size">页大小</param>
+            <param name="row_count">总数据行数 ref引用</param>
+            <param name="table_or_view_name">表的名字或者视图的名字或者子查询字符串</param>
+            <param name="order_identity_string">排序表示列名 例子：id 或者 id,role_id 或者 id desc,role_id asc (注意：必须得填入，不能为空)</param>
+            <param name="field_string">指定查询结果显示的字段 例子：* 或者 id,name,age,card_id</param>
+            <param name="where_string">查询条件字符串 例子： and a = 1 and b = 2 </param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_by_page``1(System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.String)">
+            <summary>
+            通用泛型分页查询方法
+            </summary>
+            <typeparam name="T">rx_model_base的子类型</typeparam>
+            <param name="page_index">页码（从0开始）</param>
+            <param name="page_size">页大小</param>
+            <param name="row_count">总数据行数 ref引用</param>
+            <param name="table_or_view_name">表的名字或者视图的名字或者子查询字符串</param>
+            <param name="order_identity_string">排序表示列名 例子：id 或者 id,role_id 或者 id desc,role_id asc (注意：必须得填入，不能为空)</param>
+            <param name="field_string">指定查询结果显示的字段 例子：* 或者 id,name,age,card_id</param>
+            <param name="where_string">查询条件字符串 例子： and a = 1 and b = 2 </param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_rxtable_data(System.String,System.String,System.String,System.String,rx.date_format_type)">
+            <summary>
+            rxui中RXtable数据所需要的特殊分页方法，返回的object对象直接序列化为json字符串返回给RXtable即可
+            </summary>
+            <param name="table_or_view_name">表的名字或者视图的名字</param>
+            <param name="order_identity_string">排序表示列名 例子：id 或者 id,role_id 或者 id desc,role_id asc (注意：必须得填入，不能为空)</param>
+            <param name="field_string">指定查询结果显示的字段 例子：* 或者 id,name,age,card_id</param>
+            <param name="where_string">查询条件字符串 例子： and a = 1 and b = 2 </param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns>row_count=总行数，rows=数据</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_in_view(System.String,System.String,rx.date_format_type,System.String[])">
+            <summary>
+            获取指定view（视图）的实体的entity集合对象
+            <para>视图不存在会报错</para>
+            </summary>
+            <param name="view_name">视图名称</param>
+            <param name="where_string">条件字符串</param>
+            <param name="select_display_keys">要显示的列</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns>entity集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_in_view``1(System.String,System.String[])">
+            <summary>
+            获取指定view（视图）的实体的rx_view_base集合对象
+            <para>视图不存在会报错</para>
+            </summary>
+            <param name="where_string">条件字符串</param>
+            <param name="select_display_keys">要显示的列</param>
+            <returns>rx_view_base集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_in_proc(System.String,System.Data.SqlClient.SqlParameter[],rx.date_format_type)">
+            <summary>
+            获取指定proc（存储过程）的实体的entity集合对象
+            </summary>
+            <param name="proc_name">存储过程名称</param>
+            <param name="proc_params">存储过程参数,参数为null或者数组长度为0，则为执行无参存储过程</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns>entity集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_execute_non_query(System.String)">
+            <summary>
+            dml批量执行的事务方法
+            </summary>
+            <param name="full_sql_string">多条dml（t-sql）语句的字符串</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_execute_non_query(rx.rx_entity[])">
+            <summary>
+            dml批量执行的事务方法
+            <para>entity对象受dml_command_type属性的影响，dml_command_type的值不能是默认值vague，必须是明确的update、delete、insert，根据dml_command_type属性值动态执行dml语句</para>
+            <para>entity对象可以指定is_use_null</para>
+            <para>entity对象可以指定where_keys</para>
+            <para>如果entity对象的dml_command_type属性为update或者delete且对象的where_keys属性为null或者长度为0就会以对象的id为执行条件</para>
+            <para>entity对象的entity_name必须包含在当前数据库的表名中</para>
+            </summary>
+            <param name="entity_array">entity的集合,实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_execute_non_query(rx.rx_model_base[])">
+            <summary>
+            dml批量执行的事务方法
+            <para>model对象的entity对象受dml_command_type属性的影响，dml_command_type的值不能是默认值vague，必须是明确的update、delete、insert，根据dml_command_type属性值动态执行dml语句</para>
+            <para>model对象的entity对象可以指定is_use_null</para>
+            <para>model对象的entity对象可以指定where_keys</para>
+            <para>如果model对象的entity对象的dml_command_type属性为update或者delete且对象的where_keys属性为null或者长度为0就会以对象的id为执行条件</para>
+            <para>model对象的entity_name必须包含在当前数据库的表名中</para>
+            </summary>
+            <param name="model_array">强实体model的集合,实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.filtrate_entity(rx.rx_entity)">
+            <summary>
+            查询用
+            </summary>
+        </member>
+        <member name="M:rx.rx_manager.filtrate_entity(rx.rx_entity,rx.dml_command_type)">
+            <summary>
+            dml用
+            </summary>
+        </member>
+        <member name="M:rx.rx_manager.transaction_update_string_build(rx.rx_entity,rx.dml_result)">
+            <summary>
+            根据该实体的内容生成update语句
+            <para>如：update table_name set a = 1,b = 2,c = 3 [where d = 1 and e = 2 or f = 3]</para>
+            </summary>
+            <param name="entity">会根据这个实体的机构和属性进行生成</param>
+            <param name="result">生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_update_string_build(rx.rx_model_base,rx.dml_result)">
+            <summary>
+            根据该实体的内容生成update语句
+            <para>如：update table_name set a = 1,b = 2,c = 3 [where d = 1 and e = 2 or f = 3]</para>
+            </summary>
+            <param name="model">会根据这个实体的机构和属性进行生成</param>
+            <param name="result">生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_delete_string_build(rx.rx_entity,rx.dml_result)">
+            <summary>
+            根据该实体的内容生成delete语句
+            <para>如 :delete from table_name [where a = 1 and b = 2 or c = 3]</para>
+            </summary>
+            <param name="entity">会根据这个实体的机构和属性进行生成</param>
+            <param name="result">生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_delete_string_build(rx.rx_model_base,rx.dml_result)">
+            <summary>
+            根据该实体的内容生成delete语句
+            <para>如 :delete from table_name [where a = 1 and b = 2 or c = 3]</para>
+            </summary>
+            <param name="model">会根据这个实体的机构和属性进行生成</param>
+            <param name="result">生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_insert_string_build(rx.rx_entity,rx.dml_result)">
+            <summary>
+            根据该实体的内容生成insert语句
+            <para>如 :insert table_name (a,b,c) values('1','2','3')</para>
+            </summary>
+            <param name="entity">会根据这个实体的机构和属性进行生成</param>
+            <param name="result">生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.transaction_insert_string_build(rx.rx_model_base,rx.dml_result)">
+            <summary>
+            根据该实体的内容生成insert语句
+            <para>如 :insert table_name (a,b,c) values('1','2','3')</para>
+            </summary>
+            <param name="model">会根据这个实体的机构和属性进行生成</param>
+            <param name="result">生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.execute_select_sql(System.String,rx.date_format_type)">
+            <summary>
+            执行sql查询并带有时间格式化参数
+            <para>临时列要指定列名</para>
+            </summary>
+            <param name="sql">只能写查询sql，你可以试一下注入看看</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.execute_non_query(System.String,System.Data.SqlClient.SqlParameter[],System.Data.CommandType)">
+            <summary>
+            执行sql增删改（或者存储过程）
+            <para>这个方法多条dml语句同时执行没有事务机制</para>
+            <para>建议使用transaction_execute_non_query</para>
+            </summary>
+            <param name="sql_or_proc_name">dml字符串</param>
+            <param name="param_array">SqlParameter数组，null就是执行无参存储过程</param>
+            <param name="command_type">CommandType不解释了</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_all_entitys(System.String,rx.date_format_type)">
+            <summary>
+            <para>直接根据表名或者视图获取对应实体的所有对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            </summary>
+            <param name="table_or_view_name">表名或视图名称</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns>rx_entity集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_all_entitys``1(System.String)">
+            <summary>
+            <para>直接根据表名或者视图获取对应实体的所有对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            </summary>
+            <typeparam name="T">rx_model_base的子类</typeparam>
+            <param name="table_or_view_name">表名或视图名称</param>
+            <returns>rx_entity集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_all_entitys(System.String,rx.date_format_type,System.String[])">
+            <summary>
+            <para>直接根据表名或者视图获取对应实体的所有对象</para>
+            </summary>
+            <param name="table_or_view_name">表或者视图的名字</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
+            <returns>entity集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entity_by_id(System.String,System.Nullable{System.Int32},rx.date_format_type)">
+            <summary>
+            <para>直接根据表名以及id获取对应实体的单个对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            <para>id为null会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <param name="id">id</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entity_by_id``1(System.String,System.Nullable{System.Int32})">
+            <summary>
+            <para>直接根据表名以及id获取对应实体的单个对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            <para>id为null会出现异常</para>
+            </summary>
+            <typeparam name="T">rx_model_base的子类</typeparam>
+            <param name="table_name">表名</param>
+            <param name="id">id</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entity_by_id(System.String,System.Nullable{System.Int32},rx.date_format_type,System.String[])">
+            <summary>
+            <para>直接根据表名以及id获取对应实体的单个对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            <para>id为null会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <param name="id">id</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_in_id(System.String,System.Int32[],rx.date_format_type,System.String[])">
+            <summary>
+            <para>直接根据表名以及id的数组进行in查询获取对应实体的集合对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            <para>id_array为null或者长度为0会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <param name="id_array">id_array</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_in_id``1(System.Int32[],rx.date_format_type,System.String[])">
+            <summary>
+            <para>直接根据表名以及id的数组进行in查询获取对应实体的集合对象</para>
+            <para>table_name不存在或为null会出现异常</para>
+            <para>id_array为null或者长度为0会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <param name="id_array">id_array</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_by_where_keys(rx.rx_entity,rx.date_format_type,System.String[])">
+            <summary>
+            根据实体对象的where_keys属性进行指定的where条件查询
+            </summary>
+            <param name="entity">参与条件查询的rx_entity对象，需要参与where条件的where_keys属性,可以使用参数设置where_keys,也可以使用set_where_keys方法指定where条件字段的key,必须是当前实体中存在的key,否则会出现异常</param>
+            <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_by_where_keys``1(``0)">
+            <summary>
+            根据实体对象的where_keys属性进行指定的where条件查询
+            </summary>
+            <typeparam name="T">rx_strong_type的子类</typeparam>
+            <param name="model">参与条件查询的rx_model_base子类对象，需要参与where条件的where_keys属性,可以使用参数设置where_keys,也可以使用set_where_keys方法指定where条件字段的key,必须是当前实体中存在的key,否则会出现异常</param>
+            <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_by_where_string(System.String,System.String,rx.date_format_type,System.String[])">
+            <summary>
+            获取指定table（表）的实体的entity集合对象
+            <para>视图不存在会报错</para>
+            </summary>
+            <param name="table_name">表名称</param>
+            <param name="where_string">条件字符串</param>
+            <param name="field_string">要显示的列</param>
+            <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
+            <returns>entity集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.get_entitys_by_where_string``1(System.String,System.String)">
+            <summary>
+            获取指定table（表名）的实体的rx_strong_type集合对象
+            <para>表或者视图不存在会报错</para>
+            </summary>
+            <param name="where_string">条件字符串</param>
+            <param name="field_string">需要显示的字段，默认为*</param>
+            <returns>rx_strong_type集合对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.insert_or_update_entity(System.String)">
+            <summary>
+            <para>直接根据表名进行添加或者修改操作</para>
+            <para>id为0或者null进行添加操作，否则为修改操作</para>
+            <para>Request值自动获取</para>
+            <para>table_name不存在或为null会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+        </member>
+        <member name="M:rx.rx_manager.insert_or_update_entity(rx.rx_entity)">
+            <summary>
+            <para>直接根据实体对象进行添加或者修改操作</para>
+            <para>id为0或者null进行添加操作，否则为修改操作</para>
+            <para>实体的entity_name不存在或为null会出现异常</para>
+            <para>可以置顶实体的is_use_null</para>
+            </summary>
+            <param name="entity">rx_entity的对象</param>
+        </member>
+        <member name="M:rx.rx_manager.insert_or_update_entity(rx.rx_model_base)">
+            <summary>
+            <para>直接根据实体对象进行添加或者修改操作</para>
+            <para>id为0或者null进行添加操作，否则为修改操作</para>
+            <para>实体的entity_name不存在或为null会出现异常</para>
+            <para>可以置顶实体的is_use_null</para>
+            </summary>
+            <param name="model">rx_model_base的子类对象</param>
+        </member>
+        <member name="M:rx.rx_manager.insert_entity(System.String)">
+            <summary>
+            在数据库中添加一条数据，表名要与数据库中存在的表名一致
+            <para>对象自动根据Request值生成</para>
+            <para>id会在dml_result中的tag属性进行out</para>
+            </summary>
+            <param name="table_name">entity对象，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.insert_entity(rx.rx_entity)">
+            <summary>
+            在数据库中添加一条数据，表名与当前实体类的entity_name一致
+            <para>entity对象不受dml_command_type属性的影响</para>
+            <para>entity对象可以指定is_use_null</para>
+            <para>id会进行out</para>
+            </summary>
+            <param name="entity">entity对象，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.insert_entity(rx.rx_model_base)">
+            <summary>
+            在数据库中添加一条数据，表名与当前实体类的entity_name一致
+            <para>model对象不受dml_command_type属性的影响</para>
+            <para>model对象可以指定is_use_null</para>
+            <para>id会进行out</para>
+            </summary>
+            <param name="model">rx_model_base子类对象，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.insert_entitys(rx.rx_entity[])">
+            <summary>
+            在数据库中添加多条数据，表名与当前实体的entity_name一致
+            <para>entity对象不受dml_command_type属性的影响</para>
+            <para>entity对象可以指定is_use_null</para>
+            <para>id会进行out</para>
+            </summary>
+            <param name="entity_array">entity对象的数组，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.insert_entitys``1(rx.rx_model{``0}[])">
+            <summary>
+            在数据库中添加多条数据，表名与这个实体的entity_name一致
+            <para>entity对象不受dml_command_type属性的影响</para>
+            <para>entity对象可以指定is_use_null</para>
+            <para>id会进行out</para>
+            </summary>
+            <param name="model_array">rx_model对象的数组，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.update_entity_by_id(System.String)">
+            <summary>
+            在数据库中按照对象的id更新当前实体的一条数据
+            <para>对象自动根据Request值生成</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.update_entity_by_id(rx.rx_entity)">
+            <summary>
+            在数据库中按照id更新当前实体的一条数据
+            </summary>
+            <param name="entity">entity对象where条件只是用key为id的值，其他key值作为更新数据，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.update_entity_by_id(rx.rx_model_base)">
+            <summary>
+            在数据库中按照id更新当前实体的一条数据
+            </summary>
+            <param name="model">model的rx_entity对象中where条件只是用key为id的值，其他key值作为更新数据，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.update_entity_by_where_keys(rx.rx_entity)">
+            <summary>
+            在数据库中按照where条件更新一个实体对象
+            entity对象不受dml_command_type属性属性的影响
+            entity对象可以指定is_use_null
+            entity对象必须指定where_keys
+            </summary>
+            <param name="entity">entity对象where_keys不能为null</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.update_entity_by_where_keys(rx.rx_model_base)">
+            <summary>
+            在数据库中按照where条件更新一个实体对象
+            entity对象不受dml_command_type属性属性的影响
+            entity对象可以指定is_use_null
+            entity对象必须指定where_keys
+            </summary>
+            <param name="model">model对象的rx_entity中的where_keys不能为null</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.delete_entity_by_id(System.String,System.Nullable{System.Int32})">
+            <summary>
+            <para>根据表名进行单行删除操作</para>
+            <para>id为null会出现异常</para>
+            <para>table_name不存在或为null会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.delete_entity_in_id(System.String,System.Int32[])">
+            <summary>
+            <para>根据表名进行多行in删除操作</para>
+            <para>id_array为null或者长度为0会出现异常</para>
+            <para>table_name不存在或为null会出现异常</para>
+            </summary>
+            <param name="table_name">表名</param>
+            <param name="id_array">需要删除的多个id</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.delete_entity_by_where_string(System.String,System.String)">
+            <summary>
+            <para>直接根据表名与where_string进行删除操作</para>
+            <para>where_string如果为null会出现异常</para>
+            <para>table_name不存在或为null会出现异常</para>
+            </summary>
+            <param name="table_name"></param>
+            <param name="where_string"></param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_manager.delete_entity_by_where_keys(rx.rx_entity)">
+            <summary>
+            在数据库中按照实体指定的key值和value值删除这个实体的表数据
+            entity对象不受dml_command_type属性属性的影响
+            entity对象必须指定where_keys
+            </summary>
+            <param name="entity">entity对象where条件只用key为id的值，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="M:rx.rx_manager.delete_entity_by_where_keys(rx.rx_model_base)">
+            <summary>
+            在数据库中按照实体指定的key值和value值删除这个实体的表数据
+            entity对象不受dml_command_type属性属性的影响
+            entity对象必须指定where_keys
+            </summary>
+            <param name="model">model对象的rx_entity中where条件只用key为id的值，实体会与当前实体类进行匹配和过滤操作</param>
+            <returns>dml操作结果对象</returns>
+        </member>
+        <member name="P:rx.rx_manager.performance_mode">
+            <summary>
+            性能模式
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.empty_entitys">
+            <summary>
+            包含整个数据库的表名与对应的空实体
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.empty_entity_keys">
+            <summary>
+            包含整个数据库的表名与对应的字段名称
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.empty_view_entitys">
+            <summary>
+            包含整个数据库的视图名称与对应的空实体
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.empty_view_entity_keys">
+            <summary>
+            包含整个数据库的视图名称与对应的字段名称
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.method_list">
+            <summary>
+            rx_manager中所有的静态方法的MethodInfo的集合
+            </summary>
+        </member>
+        <member name="T:rx.performance_mode">
+            <summary>
+            rx_manager数据查询性能模式,主要影响的是直接对rx_entity对象和集合的sql查询性能模式
+            <para>如果你使用的是rx_model与rx_view系列的强类型可以忽略，强类型使用Dapper进行底层查询交互</para>
+            </summary>
+        </member>
+        <member name="F:rx.performance_mode.pool_first">
+            <summary>
+            连接池优先，该模式查询速度会提升，默认的查询模式
+            </summary>
+        </member>
+        <member name="F:rx.performance_mode.memory_first">
+            <summary>
+            内存优先模式，该模式用于数据库连接池紧张的情况下使用
+            </summary>
+        </member>
+        <member name="T:rx.rx_dbhelper">
+            <summary>
+            <para>rx_dbhelper配置方法</para>  
+            <para>配置文件appSettings配置添加一个项，key="rx_db_type" value="sql或者access"</para>
+            <para>(sqlserver)配置文件connectionStrings配置添加一个项，name="rx_ms_sql_conn_str" value="连接字符串"</para>
+            <para>(access)配置文件connectionStrings配置添加一个项，name="rx_ms_access_conn_str" value="连接字符串"</para>
+            <para>sqlserver或者access 二选一即可</para>
+            </summary>
+        </member>
+        <member name="T:rx.rx_dbhelper.rx_ms_sql_dbhelper">
+            <summary>
+            微软sqlserver辅助类
+            </summary>
+        </member>
+        <member name="T:rx.rx_dbhelper.rx_ms_access_dbhelper">
+            <summary>
+            微软access辅助类
+            </summary>
+        </member>
+        <member name="M:rx.rx_mvc_api_controller.set_version_info(System.String[])">
+            <summary>
+            用这个方法来设置api的版本，必须设置
+            </summary>
+            <param name="versions">如"v1","v2","v3"......</param>
+        </member>
+        <member name="T:rx.rx_mvc_controller">
+            <summary>
+            rx_mvc_controller
+            <para>操作数据库的所以方法都是在js中进行完成</para>
+            <para>sql防注入机制请自行编写，可以在Global中进行过滤编写</para>
+            </summary>
+        </member>
+        <member name="M:rx.rx_mvc_controller.rx_obj_build(System.Object@)">
+            <summary>
+            将RX系列的实体对象转换成易被json序列化的对象
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:rx.rx_mvc_controller.rx_index_action(System.String)">
+            <summary>
+            通过这个action反射执行rx_manager的静态方法，参数列表与前端orm有关
+            </summary>
+            <param name="rx_method">rx_manager中静态方法的名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:rx.rx_web_form.rx_obj_build(System.Object@)">
+            <summary>
+            将RX系列的实体对象转换成易被json序列化的对象
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:rx.rx_web_form.response_write_json(System.Object)">
+            <summary>
+            该方法适应了rx系列的所有对象json序列化
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="T:Dapper.CommandFlags">
+            <summary>
+            Additional state flags that control command behaviour
+            </summary>
+        </member>
+        <member name="F:Dapper.CommandFlags.None">
+            <summary>
+            No additional flags
+            </summary>
+        </member>
+        <member name="F:Dapper.CommandFlags.Buffered">
+            <summary>
+            Should data be buffered before returning?
+            </summary>
+        </member>
+        <member name="F:Dapper.CommandFlags.Pipelined">
+            <summary>
+            Can async queries be pipelined?
+            </summary>
+        </member>
+        <member name="F:Dapper.CommandFlags.NoCache">
+            <summary>
+            Should the plan cache be bypassed?
+            </summary>
+        </member>
+        <member name="T:Dapper.CommandDefinition">
+            <summary>
+            Represents the key aspects of a sql operation
+            </summary>
+        </member>
+        <member name="M:Dapper.CommandDefinition.#ctor(System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType},Dapper.CommandFlags)">
+            <summary>
+            Initialize the command definition
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.CommandText">
+            <summary>
+            The command (sql or a stored-procedure name) to execute
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.Parameters">
+            <summary>
+            The parameters associated with the command
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.Transaction">
+            <summary>
+            The active transaction for the command
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.CommandTimeout">
+            <summary>
+            The effective timeout for the command
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.CommandType">
+            <summary>
+            The type of command that the command-text represents
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.Buffered">
+            <summary>
+            Should data be buffered before returning?
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.AddToCache">
+            <summary>
+            Should the plan for this query be cached?
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.Flags">
+            <summary>
+            Additional state flags against this command
+            </summary>
+        </member>
+        <member name="P:Dapper.CommandDefinition.Pipelined">
+            <summary>
+            Can async queries be pipelined?
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper">
+            <summary>
+            Dapper, a light weight object mapper for ADO.NET
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.DataTableTypeNameKey">
+            <summary>
+            Key used to indicate the type name associated with a DataTable
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.PurgeQueryCache">
+            <summary>
+            Purge the query cache 
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetCachedSQLCount">
+            <summary>
+            Return a count of all the cached queries by dapper
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetCachedSQL(System.Int32)">
+            <summary>
+            Return a list of all the queries cached by dapper
+            </summary>
+            <param name="ignoreHitCountAbove"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetHashCollissions">
+            <summary>
+            Deep diagnostics only: find any hash collisions in the cache
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ResetTypeHandlers">
+            <summary>
+            Clear the registered type handlers
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.AddTypeMap(System.Type,System.Data.DbType)">
+            <summary>
+            Configure the specified type to be mapped to a given db-type
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.AddTypeHandler(System.Type,Dapper.SqlMapper.ITypeHandler)">
+            <summary>
+            Configure the specified type to be processed by a custom handler
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.AddTypeHandlerImpl(System.Type,Dapper.SqlMapper.ITypeHandler,System.Boolean)">
+            <summary>
+            Configure the specified type to be processed by a custom handler
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.AddTypeHandler``1(Dapper.SqlMapper.TypeHandler{``0})">
+            <summary>
+            Configure the specified type to be processed by a custom handler
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetDbType(System.Object)">
+            <summary>
+            Get the DbType that maps to a given value
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.AsList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Obtains the data as a list; if it is *already* a list, the original object is returned without
+            any duplication; otherwise, ToList() is invoked.
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.Execute(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute parameterized SQL  
+            </summary>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Execute(System.Data.IDbConnection,Dapper.CommandDefinition)">
+            <summary>
+            Execute parameterized SQL  
+            </summary>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteScalar(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute parameterized SQL that selects a single value
+            </summary>
+            <returns>The first cell selected</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteScalar``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute parameterized SQL that selects a single value
+            </summary>
+            <returns>The first cell selected</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteScalar(System.Data.IDbConnection,Dapper.CommandDefinition)">
+            <summary>
+            Execute parameterized SQL that selects a single value
+            </summary>
+            <returns>The first cell selected</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteScalar``1(System.Data.IDbConnection,Dapper.CommandDefinition)">
+            <summary>
+            Execute parameterized SQL that selects a single value
+            </summary>
+            <returns>The first cell selected</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteReader(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute parameterized SQL and return an <see cref="T:System.Data.IDataReader"/>
+            </summary>
+            <returns>An <see cref="T:System.Data.IDataReader"/> that can be used to iterate over the results of the SQL query.</returns>
+            <remarks>
+            This is typically used when the results of a query are not processed by Dapper, for example, used to fill a <see cref="T:System.Data.DataTable"/>
+            or <see cref="T:System.Data.DataSet"/>.
+            </remarks>
+            <example>
+            <code>
+            <![CDATA[
+            DataTable table = new DataTable("MyTable");
+            using (var reader = ExecuteReader(cnn, sql, param))
+            {
+                table.Load(reader);
+            }
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteReader(System.Data.IDbConnection,Dapper.CommandDefinition)">
+            <summary>
+            Execute parameterized SQL and return an <see cref="T:System.Data.IDataReader"/>
+            </summary>
+            <returns>An <see cref="T:System.Data.IDataReader"/> that can be used to iterate over the results of the SQL query.</returns>
+            <remarks>
+            This is typically used when the results of a query are not processed by Dapper, for example, used to fill a <see cref="T:System.Data.DataTable"/>
+            or <see cref="T:System.Data.DataSet"/>.
+            </remarks>
+        </member>
+        <member name="M:Dapper.SqlMapper.ExecuteReader(System.Data.IDbConnection,Dapper.CommandDefinition,System.Data.CommandBehavior)">
+            <summary>
+            Execute parameterized SQL and return an <see cref="T:System.Data.IDataReader"/>
+            </summary>
+            <returns>An <see cref="T:System.Data.IDataReader"/> that can be used to iterate over the results of the SQL query.</returns>
+            <remarks>
+            This is typically used when the results of a query are not processed by Dapper, for example, used to fill a <see cref="T:System.Data.DataTable"/>
+            or <see cref="T:System.Data.DataSet"/>.
+            </remarks>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Return a list of dynamic objects, reader is closed after the call
+            </summary>
+            <remarks>Note: each row can be accessed via "dynamic", or by casting to an IDictionary&lt;string,object&gt;</remarks>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Executes a query, returning the data typed as per T
+            </summary>
+            <remarks>the dynamic param may seem a bit odd, but this works around a major usability issue in vs, if it is Object vs completion gets annoying. Eg type new [space] get new object</remarks>
+            <returns>A sequence of data of the supplied type; if a basic type (int, string, etc) is queried then the data from the first column in assumed, otherwise an instance is
+            created per row, and a direct column-name===member-name mapping is assumed (case insensitive).
+            </returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query(System.Data.IDbConnection,System.Type,System.String,System.Object,System.Data.IDbTransaction,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Executes a query, returning the data typed as per the Type suggested
+            </summary>
+            <returns>A sequence of data of the supplied type; if a basic type (int, string, etc) is queried then the data from the first column in assumed, otherwise an instance is
+            created per row, and a direct column-name===member-name mapping is assumed (case insensitive).
+            </returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``1(System.Data.IDbConnection,Dapper.CommandDefinition)">
+            <summary>
+            Executes a query, returning the data typed as per T
+            </summary>
+            <remarks>the dynamic param may seem a bit odd, but this works around a major usability issue in vs, if it is Object vs completion gets annoying. Eg type new [space] get new object</remarks>
+            <returns>A sequence of data of the supplied type; if a basic type (int, string, etc) is queried then the data from the first column in assumed, otherwise an instance is
+            created per row, and a direct column-name===member-name mapping is assumed (case insensitive).
+            </returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.QueryMultiple(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute a command that returns multiple result sets, and access each in turn
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.QueryMultiple(System.Data.IDbConnection,Dapper.CommandDefinition)">
+            <summary>
+            Execute a command that returns multiple result sets, and access each in turn
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``3(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Maps a query to objects
+            </summary>
+            <typeparam name="TFirst">The first type in the record set</typeparam>
+            <typeparam name="TSecond">The second type in the record set</typeparam>
+            <typeparam name="TReturn">The return type</typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn">The Field we should split and read the second object from (default: id)</param>
+            <param name="commandTimeout">Number of seconds before command execution timeout</param>
+            <param name="commandType">Is it a stored proc or a batch?</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``4(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Maps a query to objects
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn">The Field we should split and read the second object from (default: id)</param>
+            <param name="commandTimeout">Number of seconds before command execution timeout</param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``5(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3,``4},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with 4 input parameters
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TFourth"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``6(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3,``4,``5},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with 5 input parameters
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TFourth"></typeparam>
+            <typeparam name="TFifth"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``7(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with 6 input parameters
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TFourth"></typeparam>
+            <typeparam name="TFifth"></typeparam>
+            <typeparam name="TSixth"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``8(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with 7 input parameters
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TFourth"></typeparam>
+            <typeparam name="TFifth"></typeparam>
+            <typeparam name="TSixth"></typeparam>
+            <typeparam name="TSeventh"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Query``1(System.Data.IDbConnection,System.String,System.Type[],System.Func{System.Object[],``0},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with arbitrary input parameters
+            </summary>
+            <typeparam name="TReturn">The return type</typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="types">array of types in the record set</param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn">The Field we should split and read the second object from (default: id)</param>
+            <param name="commandTimeout">Number of seconds before command execution timeout</param>
+            <param name="commandType">Is it a stored proc or a batch?</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ReadChar(System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ReadNullableChar(System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.FindOrAddParameter(System.Data.IDataParameterCollection,System.Data.IDbCommand,System.String)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.PackListParameters(System.Data.IDbCommand,System.String,System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.ReplaceLiterals(Dapper.SqlMapper.IParameterLookup,System.Data.IDbCommand)">
+            <summary>
+            Replace all literal tokens with their text form
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.Format(System.Object)">
+            <summary>
+            Convert numeric values to their string form for SQL literal purposes
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.CreateParamInfoGenerator(Dapper.SqlMapper.Identity,System.Boolean,System.Boolean)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetTypeMap(System.Type)">
+            <summary>
+            Gets type-map for the given type
+            </summary>
+            <returns>Type map implementation, DefaultTypeMap instance if no override present</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.SetTypeMap(System.Type,Dapper.SqlMapper.ITypeMap)">
+            <summary>
+            Set custom mapping for type deserializers
+            </summary>
+            <param name="type">Entity type to override</param>
+            <param name="map">Mapping rules impementation, null to remove custom map</param>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetTypeDeserializer(System.Type,System.Data.IDataReader,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Internal use only
+            </summary>
+            <param name="type"></param>
+            <param name="reader"></param>
+            <param name="startBound"></param>
+            <param name="length"></param>
+            <param name="returnNullIfFirstMissing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ThrowDataException(System.Exception,System.Int32,System.Data.IDataReader,System.Object)">
+            <summary>
+            Throws a data exception, only used internally
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.AsTableValuedParameter(System.Data.DataTable,System.String)">
+            <summary>
+            Used to pass a DataTable as a TableValuedParameter
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.SetTypeName(System.Data.DataTable,System.String)">
+            <summary>
+            Associate a DataTable with a type name
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GetTypeName(System.Data.DataTable)">
+            <summary>
+            Fetch the type name associated with a DataTable
+            </summary>
+        </member>
+        <member name="E:Dapper.SqlMapper.QueryCachePurged">
+            <summary>
+            Called if the query cache is purged via PurgeQueryCache
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.ConnectionStringComparer">
+            <summary>
+            How should connection strings be compared for equivalence? Defaults to StringComparer.Ordinal.
+            Providing a custom implementation can be useful for allowing multi-tenancy databases with identical
+            schema to share strategies. Note that usual equivalence rules apply: any equivalent connection strings
+            <b>MUST</b> yield the same hash-code.
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.IDynamicParameters">
+            <summary>
+            Implement this interface to pass an arbitrary db specific set of parameters to Dapper
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.IDynamicParameters.AddParameters(System.Data.IDbCommand,Dapper.SqlMapper.Identity)">
+            <summary>
+            Add all the parameters needed to the command just before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="identity">Information about the query</param>
+        </member>
+        <member name="T:Dapper.SqlMapper.IParameterLookup">
+            <summary>
+            Extends IDynamicParameters providing by-name lookup of parameter values
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.IParameterLookup.Item(System.String)">
+            <summary>
+            Get the value of the specified parameter (return null if not found)
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.IParameterCallbacks">
+            <summary>
+            Extends IDynamicParameters with facilities for executing callbacks after commands have completed
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.IParameterCallbacks.OnCompleted">
+            <summary>
+            Invoked when the command has executed
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.ICustomQueryParameter">
+            <summary>
+            Implement this interface to pass an arbitrary db specific parameter to Dapper
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.ICustomQueryParameter.AddParameter(System.Data.IDbCommand,System.String)">
+            <summary>
+            Add the parameter needed to the command before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="name">Parameter name</param>
+        </member>
+        <member name="T:Dapper.SqlMapper.ITypeHandler">
+            <summary>
+            Implement this interface to perform custom type-based parameter handling and value parsing
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.ITypeHandler.SetValue(System.Data.IDbDataParameter,System.Object)">
+            <summary>
+            Assign the value of a parameter before a command executes
+            </summary>
+            <param name="parameter">The parameter to configure</param>
+            <param name="value">Parameter value</param>
+        </member>
+        <member name="M:Dapper.SqlMapper.ITypeHandler.Parse(System.Type,System.Object)">
+            <summary>
+            Parse a database value back to a typed value
+            </summary>
+            <param name="value">The value from the database</param>
+            <param name="destinationType">The type to parse to</param>
+            <returns>The typed value</returns>
+        </member>
+        <member name="T:Dapper.SqlMapper.UdtTypeHandler">
+            <summary>
+            A type handler for data-types that are supported by the underlying provider, but which need
+            a well-known UdtTypeName to be specified
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.UdtTypeHandler.#ctor(System.String)">
+            <summary>
+            Creates a new instance of UdtTypeHandler with the specified UdtTypeName
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.TypeHandler`1">
+            <summary>
+            Base-class for simple type-handlers
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.TypeHandler`1.SetValue(System.Data.IDbDataParameter,`0)">
+            <summary>
+            Assign the value of a parameter before a command executes
+            </summary>
+            <param name="parameter">The parameter to configure</param>
+            <param name="value">Parameter value</param>
+        </member>
+        <member name="M:Dapper.SqlMapper.TypeHandler`1.Parse(System.Object)">
+            <summary>
+            Parse a database value back to a typed value
+            </summary>
+            <param name="value">The value from the database</param>
+            <returns>The typed value</returns>
+        </member>
+        <member name="T:Dapper.SqlMapper.ITypeMap">
+            <summary>
+            Implement this interface to change default mapping of reader columns to type members
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.ITypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Finds best constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Matching constructor or default one</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ITypeMap.FindExplicitConstructor">
+            <summary>
+            Returns a constructor which should *always* be used.
+            
+            Parameters will be default values, nulls for reference types and zero'd for value types.
+            
+            Use this class to force object creation away from parameterless constructors you don't control.
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.ITypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Gets mapping for constructor parameter
+            </summary>
+            <param name="constructor">Constructor to resolve</param>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.ITypeMap.GetMember(System.String)">
+            <summary>
+            Gets member mapping for column
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="T:Dapper.SqlMapper.IMemberMap">
+            <summary>
+            Implements this interface to provide custom member mapping
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.IMemberMap.ColumnName">
+            <summary>
+            Source DataReader column name
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.IMemberMap.MemberType">
+            <summary>
+             Target member type
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.IMemberMap.Property">
+            <summary>
+            Target property
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.IMemberMap.Field">
+            <summary>
+            Target field
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.IMemberMap.Parameter">
+            <summary>
+            Target constructor parameter
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.Link`2">
+            <summary>
+            This is a micro-cache; suitable when the number of terms is controllable (a few hundred, for example),
+            and strictly append-only; you cannot change existing values. All key matches are on **REFERENCE**
+            equality. The type is fully thread-safe.
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.TypeHandlerCache`1">
+            <summary>
+            Not intended for direct usage
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.TypeHandlerCache`1.Parse(System.Object)">
+            <summary>
+            Not intended for direct usage
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.TypeHandlerCache`1.SetValue(System.Data.IDbDataParameter,System.Object)">
+            <summary>
+            Not intended for direct usage
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.Identity">
+            <summary>
+            Identity of a cached query in Dapper, used for extensibility
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.Identity.ForDynamicParameters(System.Type)">
+            <summary>
+            Create an identity for use with DynamicParameters, internal use only
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Identity.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.sql">
+            <summary>
+            The sql
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.commandType">
+            <summary>
+            The command type 
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.hashCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.gridIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.connectionString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Dapper.SqlMapper.Identity.parametersType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.Identity.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.SqlMapper.Identity.Equals(Dapper.SqlMapper.Identity)">
+            <summary>
+            Compare 2 Identity objects
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dapper.SqlMapper.LiteralToken">
+            <summary>
+            Represents a placeholder for a value that should be replaced as a literal value in the resulting sql
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.LiteralToken.Token">
+            <summary>
+            The text in the original command that should be replaced
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.LiteralToken.Member">
+            <summary>
+            The name of the member referred to by the token
+            </summary>
+        </member>
+        <member name="T:Dapper.SqlMapper.GridReader">
+            <summary>
+            The grid reader provides interfaces for reading multiple result sets from a Dapper query 
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read(System.Boolean)">
+            <summary>
+            Read the next grid of results, returned as a dynamic object
+            </summary>
+            <remarks>Note: each row can be accessed via "dynamic", or by casting to an IDictionary&lt;string,object&gt;</remarks>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``1(System.Boolean)">
+            <summary>
+            Read the next grid of results
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read(System.Type,System.Boolean)">
+            <summary>
+            Read the next grid of results
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``3(System.Func{``0,``1,``2},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``4(System.Func{``0,``1,``2,``3},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``5(System.Func{``0,``1,``2,``3,``4},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``6(System.Func{``0,``1,``2,``3,``4,``5},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``7(System.Func{``0,``1,``2,``3,``4,``5,``6},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Read``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:Dapper.SqlMapper.GridReader.Dispose">
+            <summary>
+            Dispose the grid, closing and disposing both the underlying reader and command.
+            </summary>
+        </member>
+        <member name="P:Dapper.SqlMapper.GridReader.IsConsumed">
+            <summary>
+            Has the underlying reader been consumed?
+            </summary>
+        </member>
+        <member name="T:Dapper.DynamicParameters">
+            <summary>
+            A bag of parameters that can be passed to the Dapper Query and Execute methods
+            </summary>
+        </member>
+        <member name="M:Dapper.DynamicParameters.#ctor">
+            <summary>
+            construct a dynamic parameter bag
+            </summary>
+        </member>
+        <member name="M:Dapper.DynamicParameters.#ctor(System.Object)">
+            <summary>
+            construct a dynamic parameter bag
+            </summary>
+            <param name="template">can be an anonymous type or a DynamicParameters bag</param>
+        </member>
+        <member name="M:Dapper.DynamicParameters.AddDynamicParams(System.Object)">
+            <summary>
+            Append a whole object full of params to the dynamic
+            EG: AddDynamicParams(new {A = 1, B = 2}) // will add property A and B to the dynamic
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="M:Dapper.DynamicParameters.Add(System.String,System.Object,System.Nullable{System.Data.DbType},System.Nullable{System.Data.ParameterDirection},System.Nullable{System.Int32})">
+            <summary>
+            Add a parameter to this dynamic parameter list
+            </summary>
+        </member>
+        <member name="M:Dapper.DynamicParameters.Add(System.String,System.Object,System.Nullable{System.Data.DbType},System.Nullable{System.Data.ParameterDirection},System.Nullable{System.Int32},System.Nullable{System.Byte},System.Nullable{System.Byte})">
+            <summary>
+            Add a parameter to this dynamic parameter list
+            </summary>
+        </member>
+        <member name="M:Dapper.DynamicParameters.AddParameters(System.Data.IDbCommand,Dapper.SqlMapper.Identity)">
+            <summary>
+            Add all the parameters needed to the command just before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="identity">Information about the query</param>
+        </member>
+        <member name="M:Dapper.DynamicParameters.Get``1(System.String)">
+            <summary>
+            Get the value of a parameter
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns>The value, note DBNull.Value is not returned, instead the value is returned as null</returns>
+        </member>
+        <member name="M:Dapper.DynamicParameters.Output``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Nullable{System.Data.DbType},System.Nullable{System.Int32})">
+            <summary>
+            Allows you to automatically populate a target property/field from output parameters. It actually
+            creates an InputOutput parameter, so you can still pass data in. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The object whose property/field you wish to populate.</param>
+            <param name="expression">A MemberExpression targeting a property/field of the target (or descendant thereof.)</param>
+            <param name="dbType"></param>
+            <param name="size">The size to set on the parameter. Defaults to 0, or DbString.DefaultLength in case of strings.</param>
+            <returns>The DynamicParameters instance</returns>
+        </member>
+        <member name="P:Dapper.DynamicParameters.RemoveUnused">
+            <summary>
+            If true, the command-text is inspected and only values that are clearly used are included on the connection
+            </summary>
+        </member>
+        <member name="P:Dapper.DynamicParameters.ParameterNames">
+            <summary>
+            All the names of the param in the bag, use Get to yank them out
+            </summary>
+        </member>
+        <member name="T:Dapper.TableValuedParameter">
+            <summary>
+            Used to pass a DataTable as a TableValuedParameter
+            </summary>
+        </member>
+        <member name="M:Dapper.TableValuedParameter.#ctor(System.Data.DataTable)">
+            <summary>
+            Create a new instance of TableValuedParameter
+            </summary>
+        </member>
+        <member name="M:Dapper.TableValuedParameter.#ctor(System.Data.DataTable,System.String)">
+            <summary>
+            Create a new instance of TableValuedParameter
+            </summary>
+        </member>
+        <member name="T:Dapper.DbString">
+            <summary>
+            This class represents a SQL string, it can be used if you need to denote your parameter is a Char vs VarChar vs nVarChar vs nChar
+            </summary>
+        </member>
+        <member name="F:Dapper.DbString.DefaultLength">
+            <summary>
+            A value to set the default value of strings
+            going through Dapper. Default is 4000, any value larger than this
+            field will not have the default value applied.
+            </summary>
+        </member>
+        <member name="M:Dapper.DbString.#ctor">
+            <summary>
+            Create a new DbString
+            </summary>
+        </member>
+        <member name="M:Dapper.DbString.AddParameter(System.Data.IDbCommand,System.String)">
+            <summary>
+            Add the parameter to the command... internal use only
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+        </member>
+        <member name="P:Dapper.DbString.IsAnsi">
+            <summary>
+            Ansi vs Unicode 
+            </summary>
+        </member>
+        <member name="P:Dapper.DbString.IsFixedLength">
+            <summary>
+            Fixed length 
+            </summary>
+        </member>
+        <member name="P:Dapper.DbString.Length">
+            <summary>
+            Length of the string -1 for max
+            </summary>
+        </member>
+        <member name="P:Dapper.DbString.Value">
+            <summary>
+            The value of the string
+            </summary>
+        </member>
+        <member name="T:Dapper.FeatureSupport">
+            <summary>
+            Handles variances in features per DBMS
+            </summary>
+        </member>
+        <member name="M:Dapper.FeatureSupport.Get(System.Data.IDbConnection)">
+            <summary>
+            Gets the feature set based on the passed connection
+            </summary>
+        </member>
+        <member name="P:Dapper.FeatureSupport.Arrays">
+            <summary>
+            True if the db supports array columns e.g. Postgresql
+            </summary>
+        </member>
+        <member name="T:Dapper.SimpleMemberMap">
+            <summary>
+            Represents simple member map for one of target parameter or property or field to source DataReader column
+            </summary>
+        </member>
+        <member name="M:Dapper.SimpleMemberMap.#ctor(System.String,System.Reflection.PropertyInfo)">
+            <summary>
+            Creates instance for simple property mapping
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <param name="property">Target property</param>
+        </member>
+        <member name="M:Dapper.SimpleMemberMap.#ctor(System.String,System.Reflection.FieldInfo)">
+            <summary>
+            Creates instance for simple field mapping
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <param name="field">Target property</param>
+        </member>
+        <member name="M:Dapper.SimpleMemberMap.#ctor(System.String,System.Reflection.ParameterInfo)">
+            <summary>
+            Creates instance for simple constructor parameter mapping
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <param name="parameter">Target constructor parameter</param>
+        </member>
+        <member name="P:Dapper.SimpleMemberMap.ColumnName">
+            <summary>
+            DataReader column name
+            </summary>
+        </member>
+        <member name="P:Dapper.SimpleMemberMap.MemberType">
+            <summary>
+            Target member type
+            </summary>
+        </member>
+        <member name="P:Dapper.SimpleMemberMap.Property">
+            <summary>
+            Target property
+            </summary>
+        </member>
+        <member name="P:Dapper.SimpleMemberMap.Field">
+            <summary>
+            Target field
+            </summary>
+        </member>
+        <member name="P:Dapper.SimpleMemberMap.Parameter">
+            <summary>
+            Target constructor parameter
+            </summary>
+        </member>
+        <member name="T:Dapper.DefaultTypeMap">
+            <summary>
+            Represents default type mapping strategy used by Dapper
+            </summary>
+        </member>
+        <member name="M:Dapper.DefaultTypeMap.#ctor(System.Type)">
+            <summary>
+            Creates default type map
+            </summary>
+            <param name="type">Entity type</param>
+        </member>
+        <member name="M:Dapper.DefaultTypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Finds best constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Matching constructor or default one</returns>
+        </member>
+        <member name="M:Dapper.DefaultTypeMap.FindExplicitConstructor">
+            <summary>
+            Returns the constructor, if any, that has the ExplicitConstructorAttribute on it.
+            </summary>
+        </member>
+        <member name="M:Dapper.DefaultTypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Gets mapping for constructor parameter
+            </summary>
+            <param name="constructor">Constructor to resolve</param>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="M:Dapper.DefaultTypeMap.GetMember(System.String)">
+            <summary>
+            Gets member mapping for column
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="P:Dapper.DefaultTypeMap.MatchNamesWithUnderscores">
+            <summary>
+            Should column names like User_Id be allowed to match properties/fields like UserId ?
+            </summary>
+        </member>
+        <member name="T:Dapper.CustomPropertyTypeMap">
+            <summary>
+            Implements custom property mapping by user provided criteria (usually presence of some custom attribute with column to member mapping)
+            </summary>
+        </member>
+        <member name="M:Dapper.CustomPropertyTypeMap.#ctor(System.Type,System.Func{System.Type,System.String,System.Reflection.PropertyInfo})">
+            <summary>
+            Creates custom property mapping
+            </summary>
+            <param name="type">Target entity type</param>
+            <param name="propertySelector">Property selector based on target type and DataReader column name</param>
+        </member>
+        <member name="M:Dapper.CustomPropertyTypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Always returns default constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Default constructor</returns>
+        </member>
+        <member name="M:Dapper.CustomPropertyTypeMap.FindExplicitConstructor">
+            <summary>
+            Always returns null
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.CustomPropertyTypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Not implemented as far as default constructor used for all cases
+            </summary>
+            <param name="constructor"></param>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.CustomPropertyTypeMap.GetMember(System.String)">
+            <summary>
+            Returns property based on selector strategy
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Poperty member map</returns>
+        </member>
+        <member name="T:Dapper.IWrappedDataReader">
+            <summary>
+            Describes a reader that controls the lifetime of both a command and a reader,
+            exposing the downstream command/reader as properties.
+            </summary>
+        </member>
+        <member name="P:Dapper.IWrappedDataReader.Reader">
+            <summary>
+            Obtain the underlying reader
+            </summary>
+        </member>
+        <member name="P:Dapper.IWrappedDataReader.Command">
+            <summary>
+            Obtain the underlying command
+            </summary>
+        </member>
+        <member name="T:Dapper.ExplicitConstructorAttribute">
+            <summary>
+            Tell Dapper to use an explicit constructor, passing nulls or 0s for all parameters
+            </summary>
+        </member>
+    </members>
+</doc>
