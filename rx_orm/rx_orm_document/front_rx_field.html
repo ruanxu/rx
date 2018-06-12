@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <p>前端中rx_field 是 rx_orm 前端中 rx_entity 的value，位于rx_manager.js中</p>
+    <p>值需要进行细节操作的属性都在这里</p>
+    <p>rx_manager.js 文件中我写了非常详细的注释，我就不多解释了</p>
+    <pre style="border:1px dotted #785;">
+    /* rx系列orm对象中的rx_field，前端orm中你基本不需要使用这个类型，可以通过后端orm来了解这个类型
+    * key 字段的键【必选】
+    * value 字段的值【必选】
+    * entity_or_model 字段所属的实体【必选】
+    * date_time_format 【可选】字段如果为日期，则日期的格式化类型，参照date_format_type的枚举，默认为date_time
+    */
+    function rx_field(key, value, entity_or_model, date_time_format) {
+        if (entity_or_model == undefined) {
+            throw "entity_or_model是必须的参数，可以为rx_entity或者rx_strong_type(以及子类)的类型";
+        }
+        var private_obj = [];
+        this.key = key;
+        private_obj["base_value"] = value;
+        this.base_value = null;
+        ................
+    </pre>
+</body>
+</html>

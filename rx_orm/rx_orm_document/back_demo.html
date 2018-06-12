@@ -1,0 +1,508 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/back_demo.js"></script>
+    <style>
+        * {
+            font-size: 18px;
+        }
+        td {
+            width:100px;
+        }
+        #demos > div {
+            margin-top: 16px;
+            background-color: rgba(220,220,220, 0.5);
+            box-shadow: 0px 0px 3px rgba(220,220,220, 1);
+            padding: 16px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="window.scrollTo(0,0);" style="padding: 12px; border-radius: 8px; cursor: pointer; border: 2px solid white; background-color: lightgray; position: fixed; bottom: 64px; right: 32px; box-shadow: 0px 0px 6px rgba(0,0,0,0.3); font-weight: bold;">Top</div>
+    <fieldset style="border-radius: 8px;">
+        <legend style="padding: 6px;"><b>select 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#all_select">全部查询</a></td>
+                <td><a href="#id_select">id查询</a></td>
+                <td><a href="#condition_select">条件查询</a></td>
+                <td><a href="#primordial_select">原生查询</a></td>
+                <td><a href="#view_select">视图查询</a></td>
+                <td><a href="#proc_select">存储过程查询</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="margin-top: 8px; border-radius: 8px;">
+        <legend style="padding: 6px;"><b>insert 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#one_insert">单条插入</a></td>
+                <td><a href="#many_select">多条插入</a></td>
+                <td><a href="#reunite_select">复合事务插入</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="margin-top: 8px; border-radius: 8px;">
+        <legend style="padding: 6px;"><b>update 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#one_update">单条修改</a></td>
+                <td><a href="#many_update">多条修改</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="margin-top: 8px; border-radius: 8px;">
+        <legend style="padding: 6px;"><b>delete 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#id_delete">id删除</a></td>
+                <td><a href="#condition_delete">条件删除</a></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <div id="demos">
+        <input name="all_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询表person中所有的数据（也可以用查询视图）</b>
+                <a href="front_demo.html#all_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    List&lt;rx_entity> list = rx_manager.get_all_entitys("person");
+    string name = list[0]["name"].value.ToString();
+    int age = list[1]["age"].value.to_int();
+            </pre>
+        </div>
+
+        <input name="id_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据id查询指定的单条或者多条person数据</b>
+                <a href="front_demo.html#id_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    rx_entity obj = rx_manager.get_entity_<b style="color:red;">by</b>_id("person", 1);
+    string name = obj["name"].value.ToString();
+    string age = obj["age"].value.to_int();
+
+    //id in 查询
+    List&lt;rx_entity> list = rx_manager.get_entitys_<b style="color:red;">in</b>_id("person", new int[] { 1, 2, 3 });
+            </pre>
+        </div>
+
+        <input name="condition_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据指定条件查询对应的person数据</b>
+                <a href="front_demo.html#condition_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    //方式1
+    List&lt;rx_entity> list = rx_manager.get_entitys_by_where_string("person", " and name like '%张%' and age in (16,17,18)");
+
+    //方式2
+    //查询name包含"张",且age在16，17，18中的person
+    rx_entity condition_obj = rx_manager.instance_entity("person");
+    condition_obj["name"].value = "张";
+    condition_obj["age"].value = "16,17,18";
+
+    //将name字段的比较运算符换成like（默认是等值匹配）
+    <b style="color:red;">condition_obj["name"].compare_symbol = compare_symbol.like</b>;
+    //将age字段的比较运算符换成in（默认是等值匹配）
+    <b style="color:red;">condition_obj["age"].compare_symbol = compare_symbol.contain</b>;
+    //指定使用name与age参与条件运算,可以重复指定
+    <b style="color:red;">condition_obj.set_where_keys("name", "age")</b>;
+    List&lt;rx_entity> list = rx_manager.get_entitys_by_where_keys(condition_obj, date_format_type.date_time);
+    //这个位置大家会明显觉得弱类型开发很累，但是强类型开发解决了这个问题，具体可以参照强类型例子
+
+    //方式3
+    //在web开发中可以这样简化了方式2
+    //request_fill方法可以将本次http请求中符合person成员参数填直接充到person对象中
+    //set_rx_field方法不仅可以指定对应字段的比较运算符，还可以将这个字段加入到where_keys中
+    List&lt;rx_entity> list = rx_manager.get_entitys_by_where_keys(
+    rx_manager.instance_entity("person").<b style="color:red;">request_fill()
+    .set_rx_field("name", compare: compare_symbol.like)
+    .set_rx_field("age", compare: compare_symbol.contain)</b>
+    , date_format_type.date_time);
+            </pre>
+        </div>
+
+        <input name="primordial_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>使用任意的sql进行查询操作，只能是查询sql，注入无门</b>
+                <a href="front_demo.html#primordial_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    List&lt;rx_entity> list = rx_manager.execute_select_sql("select * from person");
+    //我基本没用过这个方法，但是大家估计一看这个方法就明白是什么意思了
+    //可能真的是越原生越繁琐就越简单容易理解
+            </pre>
+        </div>
+
+        <input name="view_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询视图v_person_list中姓名是张三的数据</b>
+                <a href="front_demo.html#view_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    List&lt;rx_entity> list = rx_manager.get_entitys_in_view("v_person_list", " and name = '张三'");
+            </pre>
+        </div>
+
+        <input name="proc_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询存储过程pro_person</b>
+                <a href="front_demo.html#proc_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    List<rx_entity> list = rx_manager.get_entitys_in_proc("pro_person", new System.Data.SqlClient.SqlParameter[]
+    {
+        new System.Data.SqlClient.SqlParameter("@name","张三")
+    });
+            </pre>
+        </div>
+
+        <input name="one_insert" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>插入一条person数据</b>
+                <a href="front_demo.html#one_insert" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    //方式1
+    rx_entity obj = rx_manager.instance_entity("person");
+    //obj["id"].value = 1;
+    obj["name"].value = "jack";
+    obj["age"].value = 18;
+    obj["gender"].value = "男";
+    dml_result result = rx_manager.insert_entity(obj);
+
+    //方式2
+    //insert_or_update_entity这种情况id不为0或者不为null就进行更新操作，否则还是添加
+    rx_entity obj = rx_manager.instance_entity("person");
+    <b style="color:red;">obj["id"].value = 1;</b>
+    obj["name"].value = "jack";
+    obj["age"].value = 18;
+    obj["gender"].value = "男";
+    dml_result result = rx_manager.<b style="color:red;">insert_or_update_entity(obj)</b>;
+
+    //方式3
+    //这种情况在web开发中经常使用，非常方便
+    //request_fill方法直接可以将请求中的参数填充到实体中
+    //强类型开发模式比这个还要简单且直观
+    dml_result result = rx_manager.insert_or_update_entity(rx_manager.instance_entity("person").<b style="color:red;">request_fill()</b>);
+
+    //方式4
+    //这个一看就懂，就不用做解释了，不限于insert
+    dml_result result = rx_manager.execute_non_query("insert into person values('jack',18,'男')");
+            </pre>
+        </div>
+
+        <input name="many_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>插入多条person数据</b>
+                <a href="front_demo.html#many_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    //方式1
+    rx_entity obj1 = rx_manager.instance_entity("person");
+    obj1["name"].value = "jack";
+    obj1["age"].value = 18;
+    obj1["gender"].value = "男";
+    rx_entity obj2 = rx_manager.instance_entity("person");
+    obj2["name"].value = "tom";
+    obj2["age"].value = 19;
+    obj2["gender"].value = "男";
+
+    dml_result result = rx_manager.insert_entitys(obj1, obj2);
+    
+    //方式2
+    //同一个对象request_fill方法无法从逻辑上进行解析，然后不同的就可以了，复合事务插入demo会进行解释
+    rx_entity obj1 = rx_manager.instance_entity("person").request_fill();
+    rx_entity obj2 = rx_manager.instance_entity("person");
+    obj2["name"].value = "tom";
+    obj2["age"].value = 19;
+    obj2["gender"].value = "男";
+    
+    dml_result result = rx_manager.insert_entitys(obj1, obj2);
+
+    //方式3
+    //transaction_execute_non_query可以将多个rx_entity对象同时进行事务级别dml操作，不限于insert
+    rx_entity obj1 = rx_manager.instance_entity("person");
+    <b style="color:red;">obj1.command_type = dml_command_type.insert;</b>//指定进行insert操作
+    obj1["name"].value = "jack";
+    obj1["age"].value = 18;
+    obj1["gender"].value = "男";
+    rx_entity obj2 = rx_manager.instance_entity("person");
+    <b style="color:red;">obj2.command_type = dml_command_type.insert;</b>//指定进行insert操作
+    obj2["name"].value = "tom";
+    obj2["age"].value = 19;
+    obj2["gender"].value = "男";
+
+    rx_manager.transaction_execute_non_query(obj1, obj2);
+
+    //方式4
+    //相信这个方法大家也是一看就懂了,这也是transaction_execute_non_query另一种重载
+    //与execute_non_query不同点<b style="color:red;">transaction_execute_non_query</b>是事务级别的用来多行dml语句的，不限于insert
+    dml_result result = rx_manager.transaction_execute_non_query(
+                @"insert into person values('jack',18,'男')
+                  insert into person values('tom',19,'男')"
+                );
+
+    //方式5
+    //原理与方式4相同，先通过rx_entity产生需要添加的实体对象
+    //然后使用<b style="color:red;">transaction_insert_string_build</b>方法将实体对象转换成insert语句
+    rx_entity obj1 = rx_manager.instance_entity("person");
+    obj1["name"].value = "jack";
+    obj1["age"].value = 18;
+    obj1["gender"].value = "男";
+    rx_entity obj2 = rx_manager.instance_entity("person");
+    obj2["name"].value = "tom";
+    obj2["age"].value = 19;
+    obj2["gender"].value = "男";
+
+    System.Text.StringBuilder full_sql_string = new System.Text.StringBuilder();
+    full_sql_string.Append(rx_manager.<b style="color:red;">transaction_insert_string_build(obj1)</b> + " ");
+    full_sql_string.Append(rx_manager.<b style="color:red;">transaction_insert_string_build(obj2)</b> + " ");
+
+    rx_manager.transaction_execute_non_query(full_sql_string.ToString());
+            </pre>
+        </div>
+
+        <input name="reunite_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>添加一个部门，然后添加一个人属于这个部门</b>
+                <a href="front_demo.html#reunite_select" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    //方式1
+    rx_entity dept = rx_manager.instance_entity("dept");
+    dept["dept_name"].value = "研发部";
+    <b style="color:red;">rx_manager.insert_entity(dept);</b>//添加成功后，id会out回原对象的id字段中
+
+    rx_entity pre = rx_manager.instance_entity("person");
+    pre["name"].value = "张三";
+    pre["age"].value = 18;
+    pre["gender"].value = "男";
+    <b style="color:red;">pre["dept_id"].value = dept["id"].value;</b>
+    rx_manager.insert_entity(pre);
+    //这样看似可行，但是有个缺点，分别执行两次insert，没有使用事务机制整体执行，所以不可行
+
+    //方式2
+    //对象sql语句拼接方式
+    System.Text.StringBuilder full_sql_string = new System.Text.StringBuilder
+        (
+            " declare @id int = 0 "
+        );
+
+    rx_entity dept = rx_manager.instance_entity("dept");
+    dept["dept_name"].value = "研发部";
+    //将新的部门对象转换成insert语句
+    <b style="color:red;">full_sql_string.Append(" " + rx_manager.transaction_insert_string_build(dept) + " ");</b>
+
+    <b style="color:red;">full_sql_string.Append(" set @id = @@identity ");</b>
+
+    rx_entity pre = rx_manager.instance_entity("person");
+    pre["name"].value = "张三";
+    pre["age"].value = 18;
+    pre["gender"].value = "男";
+    <b style="color:red;">pre["dept_id"].value = "@id";</b>
+    //dept_id在进行sql生成操作时不会生成单引号(')
+    <b style="color:red;">pre["dept_id"].build_quote = false;</b>
+    //将新的人员对象转换成insert语句
+    full_sql_string.Append(" " + rx_manager.transaction_insert_string_build(pre) + " ");
+
+    dml_result result = rx_manager.<b style="color:red;">transaction_execute_non_query(full_sql_string.ToString());</b>
+    //最终执行的sql如下所示
+    //declare @id int = 0
+    //insert into dept values('研发部')
+    //set @id = @@identity
+    //insert into person values('张三', 18, '男', @id)
+    
+    //方式3
+    //进一步简化了方式2的操作
+    System.Text.StringBuilder full_sql_string = new System.Text.StringBuilder
+        (
+            " declare @id int = 0 "
+        );
+
+    //将request中的参数填充为新的部门并对象转换成insert语句
+    full_sql_string.Append(" " + <b style="color:red;">rx_manager.instance_entity("dept").request_fill()</b> + " ");
+
+    full_sql_string.Append(" set @id = @@identity ");
+
+    //将request中的参数填充为新的人员对象并转换成insert语句
+    full_sql_string.Append(" " + <b style="color:red;">rx_manager.instance_entity("person").request_fill().set_rx_field("dept_id", build_quote: false, value: "@id")</b> + " ");
+
+    dml_result result = rx_manager.transaction_execute_non_query(full_sql_string.ToString());
+    //整体操作起来还是比较繁琐，但是使用强类型开发能够进一步简化
+            </pre>
+        </div>
+
+        <input name="one_update" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>修改一个person的信息</b>
+                <a href="front_demo.html#one_update" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+
+    //方式1
+    //将id为1的person对象的name修改为tom
+    rx_entity obj = rx_manager.instance_entity("person");
+    obj["id"].value = 1;
+    obj["name"].value = "tom";
+    //如果is_use_null为true，会将id为1的person对象的除name以外的字段全部修改为null
+    <b style="color:red;">//obj.is_use_null = true;</b>//is_use_null默认为false
+    dml_result result = rx_manager.<b style="color:red;">update_entity_by_id(obj)</b>;
+
+    //方式2
+    //简化了方式1的操作
+    dml_result result = rx_manager.update_entity_by_id(rx_manager.instance_entity("person").<b style="color:red;">request_fill()</b>);
+            
+    //方式3
+    //将person表中年龄为16，17，18的人员的name修改为tom，且性别不等于"女"
+    rx_entity obj = rx_manager.instance_entity("person");
+    obj["age"].value = "16,17,18";
+    //指定age字段的比较运算符为 in
+    <b style="color:red;">obj["age"].compare_symbol = compare_symbol.contain;</b>
+    obj["gender"].value = "女";
+    //指定gender字段的比较运算符为不等于 !=
+    <b style="color:red;">obj["gender"].compare_symbol = compare_symbol.not_equal;</b>
+    obj["name"].value = "tom";
+    
+    //指定参与条件运算的字段名称，可以多次指定
+    <b style="color:red;">obj.set_where_keys("age", "gender");</b>
+    dml_result result = rx_manager.<b style="color:red;">update_entity_by_where_keys(obj)</b>;
+            
+    //方式4
+    //简化了方式3
+    dml_result result = rx_manager.update_entity_by_where_keys
+        (
+            rx_manager.instance_entity("person").<b style="color:red;">request_fill()
+            .set_rx_field("age", compare: compare_symbol.contain)
+            .set_rx_field("gender", compare: compare_symbol.not_equal)</b>
+        );
+    //set_rx_field方法会在where_keys中加入这个字段，但是不会重复加入
+            
+            </pre>
+        </div>
+
+        <input name="many_update" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>修改多个实体的信息</b>
+                <a href="front_demo.html#many_update" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+    
+    //方式1
+    //修改person信息id为1的对象的name修改为"tom"、age修改为18，同时修改dept信息id为1的对象name修改为"项目部"
+    rx_entity per = rx_manager.instance_entity("person");
+    <b style="color:red;">per.command_type = dml_command_type.update</b>;
+    per["id"].value = 1;
+    per["name"].value = "tom";
+    per["age"].value = 18;
+
+    rx_entity dept = rx_manager.instance_entity("dept");
+    <b style="color:red;">dept.command_type = dml_command_type.update</b>;
+    per["id"].value = 1;
+    per["name"].value = "项目部";
+
+    dml_result result = rx_manager.transaction_execute_non_query(per, dept);
+
+    //方式2
+    //简化方式1
+    rx_entity per = rx_manager.instance_entity("person").<b style="color:red;">request_fill()</b>;
+    per.command_type = dml_command_type.update;
+
+    rx_entity dept = rx_manager.instance_entity("dept").<b style="color:red;">request_fill()</b>;
+    dept.command_type = dml_command_type.update;
+
+    dml_result result = rx_manager.transaction_execute_non_query(per, dept)
+    //进一步的操作方式与insert相类似，我不就不多列出了，后期有时间我会全部列出
+
+                </pre>
+        </div>
+
+        <input name="id_delete" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据id删除一个或者多个person实体</b>
+                <a href="front_demo.html#id_delete" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+    
+    //方式1
+    //删除id为1的person
+    dml_result result = rx_manager.delete_entity_<b style="color:red;">by</b>_id("person", 1);
+
+    //方式2
+    //删除id为1,2,3的person
+    dml_result result = rx_manager.delete_entity_<b style="color:red;">in</b>_id("person", new int[]{1, 2, 3});
+                </pre>
+        </div>
+
+        <input name="condition_delete" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据条件删除指定的person实体</b>
+                <a href="front_demo.html#condition_delete" style="float:right; font-weight:bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+    using rx;
+    
+    //方式1
+    //删除name包含"张"且age在"16,17,18"的person实体
+    rx_entity obj = rx_manager.instance_entity("person");
+    obj["name"].value = "张";
+    <b style="color:red;">obj["name"].compare_symbol = compare_symbol.like;</b>
+    obj["age"].value = "16,17,18";
+    <b style="color:red;">obj["age"].compare_symbol = compare_symbol.contain;</b>
+    obj.set_where_keys("name", "age");
+    dml_result result = rx_manager.delete_entity_by_where_keys(obj);
+    
+    //方式2
+    //简化了方式1的操作
+    dml_result result = rx_manager.delete_entity_by_where_keys(
+    rx_manager.instance_entity("person")
+    <b style="color:red;">.set_rx_field("name", value: "张", compare: compare_symbol.like)
+    .set_rx_field("age", value: "16,17,18", compare: compare_symbol.contain)</b>
+    );
+                </pre>
+        </div>
+
+    </div>
+</body>
+</html>

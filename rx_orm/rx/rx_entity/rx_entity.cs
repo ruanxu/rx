@@ -13,7 +13,7 @@ namespace rx
     /// rx_orm中的基础实体类，弱类型
     /// <para>键值对规则</para>
     /// <para>直接使用rx_manager进行弱类型开发，性能搞</para>
-    /// <para>rx_manager要求物理表中必须存在字段id，类型int，自增</para>
+    /// <para>rx_manager要求物理表中必须存在字段id，类型int，自增(1,1)</para>
     /// </summary>
     public sealed class rx_entity : Dictionary<string, rx_field>
     {
@@ -85,6 +85,10 @@ namespace rx
         /// <returns></returns>
         public rx_entity set_rx_field(string key, compare_symbol? compare = null, logic_symbol? logic = null, date_format_type? date_format_type = null, bool? auto_remove = null, bool? build_quote = null, object value = null)
         {
+            if (!this.Keys.Contains(key))
+            {
+                throw new Exception("key:" + key + " 在这个实体中不存在！");
+            }
             this[key].compare_symbol = compare ?? this[key].compare_symbol;
             this[key].logic_symbol = logic ?? this[key].logic_symbol;
             this[key].date_format_type = date_format_type ?? this[key].date_format_type;

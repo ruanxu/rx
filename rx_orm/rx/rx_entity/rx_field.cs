@@ -11,6 +11,8 @@ namespace rx
 {
     /// <summary>
     /// rx系列orm中【字段的】类型
+    /// <para>就是rx_entity的value</para>
+    /// <para>字段的值需要进行细节操作的属性都在这里</para>
     /// </summary>
     public class rx_field
     {
@@ -213,7 +215,7 @@ namespace rx
         }
 
         private static Random random = new Random();
-
+         
         /// <summary>
         /// 运算符转换where字符串的方法
         /// </summary>
@@ -360,6 +362,8 @@ namespace rx
             (this.value == null ? "null" : (this.build_quote ? "'" : "") + this.value + (this.build_quote ? "'" : ""))
             + right + " ";
         }
+
+
         /// <summary>
         /// 生成一个空的rx_field
         /// </summary>

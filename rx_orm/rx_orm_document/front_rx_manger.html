@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <p>在项目 rx_javaScript 中的 rx_manager.js 是 rx_orm 前端的核心，所有的前端DB交互处理都在这里</p>
+    <p>但是你要直接使用rx_manager.js，那就是前端弱类型开发模式，弱前端开发操作与编写代码有些繁琐</p>
+    <p>rx_manager.js 文件中我写了非常详细的注释，我就不多解释了</p>
+    <pre style="border:1px dotted #785;">
+    /// &lt;reference path="rx.js" />
+    //服务器项目类型枚举
+    var server_project_type = {
+        asp_net_handle: "asp_net_handle",
+        asp_net_web_form: "asp_net_web_form",
+        asp_net_mvc: "asp_net_mvc",
+        asp_net_mvc_api: "asp_net_mvc_api"
+    };
+
+    /*前端rx_maager，与后端rx_manager一致
+    * 所有回调函数call_back的参数都是data与xml
+    */
+    var rx_manager = {
+        /*-----------------------------配置begin*/
+        /*服务接口地址需要在使用前或者使用中进行配置
+        * asp.net mvc项目server_url要指定继承rx_mvc_controller的控制器的地址
+        * asp.net mvc api项目server_url要指定继承rx_mvc_api_controller的api控制器的地址
+        * asp.net web_form项目server_url要指定继承rx_handle的一般处理程序的地址
+        */
+        server_url: "http://localhost:24793/api/v1/TestApi",
+    ................
+    </pre>
+    
+</body>
+</html>

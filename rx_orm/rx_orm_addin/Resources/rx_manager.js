@@ -17,9 +17,9 @@ var rx_manager = {
     * asp.net mvc api项目server_url要指定继承rx_mvc_api_controller的api控制器的地址
     * asp.net web_form项目server_url要指定继承rx_handle的一般处理程序的地址
     */
-    server_url: "http://localhost:24793/api/v1/TestApi",
+    server_url: "{$server_url}",
     //项目类型，具体参考枚举server_project_type中的值
-    project_type: server_project_type.asp_net_mvc_api,
+    project_type: server_project_type.{$project_type},
     //是否启用默认的error事件
     is_show_error: true,
     /*-----------------------------配置end*/
@@ -455,6 +455,13 @@ var rx_manager = {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
 
+        if (!(entity instanceof rx_entity)) {
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
+        }
+
         do_entity = { rx_fields: [] };
         var fields = [];
         for (var key in entity) {
@@ -548,7 +555,10 @@ var rx_manager = {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
         if (!(entity instanceof rx_entity)) {
-            throw "entity必须是一个rx_entity对象！";
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
         }
 
         do_entity = { rx_fields: [] };
@@ -592,7 +602,10 @@ var rx_manager = {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
         if (!(entity instanceof rx_entity)) {
-            throw "entity必须是一个rx_entity对象！";
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
         }
 
         do_entity = { rx_fields: [] };
@@ -613,6 +626,9 @@ var rx_manager = {
                     entity: JSON.stringify(do_entity)
                 },
                 success: function (data, xml) {
+                    if (data.code == "success") {
+                        entity.id = new rx_field("id", data.tag, entity);
+                    }
                     call_back(data, xml);
                 },
                 error: function (response_text, xml, status, status_text) {
@@ -688,7 +704,7 @@ var rx_manager = {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
         if (!(entity instanceof rx_entity)) {
-            throw "entity必须是一个rx_entity对象！";
+            throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
         }
 
         do_entity = { rx_fields: [] };
@@ -730,6 +746,13 @@ var rx_manager = {
     update_entity_by_where_keys: function (call_back, entity) {
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
+        }
+
+        if (!(entity instanceof rx_entity)) {
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
         }
 
         do_entity = { rx_fields: [] };
@@ -890,6 +913,13 @@ var rx_manager = {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
 
+        if (!(entity instanceof rx_entity)) {
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
+        }
+
         do_entity = { rx_fields: [] };
         var fields = [];
         for (var key in entity) {
@@ -921,8 +951,211 @@ var rx_manager = {
         } catch (e) {
             throw e.message + ',未找到ajax方法的依赖文件，请检查是否引入了rx.js！';
         }
-    }
+    },
     /*-----------------------------各种orm方法end*/
+
+    /*-----------------------------各种orm辅助方法begin*/
+
+    /* 根据该实体的内容生成update语句
+    * 如：update table_name set a = 1,b = 2,c = 3 [where d = 1 and e = 2 or f = 3]
+    * 会根据这个实体的机构和属性进行生成
+    * 生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成
+    */
+    transaction_update_string_build: function (entity_or_model) {
+        var entity = entity_or_model;
+        if (!(entity instanceof rx_entity)) {
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
+        }
+
+        entity = entity.clone();
+        var sql = String.Format(" update {0} set ", entity.entity_name);
+        var where_query = "";
+        var entity_query = "";
+        if (entity.where_keys == null || entity.where_keys.length == 0) {
+            if (!(entity.id instanceof rx_field)) {
+                throw String.Format("实体对象where_keys属性为null并且不存在key为id的rx_field！");
+            }
+            if (entity.id.value == null) {
+                throw String.Format("实体对象where_keys属性为null并且id值不能为null");
+            }
+
+            var right_num = entity.id.value == null ? 0 : entity.id.value.toString().split(')').length;
+            var num = 3 + right_num + Math.round(Math.random() * (11 + right_num));
+            var left = new Array(num + 1).join('(');
+            var right = new Array(num + 1).join(')');
+
+            where_query += String.Format(" where id = {0}'{1}'{2} ", left, entity["id"].value, right);
+            entity.Remove("id");
+        }
+        else {
+            for (var i = 0; i < entity.where_keys.length; i++) {
+                var where_key = entity.where_keys[i];
+                if (entity.Keys.indexOf(where_key) != -1) {
+                    if (where_query.length == 0) {
+                        where_query += entity[where_key].build_query(false).replace(entity[where_key].logic_symbol.toString(), "where");
+                    }
+                    else {
+                        where_query += entity[where_key].build_query(false);
+                    }
+                    entity.Remove(where_key);
+                }
+                else if (where_key == "id") {
+                    var right_num = entity.id.value == null ? 0 : entity.id.value.toString().split(')').length;
+                    var num = 3 + right_num + Math.round(Math.random() * (11 + right_num));
+                    var left = new Array(num + 1).join('(');
+                    var right = new Array(num + 1).join(')');
+                    if (where_query.Length == 0) {
+                        where_query += String.Format(" where id = {0}'{1}'{2} ", left, entity["id"].value, right);
+                    }
+                    else {
+                        where_query += String.Format(" and id = {0}'{1}'{2} ", left, entity["id"].value, right);
+                    }
+                }
+                else {
+                    throw String.Format("实体对象中where_keys属性中的值{0}在实体{1}中不存在,或者实体对象的is_use_null值为false而该key的值也为null！", where_key, entity.entity_name);
+                }
+            }
+        }
+        if (entity.Keys.indexOf("id") != -1 && entity["id"].auto_remove) {
+            entity.Remove("id");
+        }
+        for (var i = 0 ; i < entity.Keys.length; i++) {
+            var key = entity.Keys[i];
+            if (entity[key].value != null || entity[key].value == null && entity.is_use_null) {
+
+                if (entity_query.length > 0) entity_query += (",");
+                entity_query += (entity[key].build_query_not_symbol(false));
+            }
+        }
+        if (entity_query.length == 0) {
+            throw String.Format("实体对象中需要修改操作的字段都为null或者不存在,或者实体对象的is_use_null值为false而需要修改的key值也为null！");
+        }
+        sql += (entity_query);
+        sql += (where_query);
+
+        return sql;
+    },
+    /* 根据该实体的内容生成delete语句
+    * 如 :delete from table_name [where a = 1 and b = 2 or c = 3]
+    * <param name="entity">会根据这个实体的机构和属性进行生成
+    * 生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成
+    */
+    transaction_delete_string_build: function (entity_or_model) {
+        var entity = entity_or_model;
+        if (!(entity instanceof rx_entity)) {
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
+        }
+
+        entity = entity.clone();
+        var sql = String.Format(" delete from {0} ", entity.entity_name);
+        var where_query = "";
+
+        if (entity.where_keys == null || entity.where_keys.length == 0) {
+            if (entity.Keys.indexOf("id") != -1) {
+                var right_num = entity.id.value == null ? 0 : entity.id.value.toString().split(')').length;
+                var num = 3 + right_num + Math.round(Math.random() * (11 + right_num));
+                var left = new Array(num + 1).join('(');
+                var right = new Array(num + 1).join(')');
+
+                where_query += String.Format(" where id = {0}'{1}'{2} ", left, entity["id"].value, right);
+            }
+            else {
+                throw String.Format("实体对象的key中不存在id！");
+            }
+        }
+        else {
+            for (var i = 0; i < entity.where_keys.length; i++) {
+                var where_key = entity.where_keys[i];
+                if (entity.Keys.indexOf(where_key) != -1) {
+                    if (where_query.length == 0) {
+                        where_query += (entity[where_key].build_query(false).replace(entity[where_key].logic_symbol, "where"));
+                    }
+                    else {
+                        where_query += (entity[where_key].build_query(false));
+                    }
+                    entity.Remove(where_key);
+                }
+                else if (where_key == "id") {
+                    var right_num = entity.id.value == null ? 0 : entity.id.value.toString().split(')').length;
+                    var num = 3 + right_num + Math.round(Math.random() * (11 + right_num));
+                    var left = new Array(num + 1).join('(');
+                    var right = new Array(num + 1).join(')');
+
+                    if (where_query.length == 0) {
+                        where_query += String.Format(" where id = {0}'{1}'{2} ", left, entity["id"].value, right);
+                    }
+                    else {
+                        where_query += String.Format(" and id = {0}'{1}'{2} ", left, entity["id"].value, right);
+                    }
+                }
+                else {
+                    throw String.Format("实体对象中where_keys属性中的值{0}在实体{1}中不存在,或者实体对象的is_use_null值为false而该key的值也为null！", where_key, entity.entity_name);
+                }
+            }
+        }
+        sql += (where_query);
+
+        return sql;
+    },
+    /* 根据该实体的内容生成insert语句
+    * 如 :insert table_name (a,b,c) values('1','2','3')
+    * 会根据这个实体的机构和属性进行生成
+    * 生成过程中产生的结果，只要dml_result_code不为fail就是正确的生成
+    */
+    transaction_insert_string_build: function (entity_or_model) {
+        var entity = entity_or_model;
+        if (!(entity instanceof rx_entity)) {
+            entity = entity.rx_entity;
+            if (!(entity instanceof rx_entity)) {
+                throw "entity_or_model必须是一个rx_entity对象或者rx_modeld对象！";
+            }
+        }
+
+        var insert_field = "";
+        var insert_value = "";
+        for (var i = 0; i < entity.Keys.length; i++) {
+            key = entity.Keys[i];
+            var is_null_value = entity[key].value == null;
+            var right_num = is_null_value ? 0 : entity[key].value.toString().split(')').length;
+            var num = 3 + right_num + Math.round(Math.random() * (11 + right_num));
+            var left = new Array(num + 1).join('(');
+            var right = new Array(num + 1).join(')');
+            if (entity[key].value != null) {
+                if (key != "id") {
+                    if (insert_field.length > 0) {
+                        insert_field += (",");
+                        insert_value += (",");
+                    }
+                    insert_field += ("[" + key + "]");
+                    insert_value += String.Format("{0}{1}{2}{3}{4}", left, entity[key].build_quote ? "'" : "", entity[key].value, entity[key].build_quote ? "'" : "", right);
+                }
+            }
+            else {
+                if (entity.is_use_null && key != "id") {
+                    if (insert_field.length > 0) {
+                        insert_field += (",");
+                        insert_value += (",");
+                    }
+                    insert_field += ("[" + key + "]");
+                    insert_value += ("null");
+                }
+            }
+        }
+
+        if (insert_field.length == 0 || insert_value.length == 0) {
+            throw String.Format("实体的对象中所有需要进行添加操作的key中的值都为null,或者实体对象的is_use_null值为false而该key的值也为null！");
+        }
+
+        return String.Format(" insert {0} ({1}) values({2}) ", entity.entity_name, insert_field, insert_value);
+    }
+
+    /*-----------------------------各种orm辅助方法end*/
 };
 
 server_project_type.build_url = function (method_name) {
@@ -1100,11 +1333,11 @@ var compare_symbol = {
     less: "less",
     // 小于等于匹配
     less_equal: "less_equal",
-    // 模糊匹配 例:"%张%"
+    // 模糊匹配
     like: "like",
-    // 头模糊匹配 例:"%张"
+    // 头模糊匹配
     begin_like: "begin_like",
-    // 尾模糊匹配 例:"张%"
+    // 尾模糊匹配
     end_like: "end_like",
     // 无通配符匹配，需要自行在value写入通配符
     null_like: "null_like",
@@ -1217,6 +1450,22 @@ function create_rx_get_and_set_property(obj, property_name) {
     });
 }
 
+//运算符的hash表
+var compare_dic = {
+    "equal": "=",
+    "not_equal": "!=",
+    "greater": ">",
+    "greater_equal": ">=",
+    "less": "<",
+    "less_equal": "<=",
+    "like": "like",
+    "begin_like": "like",
+    "end_like": "like",
+    "null_like": "like",
+    "contain": "in",
+    "not_contain": "not in",
+    "contain_arr": ""
+};
 /* rx系列orm对象中的rx_field，前端orm中你基本不需要使用这个类型，可以通过后端orm来了解这个类型
 * key 字段的键【必选】
 * value 字段的值【必选】
@@ -1278,9 +1527,123 @@ function rx_field(key, value, entity_or_model, date_time_format) {
     this.build_quote = private_obj["build_quote"];
     Object.defineProperty(this, "build_quote", { get: function () { return private_obj["build_quote"]; }, set: function (value) { private_obj["build_quote"] = ((typeof value).toLocaleLowerCase() == "boolean") ? value : true } });
 
+    /* 运算符转换where字符串的方法
+    * 是否在生成SQL语句的字段时加入实体名称。 false：[字段名]   true:[表名].[字段名]
+    */
+    this.build_query = function (show_entity_name) {
+        show_entity_name = show_entity_name || false;
+        var build_string = "";
+
+        var compare = compare_dic[this.compare_symbol];
+
+        if (this.value == null) {
+            switch (this.compare_symbol) {
+                case compare_symbol.equal:
+                case compare_symbol.greater:
+                case compare_symbol.greater_equal:
+                case compare_symbol.like:
+                case compare_symbol.begin_like:
+                case compare_symbol.end_like:
+                case compare_symbol.null_like:
+                case compare_symbol.contain:
+                case compare_symbol.contain_arr:
+                    compare = "is";
+                    break;
+                case compare_symbol.not_equal:
+                case compare_symbol.not_contain:
+                case compare_symbol.less:
+                case compare_symbol.less_equal:
+                    compare = "is not";
+                    break;
+            }
+        }
+
+        var quote = this.build_quote && this.value != null ? "'" : "";
+        var begin_like = "", end_like = "";
+        if (this.value != null) {
+            switch (this.compare_symbol) {
+                case compare_symbol.like:
+                    begin_like = "%"; end_like = "%";
+                    break;
+                case compare_symbol.begin_like:
+                    end_like = "%";
+                    break;
+                case compare_symbol.end_like:
+                    begin_like = "%";
+                    break;
+                case compare_symbol.contain:
+                case compare_symbol.not_contain:
+                    quote = "";
+                    break;
+            }
+        }
+
+        var is_null_value = this.value == null;
+        var right_num = is_null_value ? 0 : this.value.toString().split(")").length;
+        var num = 1 + right_num + Math.round(Math.random() * (11 + right_num));
+        var left = is_null_value ? "" : new Array(num + 1).join('(');
+        var right = is_null_value ? "" : new Array(num + 1).join(')');
+
+        if (this.compare_symbol != compare_symbol.contain && this.compare_symbol != compare_symbol.not_contain) {
+            if (this.compare_symbol != compare_symbol.contain_arr) {
+                build_string = String.Format(" {0} {1} {2} {3}{4}{5} ",
+                    this.logic_symbol,
+                    (!show_entity_name ? "" : "[" + entity.entity_name + "].") + "[" + this.key + "]",
+                    compare,
+                    left,
+                    this.value == null ? "null" : String.Format("{0}{1}{2}{3}{4}",
+                        quote,
+                        begin_like,
+                        this.value,
+                        end_like,
+                        quote),
+                    right
+                    );
+            }
+            else {
+                build_string = String.Format(" {0} dbo.rx_contains_arr({1},'{2}',',') = 1 ", this.logic_symbol.ToString(), (!show_entity_name ? "" : "[" + entity.entity_name + "].") + "[" + this.key + "]", this.value);
+            }
+        }
+        else {
+            build_string = String.Format(" {0} {1}{2} {3}{4}{5} ",
+                this.logic_symbol,
+                left,
+                (!show_entity_name ? "" : "[" + entity.entity_name + "].") + "[" + this.key + "]",
+                compare,
+                this.value == null ? "null" : String.Format("({0}{1}{2}{3}{4})",
+                    quote,
+                    begin_like,
+                    this.value,
+                    end_like,
+                    quote),
+                right
+                );
+        }
+        return build_string;
+    }
+
+    /* 转换key=value字符串的方法
+    * 是否在生成SQL语句的字段时加入实体名称。 false：[字段名]   true:[表名].[字段名]
+    */
+    this.build_query_not_symbol = function (show_entity_name) {
+        show_entity_name = show_entity_name || false;
+
+        var is_null_value = this.value == null;
+        var right_num = is_null_value ? 0 : this.value.toString().split(")").length;
+        var num = 1 + right_num + Math.round(Math.random() * (11 + right_num));
+        var left = is_null_value ? "" : new Array(num + 1).join('(');
+        var right = is_null_value ? "" : new Array(num + 1).join(')');
+
+        return (!show_entity_name ? " " : " [" + entity.entity_name + "].")
+        + "[" + this.key + "] = "
+        + left +
+        (this.value == null ? "null" : (this.build_quote ? "'" : "") + this.value + (this.build_quote ? "'" : ""))
+        + right + " ";
+    }
+
     /*克隆对象*/
     this.clone = function () {
-        var field = new rx_field(this.key, entity, this.date_format_type);
+        var field = new rx_field(this.key, this.value, entity, this.date_format_type);
         field.compare_symbol = this.compare_symbol;
         field.logic_symbol = this.logic_symbol;
         field.build_quote = this.build_quote;
@@ -1320,6 +1683,7 @@ function rx_entity(entity_name, instance_json) {
     * 链式操作
     */
     this.set_where_keys = function (where_keys) {
+        if (where_keys == null) where_keys = [];
         if (!(where_keys instanceof Array))
             throw "where_keys必须是一个string的数组";
         for (var i = 0; i < where_keys.length; i++) {
@@ -1347,6 +1711,7 @@ function rx_entity(entity_name, instance_json) {
     * 链式操作
     */
     this.set_select_display_keys = function (select_display_keys) {
+        if (select_display_keys == null) select_display_keys = [];
         if (!(select_display_keys instanceof Array))
             throw "select_display_keys必须是一个string的数组";
         for (var i = 0; i < select_display_keys.length; i++) {
@@ -1358,6 +1723,7 @@ function rx_entity(entity_name, instance_json) {
     }
 
     /*类似后端orm中的request_fill，但是只能接受url地址栏显示传值，要求是这个rx_entity存在rx_field的key才会填充，所以H5手机APP比较适合
+    * 弱实体对象在没有任何rx_field成员时使用这个方法是无效的
     * 链式操作
     */
     this.request_fill = function () {
@@ -1411,15 +1777,12 @@ function rx_entity(entity_name, instance_json) {
         return this;
     }
 
-    /* js键值对和属性get|set不能同时使用，这里使用get_field代替后端的键值对设置rx_field对象
-    * 参数列表与后端rx_entity的Add方法一致
+    /* js键值对和属性get|set不能同时使用，这里使用Add代替后端的键值对设置rx_field对象
     * 【如果你一定要用键值对也可以，例子obj["id"] = new rx_field("id", 1, obj); 必须这样写才能识别为添加（Add）rx_field对象】
     * 链式操作
     */
-    this.Add = function (key, field) {
-        if (!(field instanceof rx_field))
-            throw "field必须是rx_field的对象";
-        this[key] = field;
+    this.Add = function (key, value) {
+        this[key] = new rx_field(key, value, this);
         return this;
     }
 
@@ -1446,13 +1809,29 @@ function rx_entity(entity_name, instance_json) {
         return this;
     }
 
+    this.clone = function () {
+        var obj = new rx_entity(this.entity_name, {
+            command_type: this.command_type,
+            is_use_null: this.is_use_null,
+        });
+        obj.set_where_keys(this.where_keys == null ? null : this.where_keys);
+        obj.set_select_display_keys(this.select_display_keys == null ? null : this.select_display_keys.select_display_keys.split(","));
+
+        var values = this.Values;
+        for (var i = 0; i < values.length; i++) {
+            obj[values[i].key] = values[i].clone();
+        }
+
+        return obj;
+    }
+
     create_get_and_set_property(this, "length", "Count");
 
     if (instance_json != undefined) {
         for (var key in instance_json) {
             if (!(instance_json[key] instanceof Function)) {
                 if (this[key] == undefined)
-                    this.Add(key, new rx_field(key, instance_json[key], this));
+                    this.Add(key, instance_json[key]);
                 else
                     this[key] = instance_json[key];
             }
@@ -1569,7 +1948,7 @@ function rx_strong_type(entity_name, instance_json) {
 
         var values = this.rx_entity.Values;
         for (var i = 0; i < values.length; i++) {
-            model.rx_entity.Add(values[i].key, values[i].clone());
+            model.rx_entity[values[i].key] = values[i].clone();
         }
         return model;
     }
@@ -1578,7 +1957,7 @@ function rx_strong_type(entity_name, instance_json) {
     * 链式操作
     */
     this.add = function (key, value) {
-        this.rx_entity.Add(key, new rx_field(key, value, this.rx_entity));
+        this.rx_entity.Add(key, value);
         return this;
     }
     /*为实体类强行删除一个rx_field，如果删除的是一个强属性，那么这个属性在使用时为undefined
@@ -1590,6 +1969,7 @@ function rx_strong_type(entity_name, instance_json) {
     }
 
     /*类似后端orm中的request_fill，但是只能接受url地址栏显示传值，要求是实体中的rx_entity存在rx_field的key才会填充，所以H5手机APP比较适合
+    * 弱实体对象在没有任何rx_field成员时使用这个方法是无效的，强实体可以忽略
     * 链式操作
     */
     this.request_fill = function () {
@@ -1899,4 +2279,3 @@ function rx_view(entity_name, instance_json) {
         }
     };
 })();
-

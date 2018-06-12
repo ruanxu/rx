@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <p>rx_manager 是 rx_orm 的核心，所有的DB交互处理都在这里</p>
+    <p>但是你要直接使用rx_manager，那就是弱类型开发模式，弱类型开发模式性能略高，但是操作与编写代码有些繁琐</p>
+    <p>rx_manager.cs 文件中我写了非常详细的注释，我就不多解释了</p>
+    <pre style="border:1px dotted #785;">
+        namespace rx
+    {
+        /// &lt;summary>
+        /// &lt;para>rx_manager要求数据库的任何一张表必须有（int）主键&lt;/para>
+        /// &lt;para>主键字段名必须是小写的id&lt;/para>
+        /// &lt;para>主键必须是自增的(1,1)&lt;/para>
+        /// &lt;para>我觉得这个要求不过分&lt;/para>
+        /// &lt;para>----------数据手动库配置----------&lt;/para>
+        /// &lt;para>rx_dbhelper配置方法&lt;/para>  
+        /// &lt;para>配置文件appSettings配置添加一个项，key="rx_db_type" value="sql或者access"&lt;/para>
+        /// &lt;para>(sqlserver)配置文件connectionStrings配置添加一个项，name="rx_ms_sql_conn_str" value="连接字符串"&lt;/para>
+        /// &lt;para>(access)配置文件connectionStrings配置添加一个项，name="rx_ms_access_conn_str" value="连接字符串"&lt;/para>
+        /// &lt;para>sqlserver或者access 二选一即可，目前只支持这两个数据库&lt;/para>
+        /// &lt;/summary>
+        public sealed class rx_manager
+        {
+            internal const string version = "1.0.0.0";
+        ................
+    </pre>
+    
+</body>
+</html>

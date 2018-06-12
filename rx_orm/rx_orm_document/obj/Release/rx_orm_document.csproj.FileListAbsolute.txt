@@ -1,0 +1,5 @@
+E:\c#\rx\rx_orm\rx_orm_document\bin\rx_orm_document.dll
+E:\c#\rx\rx_orm\rx_orm_document\bin\rx_orm_document.pdb
+E:\c#\rx\rx_orm\rx_orm_document\obj\Release\rx_orm_document.csprojResolveAssemblyReference.cache
+E:\c#\rx\rx_orm\rx_orm_document\obj\Release\rx_orm_document.dll
+E:\c#\rx\rx_orm\rx_orm_document\obj\Release\rx_orm_document.pdb

@@ -9,3 +9,14 @@ E:\c#\rx_javaScript\rx_orm_addin\obj\Debug\rx_orm_addin.pdb
 E:\c#\rx_javaScript\rx_orm_addin\bin\Debug\VSLangProj80.dll
 E:\c#\rx_javaScript\rx_orm_addin\obj\Debug\rx_orm_addin.GenerateCodeFrom.resources
 E:\c#\rx_javaScript\rx_orm_addin\obj\Debug\rx_orm_addin.csprojResolveAssemblyReference.cache
+E:\c#\rx\rx_orm\rx_orm_addin\bin\Debug\rx_orm_addin.dll
+E:\c#\rx\rx_orm\rx_orm_addin\bin\Debug\rx_orm_addin.pdb
+E:\c#\rx\rx_orm\rx_orm_addin\bin\Debug\rx_orm_addin.xml
+E:\c#\rx\rx_orm\rx_orm_addin\bin\Debug\VSLangProj80.dll
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.csprojResolveAssemblyReference.cache
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.csproj.ResolveComReference.cache
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.GenerateCodeFrom.resources
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.Properties.Resources.resources
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.csproj.GenerateResource.Cache
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.dll
+E:\c#\rx\rx_orm\rx_orm_addin\obj\Debug\rx_orm_addin.pdb

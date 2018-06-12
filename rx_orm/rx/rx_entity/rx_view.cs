@@ -111,6 +111,10 @@ namespace rx
         /// <returns>正在被操作的实体对象</returns>
         public T set_rx_field(string key, compare_symbol? compare = null, logic_symbol? logic = null, date_format_type? date_format_type = null, bool? auto_remove = null, bool? build_quote = null, object value = null)
         {
+            if (!this.Keys.Contains(key))
+            {
+                throw new Exception("key:" + key + " 在这个实体中不存在！");
+            }
             this[key].compare_symbol = compare ?? this[key].compare_symbol;
             this[key].logic_symbol = logic ?? this[key].logic_symbol;
             this[key].date_format_type = date_format_type ?? this[key].date_format_type;

@@ -100,7 +100,7 @@
             rx_orm中的基础实体类，弱类型
             <para>键值对规则</para>
             <para>直接使用rx_manager进行弱类型开发，性能搞</para>
-            <para>rx_manager要求物理表中必须存在字段id，类型int，自增</para>
+            <para>rx_manager要求物理表中必须存在字段id，类型int，自增(1,1)</para>
             </summary>
         </member>
         <!-- 对于成员“M:rx.rx_entity.#ctor(System.String)”忽略有格式错误的 XML 注释 -->
@@ -325,6 +325,8 @@
         <member name="T:rx.rx_field">
             <summary>
             rx系列orm中【字段的】类型
+            <para>就是rx_entity的value</para>
+            <para>字段的值需要进行细节操作的属性都在这里</para>
             </summary>
         </member>
         <member name="M:rx.rx_field.build_query(System.Boolean)">
@@ -1074,13 +1076,14 @@
             <summary>
             <para>rx_manager要求数据库的任何一张表必须有（int）主键</para>
             <para>主键字段名必须是小写的id</para>
-            <para>主键必须是自增的</para>
-            <para>----------数据库配置----------</para>
+            <para>主键必须是自增的(1,1)</para>
+            <para>我觉得这个要求不过分</para>
+            <para>----------数据手动库配置----------</para>
             <para>rx_dbhelper配置方法</para>  
             <para>配置文件appSettings配置添加一个项，key="rx_db_type" value="sql或者access"</para>
             <para>(sqlserver)配置文件connectionStrings配置添加一个项，name="rx_ms_sql_conn_str" value="连接字符串"</para>
             <para>(access)配置文件connectionStrings配置添加一个项，name="rx_ms_access_conn_str" value="连接字符串"</para>
-            <para>sqlserver或者access 二选一即可</para>
+            <para>sqlserver或者access 二选一即可，目前只支持这两个数据库</para>
             </summary>
         </member>
         <member name="F:rx.rx_manager.init">

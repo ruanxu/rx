@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <p>前端中的rx_entity 是 rx_orm 前端的核心实体，位于rx_manager.js中，前端orm中rx_entity与后端orm基本保持一致</p>
+    <p>rx_entity本身要包含许多CRUD操作的属性</p>
+    <p>rx_manager.js 文件中我写了非常详细的注释，我就不多解释了</p>
+    <pre style="border:1px dotted #785;">
+    /* 前端orm中rx_entity与后端orm保持一致
+    * entity_name 【必选】
+    * instance_json 【可选】用于快速初始化rx_entity成员与其中rx_field成员的json对象，键值对填充
+    */
+    function rx_entity(entity_name, instance_json) {
+        if (entity_name == undefined || entity_name == null) {
+            throw "entity_name不能为null或者undefined";
+        }
+        var private_obj = [];
+
+        private_obj["entity_name"] = entity_name;
+        this.entity_name = private_obj["entity_name"];
+        Object.defineProperty(this, "entity_name", { get: function () { return private_obj["entity_name"]; } });
+
+        private_obj["command_type"] = dml_command_type.vague;
+        this.command_type = private_obj["command_type"];
+        ................
+    </pre>
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿* {
+    margin:0px;
+    padding:0px;
+    list-style:none;
+}
+li {
+    margin-left:8px;
+    padding:4px;
+}
+a {
+    padding:4px;
+}
+#main {
+    overflow:hidden;
+}
+#menu {
+    float:left;
+    width:14%;
+    border-right:4px solid lightgray;
+    height:100%;
+}
+    #menu > div {
+        padding:8px;
+    }
+#content {
+    float:left;
+    width:85%;
+    height:100%;
+}

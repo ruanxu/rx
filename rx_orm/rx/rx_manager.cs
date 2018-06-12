@@ -27,13 +27,14 @@ namespace rx
     /// <summary>
     /// <para>rx_manager要求数据库的任何一张表必须有（int）主键</para>
     /// <para>主键字段名必须是小写的id</para>
-    /// <para>主键必须是自增的</para>
-    /// <para>----------数据库配置----------</para>
+    /// <para>主键必须是自增的(1,1)</para>
+    /// <para>我觉得这个要求不过分</para>
+    /// <para>----------数据手动库配置----------</para>
     /// <para>rx_dbhelper配置方法</para>  
     /// <para>配置文件appSettings配置添加一个项，key="rx_db_type" value="sql或者access"</para>
     /// <para>(sqlserver)配置文件connectionStrings配置添加一个项，name="rx_ms_sql_conn_str" value="连接字符串"</para>
     /// <para>(access)配置文件connectionStrings配置添加一个项，name="rx_ms_access_conn_str" value="连接字符串"</para>
-    /// <para>sqlserver或者access 二选一即可</para>
+    /// <para>sqlserver或者access 二选一即可，目前只支持这两个数据库</para>
     /// </summary>
     public sealed class rx_manager
     {
@@ -1330,7 +1331,7 @@ namespace rx
                     result.message = string.Format("实体对象where_keys属性为null并且不存在key为id的值！");
                     return "";
                 }
-                int right_num = entity["id"].ToString().Count(a => a == ')');
+                int right_num = entity["id"].value.ToString().Count(a => a == ')');
                 int num = random.Next(3 + right_num, 11 + right_num);
                 string left = new string('(', num);
                 string right = new string(')', num);

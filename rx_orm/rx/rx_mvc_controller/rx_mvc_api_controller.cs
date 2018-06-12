@@ -279,9 +279,12 @@ namespace rx
                     else if (parameters[j].ParameterType.FullName.ToLower() == "rx.rx_entity")
                     {
                         Dictionary<string, object> dic = jss.Deserialize<Dictionary<string, object>>(context.Request[parameters[j].Name]);
+                        if (!rx_manager.empty_entity_and_view_keys.Keys.Contains(dic["entity_name"].ToString()))
+                        {
+                            throw new Exception("表或者视图 " + dic["entity_name"].ToString() + " 不存在");
+                        }
                         rx_entity entity = new rx_entity(dic["entity_name"].ToString());
 
-                        entity = new rx_entity(dic["entity_name"].ToString());
                         entity.command_type = (dml_command_type)Enum.Parse(typeof(dml_command_type), dic["command_type"].ToString(), true);
                         entity.is_use_null = Convert.ToBoolean(dic["is_use_null"]);
                         entity.where_keys = dic["where_keys"] as List<string>;
@@ -408,7 +411,7 @@ namespace rx
                     throw new Exception(method.Name + " 在 asp.net mvc api 模式中可以使用的动作有 " + string.Join(" ", api_methods) + "，而且调用该接口的动作为 " + http_method);
                 }
             }
-            return method.Invoke(null, input_parameters);
+            return rx_obj_build(method.Invoke(null, input_parameters));
         }
 
         private object rx_obj_build(object data)

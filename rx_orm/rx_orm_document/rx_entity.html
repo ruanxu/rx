@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <p>rx_entity 是 rx_orm 的核心的实体，但是是弱类型实体，使用键值对代表一个实体（表）的对象Dictionary&lt;string, rx_field&gt;</p>
+    <p>rx_entity本身要包含许多CRUD操作的属性</p>
+    <p>rx_entity.cs 文件中我写了非常详细的注释，我就不多解释了</p>
+    <pre style="border:1px dotted #785;">
+    namespace rx
+    {
+        /// &lt;summary>
+        /// rx_orm中的基础实体类，弱类型
+        /// &lt;para>键值对规则&lt;/para>
+        /// &lt;para>直接使用rx_manager进行弱类型开发，性能搞&lt;/para>
+        /// &lt;para>rx_manager要求物理表中必须存在字段id，类型int，自增(1,1)&lt;/para>
+        /// &lt;/summary>
+        public sealed class rx_entity : Dictionary&lt;string, rx_field>
+        {
+            public new rx_field this[string key]
+            {
+        ................
+    </pre>
+</body>
+</html>
