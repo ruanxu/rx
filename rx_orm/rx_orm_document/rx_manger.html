@@ -14,24 +14,25 @@
     <p>但是你要直接使用rx_manager，那就是弱类型开发模式，弱类型开发模式性能略高，但是操作与编写代码有些繁琐</p>
     <p>rx_manager.cs 文件中我写了非常详细的注释，我就不多解释了</p>
     <pre style="border:1px dotted #785;">
-        namespace rx
-    {
-        /// &lt;summary>
-        /// &lt;para>rx_manager要求数据库的任何一张表必须有（int）主键&lt;/para>
-        /// &lt;para>主键字段名必须是小写的id&lt;/para>
-        /// &lt;para>主键必须是自增的(1,1)&lt;/para>
-        /// &lt;para>我觉得这个要求不过分&lt;/para>
-        /// &lt;para>----------数据手动库配置----------&lt;/para>
-        /// &lt;para>rx_dbhelper配置方法&lt;/para>  
-        /// &lt;para>配置文件appSettings配置添加一个项，key="rx_db_type" value="sql或者access"&lt;/para>
-        /// &lt;para>(sqlserver)配置文件connectionStrings配置添加一个项，name="rx_ms_sql_conn_str" value="连接字符串"&lt;/para>
-        /// &lt;para>(access)配置文件connectionStrings配置添加一个项，name="rx_ms_access_conn_str" value="连接字符串"&lt;/para>
-        /// &lt;para>sqlserver或者access 二选一即可，目前只支持这两个数据库&lt;/para>
-        /// &lt;/summary>
-        public sealed class rx_manager
-        {
-            internal const string version = "1.0.0.0";
-        ................
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">namespace</span><span style="font-size: 24px;font-family: 新宋体"> rx</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;summary&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">rx_manager</span><span style="font-size:24px;font-family:新宋体;color:green">要求数据库的任何一张表必须有（int）主键</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">主键字段名必须是小写的id</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">主键必须是自增的(1,1)</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">我觉得这个要求不过分</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">----------</span><span style="font-size:24px;font-family:新宋体;color:green">数据手动库配置----------</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">rx_dbhelper</span><span style="font-size:24px;font-family:新宋体;color:green">配置方法</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span><span style="font-size: 24px;font-family:新宋体;color:green">&nbsp; </span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">配置文件appSettings配置添加一个项，key=&quot;rx_db_type&quot; value=&quot;sql或者access&quot;</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">(sqlserver)</span><span style="font-size:24px;font-family:新宋体;color:green">配置文件connectionStrings配置添加一个项，name=&quot;rx_ms_sql_conn_str&quot; value=&quot;连接字符串&quot;</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">(access)</span><span style="font-size:24px;font-family: 新宋体;color:green">配置文件connectionStrings配置添加一个项，name=&quot;rx_ms_access_conn_str&quot; value=&quot;连接字符串&quot;</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size:24px;font-family:新宋体;color:gray">&nbsp;&nbsp;&nbsp;&nbsp;///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">sqlserver</span><span style="font-size:24px;font-family: 新宋体;color:green">或者access 二选一即可，目前只支持这两个数据库</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;/summary&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:blue">public</span> <span style="font-size:24px;font-family:新宋体;color:blue">sealed</span> <span style="font-size:24px;font-family:新宋体;color:blue">class</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_manager</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:blue">internal</span> <span style="font-size:24px;font-family:新宋体;color:blue">const</span> <span style="font-size:24px;font-family:新宋体;color:blue">string</span><span style="font-size: 24px;font-family: 新宋体"> version = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;1.0.0.0&quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+               ................
     </pre>
     
 </body>

@@ -14,19 +14,20 @@
     <p>rx_entity本身要包含许多CRUD操作的属性</p>
     <p>rx_entity.cs 文件中我写了非常详细的注释，我就不多解释了</p>
     <pre style="border:1px dotted #785;">
-    namespace rx
-    {
-        /// &lt;summary>
-        /// rx_orm中的基础实体类，弱类型
-        /// &lt;para>键值对规则&lt;/para>
-        /// &lt;para>直接使用rx_manager进行弱类型开发，性能搞&lt;/para>
-        /// &lt;para>rx_manager要求物理表中必须存在字段id，类型int，自增(1,1)&lt;/para>
-        /// &lt;/summary>
-        public sealed class rx_entity : Dictionary&lt;string, rx_field>
-        {
-            public new rx_field this[string key]
-            {
-        ................
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">namespace</span><span style="font-size: 24px;font-family: 新宋体"> rx</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;summary&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span><span style="font-size:24px;font-family:新宋体;color:green"> rx_orm</span><span style="font-size:24px;font-family: 新宋体;color:green">中的基础实体类，弱类型</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">键值对规则</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">直接使用rx_manager进行弱类型开发，性能高</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;para&gt;</span><span style="font-size:24px;font-family:新宋体;color:green">rx_manager</span><span style="font-size:24px;font-family:新宋体;color:green">要求物理表中必须存在字段id，类型int，自增(1,1)</span><span style="font-size:24px;font-family:新宋体;color:gray">&lt;/para&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:gray">///</span> <span style="font-size:24px;font-family:新宋体;color:gray">&lt;/summary&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:blue">public</span> <span style="font-size:24px;font-family:新宋体;color:blue">sealed</span> <span style="font-size:24px;font-family:新宋体;color:blue">class</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_entity</span><span style="font-size: 24px;font-family: 新宋体"> : </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">Dictionary</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:blue">string</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_field</span><span style="font-size: 24px;font-family: 新宋体">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:24px;font-family:新宋体;color:blue">public</span> <span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_field</span> <span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">[</span><span style="font-size:24px;font-family:新宋体;color:blue">string</span><span style="font-size: 24px;font-family: 新宋体"> key]</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+               ................
     </pre>
 </body>
 </html>

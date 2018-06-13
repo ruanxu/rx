@@ -12,7 +12,7 @@ namespace rx
     /// <summary>
     /// rx_orm中的基础实体类，弱类型
     /// <para>键值对规则</para>
-    /// <para>直接使用rx_manager进行弱类型开发，性能搞</para>
+    /// <para>直接使用rx_manager进行弱类型开发，性能高</para>
     /// <para>rx_manager要求物理表中必须存在字段id，类型int，自增(1,1)</para>
     /// </summary>
     public sealed class rx_entity : Dictionary<string, rx_field>

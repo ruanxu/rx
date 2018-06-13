@@ -16,9 +16,10 @@
     <p>H5App使用前端orm基本不在操心web api的事情了，你也可以自己重写web api类来自定义自己的规则</p>
     <p>性能方面也不用担心，底层使用的表达式树与Dapper,SQL处理速度比手写还要高</p>
     <div style="text-align:center;">
-        <h1>插件使用流程</h1>
+        <h1>插件使用流程（目前只支持 Visual Studio 2012 ）</h1>
         <p style="border-bottom:1px dashed lightgray; padding:8px;">
-            1.将Addins放入C:\Users\【你的用户名】\Documents\Visual Studio 2012目录中（我会在视频中具体预演示）
+            1.将<a href="file/Addins.zip" style="font-weight:bold;">Addins</a>放入C:\Users\【你的用户名】\Documents\Visual Studio 2012目录中（我会在视频中具体演示）
+            <br /><b style="color:red;">项目：rx_orm_addin 就是插件项目的源码</b>
         </p>
         <p style="border-bottom:1px dashed lightgray; padding:8px;">
             2.打开一个项目右键你的项目
@@ -36,12 +37,12 @@
             <img src="img/addin3.png" />
         </p>
         <p style="border-bottom:1px dashed lightgray; padding:8px;">
-            5.生成完成后会在项目下看见model（表）、views（视图）、procedures（存储过程）的类文件
+            5.生成完成后会在项目下看见models（表）、views（视图）、procedures（存储过程）的类文件
             <br /><br />
             <img src="img/addin4.png" />
         </p>
         <p style="border-bottom:1px dashed lightgray; padding:8px;">
-            6.同时也能看见生成的两个js文件，rx.js是前端orm底层的一些基础对象与方式，rx_manager.js就是核心对象与方法其中也包括前端model（表）、views（视图）、procedures（存储过程）的类
+            6.同时也能看见生成的两个js文件，rx.js是前端orm底层的一些基础对象与方式，rx_manager.js就是核心对象与方法其中也包括前端models（表）、views（视图）、procedures（存储过程）的类
             <br /><br />
             <img src="img/addin5.png" />
         </p>

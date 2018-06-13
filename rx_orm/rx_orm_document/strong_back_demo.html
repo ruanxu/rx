@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/back_demo.js"></script>
+    <style>
+        * {
+            font-size: 18px;
+        }
+
+        td {
+            width: 100px;
+        }
+
+        #demos > div {
+            margin-top: 16px;
+            background-color: rgba(220,220,220, 0.5);
+            box-shadow: 0px 0px 3px rgba(220,220,220, 1);
+            padding: 16px;
+            border-radius: 8px;
+        }
+        pre {
+            overflow:auto;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="window.scrollTo(0,0);" style="padding: 12px; border-radius: 8px; cursor: pointer; border: 2px solid white; background-color: lightgray; position: fixed; bottom: 64px; right: 32px; box-shadow: 0px 0px 6px rgba(0,0,0,0.3); font-weight: bold;">Top</div>
+    <fieldset style="border-radius: 8px;">
+        <legend style="padding: 6px;"><b>select 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#all_select">全部查询</a></td>
+                <td><a href="#id_select">id查询</a></td>
+                <td><a href="#condition_select">条件查询</a></td>
+                <td><a href="#view_select">视图查询</a></td>
+                <td><a href="#proc_select">存储过程查询</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="margin-top: 8px; border-radius: 8px;">
+        <legend style="padding: 6px;"><b>insert 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#one_insert">单条插入</a></td>
+                <td><a href="#many_select">多条插入</a></td>
+                <td><a href="#reunite_select">复合事务插入</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="margin-top: 8px; border-radius: 8px;">
+        <legend style="padding: 6px;"><b>update 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#one_update">单条修改</a></td>
+                <td><a href="#many_update">多条修改</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="margin-top: 8px; border-radius: 8px;">
+        <legend style="padding: 6px;"><b>delete 操作</b></legend>
+        <table style="width: 100%;">
+            <tr>
+                <td><a href="#id_delete">id删除</a></td>
+                <td><a href="#condition_delete">条件删除</a></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <div id="demos">
+        <input name="all_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询表person中所有的数据（也可以用查询视图）</b>
+                <a href="strong_front_demo.html#all_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.get_all_entitys();</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">string</span><span style="font-size: 24px;font-family: 新宋体"> name = list[0].name;</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">int</span><span style="font-size: 24px;font-family: 新宋体"> age = list[1].age;</span>
+            </pre>
+        </div>
+
+        <input name="id_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据id查询指定的单条或者多条person数据</b>
+                <a href="strong_front_demo.html#id_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//id </span><span style="font-size:24px;font-family:新宋体;color:green">查询</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体"> obj = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.get_entity_by_id(1);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//id in </span><span style="font-size: 24px;font-family:新宋体;color:green">查询</span>
+    <span style="font-size:24px;font-family:新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.get_entitys_in_id(1, 2, 3);</span>
+            </pre>
+        </div>
+
+        <input name="condition_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据指定条件查询对应的person数据</b>
+                <a href="strong_front_demo.html#condition_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.get_entitys_by_where_string(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; and gender = &#39;男&#39; and name like &#39;%</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">张%&#39; and age in (16,17,18)&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">查询gender为男、name包含&quot;张&quot;,且age在16，17，18中的person</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">()</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; gender = </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span><span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">默认作为等值匹配条件</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">张&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//age = &quot;16,17,18&quot; //</span><span style="font-size:24px;font-family:新宋体;color:green">因为是强类型int成员不能赋值字符串</span>
+    <span style="font-size: 24px;font-family: 新宋体">}</span>
+    <span style="font-size: 24px;font-family: 新宋体">.set_gender_field()</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这只是为了让gender参与条件匹配</span>
+    <span style="font-size: 24px;font-family: 新宋体">.set_name_field(compare:</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">compare_symbol</span><span style="font-size: 24px;font-family: 新宋体">.like)</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将字段name的比较运算符修改为like</span>
+    <span style="font-size: 24px;font-family: 新宋体">.set_age_field(compare:</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">compare_symbol</span><span style="font-size: 24px;font-family: 新宋体">.contain, value: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span><span style="font-size: 24px;font-family: 新宋体">)</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将字段age的比较运算符修改为in,因为int不能赋值string这里就可以使用value来解决</span>
+    <span style="font-size: 24px;font-family: 新宋体">.get_entitys();</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">进行查询操作（指定的条件都将带入）</span>
+
+            </pre>
+        </div>
+
+        <input name="view_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询视图v_person_list中所有的数据</b>
+                <a href="strong_front_demo.html#view_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models.view;</span><span style="font-size: 24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的视图实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这里只列举全部查询，其他的查询方式与rx_model&lt;T&gt;的子类基本一致</span>
+    <span style="font-size:24px;font-family:新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">v_person_list</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">v_person_list</span><span style="font-size: 24px;font-family: 新宋体">.get_all_entitys();</span>
+            </pre>
+        </div>
+
+        <input name="proc_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询存储过程pro_person</b>
+                <a href="strong_front_demo.html#proc_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models.procedures;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的存储过程类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//rx_orm</span><span style="font-size: 24px;font-family:新宋体;color:green">强类型开发中，存过过程被包装为类，execute_select方法代表以查询的方法进行执行</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方法的参数列表，与你在SQL中创建存储过程时定义的参数是一致的</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">但是因为存过过程无法强实体化，所以返回的是弱类型集合，使用键值对访问</span>
+    <span style="font-size:24px;font-family:新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_entity</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">pro_person</span><span style="font-size: 24px;font-family: 新宋体">.execute_select(</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张三&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+
+            </pre>
+        </div>
+
+        <input name="one_insert" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>插入一条person数据</b>
+                <a href="strong_front_demo.html#one_insert" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">()</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//id = 1,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; age = 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; gender = </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">}.insert_entity();</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//insert_or_update_entity</span><span style="font-size:24px;font-family:新宋体;color:green">这种情况id不为0或者不为null就进行更新操作，否则还是添加</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">()</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; id = 1,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; age = 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; gender = </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">}.insert_or_update_entity();</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式3</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这种情况在web开发中经常使用，非常方便</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//request_fill</span><span style="font-size:24px;font-family:新宋体;color:green">方法直接可以将请求中的参数填充到实体中</span>
+    <span style="font-size:24px;font-family:新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">().request_fill().insert_or_update_entity();</span>
+            </pre>
+        </div>
+
+        <input name="many_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>插入多条person数据</b>
+                <a href="strong_front_demo.html#many_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.insert_entitys</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; (</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ name= </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age = 18, gender = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">},</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ name= </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age = 19, gender = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">}</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//transaction_execute_non_query</span><span style="font-size:24px;font-family:新宋体;color:green">可以将多个rx_model对象同时进行事务级别dml操作，不限于insert</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">rx_manager</span><span style="font-size: 24px;font-family: 新宋体">.transaction_execute_non_query</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; (</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ name= </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age = 18, gender = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">, command_type = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">dml_command_type</span><span style="font-size: 24px;font-family: 新宋体">.insert },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ name= </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age = 19, gender = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">, command_type = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">dml_command_type</span><span style="font-size: 24px;font-family: 新宋体">.insert }</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+            </pre>
+        </div>
+
+        <input name="reunite_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>添加一个部门，然后添加一个人属于这个部门</b>
+                <a href="strong_front_demo.html#reunite_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">()</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; dept_id = </span><span style="font-size:24px;font-family: 新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">dept</span><span style="font-size: 24px;font-family: 新宋体">(){ name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">研发部&quot;</span><span style="font-size: 24px;font-family: 新宋体"> }.insert_entity().tag.to_int(),</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">添加成功后，id会out回原对象的id以及dml_result对象的tag中</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">张三&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; age = 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; gender = </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">}.insert_entity();</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">强事务原则可以参照弱类型开发模式的例子</span>
+            </pre>
+        </div>
+
+        <input name="one_update" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>修改一个person的信息</b>
+                <a href="strong_front_demo.html#one_update" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将id为1的person对象的name修改为tom</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">如果is_use_null为true，会将id为1的person对象的除name以外的字段全部修改为null</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">()</span>
+    <span style="font-size: 24px;font-family: 新宋体">{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; id = 1,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//is_use_null = true</span>
+    <span style="font-size: 24px;font-family: 新宋体">}.update_entity();</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">简化了方式1的操作</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">().request_fill().update_entity();</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式3</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将gender不为"女"且age在"16，17，18"中的person的name修改为"tom"</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//set_[</span><span style="font-size: 24px;font-family:新宋体;color:green">属性名]_field方法会在where_keys中加入这个字段，但是不会重复加入</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//set_[</span><span style="font-size: 24px;font-family:新宋体;color:green">属性名]_field方法就是弱类型set_rx_field的包装版，使用更加精简</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ gender = </span><span style="font-size: 24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">女&quot;</span><span style="font-size: 24px;font-family: 新宋体">, name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">}</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_gender_field(compare: </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">compare_symbol</span><span style="font-size: 24px;font-family: 新宋体">.not_equal)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_age_field(compare: </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">compare_symbol</span><span style="font-size: 24px;font-family: 新宋体">.contain, value: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span><span style="font-size: 24px;font-family: 新宋体">)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .update_entity();</span>
+            </pre>
+        </div>
+
+        <input name="many_update" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>修改多个实体的信息</b>
+                <a href="strong_front_demo.html#many_update" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">修改person信息id为1的对象的name修改为&quot;tom&quot;、age修改为18，同时修改dept信息id为1的对象name修改为&quot;项目部&quot;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_manager</span><span style="font-size: 24px;font-family: 新宋体">.transaction_execute_non_query</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; (</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ id = 1, name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age = 18, command_type = </span><span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_command_type</span><span style="font-size: 24px;font-family: 新宋体">.update },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">dept</span><span style="font-size: 24px;font-family: 新宋体">() { id = 1, name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">项目部&quot;</span><span style="font-size: 24px;font-family: 新宋体">, command_type = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">dml_command_type</span><span style="font-size: 24px;font-family: 新宋体">.update }</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+    <span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">进一步的操作方式与insert相类似，我不就不多列出了，后期有时间我会全部列出</span>
+            </pre>
+        </div>
+
+        <input name="id_delete" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据id删除一个或者多个person实体</b>
+                <a href="strong_front_demo.html#id_delete" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除id为1的person</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.delete_entity_in_id(1);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除id为1,2,3的person</span>
+    <span style="font-size:24px;font-family:新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.delete_entity_in_id(1, 2, 3);</span>
+                </pre>
+        </div>
+
+        <input name="condition_delete" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>根据条件删除指定的person实体</b>
+                <a href="strong_front_demo.html#condition_delete" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除name包含&quot;张&quot;且age在&quot;16,17,18&quot;的person实体</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">dml_result</span><span style="font-size: 24px;font-family: 新宋体"> result = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span> <span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">(){ name = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张&quot;</span><span style="font-size: 24px;font-family: 新宋体"> }</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_name_field(compare: </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">compare_symbol</span><span style="font-size: 24px;font-family: 新宋体">.like)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_age_field(compare: </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">compare_symbol</span><span style="font-size: 24px;font-family: 新宋体">.contain, value: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span><span style="font-size: 24px;font-family: 新宋体">)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .delete_entity();</span>
+                </pre>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <p>rx_model 是 rx_orm 的强类型开发中前端的实体（表）的核心，所有前端的强类型（表）DB交互处理都在这里</p>
+    <p>使用 rx_model 的子类（实体类）进行前端开发实现效果非常干净利落，链式操作一步到位</p>
+    <p>rx_manager.js 文件中对rx_model类型的描述我写了非常详细的注释，我就不多解释了</p>
+    <pre style="border:1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:green">/* </span><span style="font-size:24px;font-family:新宋体;color:green">前端orm中rx_model与后端orm基本一致,因为js不能泛型，所以继承规则略微有所不同,用于被rx系类强实体类继承</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* entity_name </span><span style="font-size:24px;font-family:新宋体;color:green">【必选】</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* instance_json </span><span style="font-size:24px;font-family:新宋体;color:green">【可选】用于快速初始化rx_entity成员与其中rx_field成员的json对象，键值对填充</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">*/</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> rx_model(entity_name, instance_json) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_strong_type.call(</span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">, entity_name, instance_json);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">/* </span><span style="font-size:24px;font-family:新宋体;color:green">默认根据实体中不为null的属性进行条件查询,也可以根据当前实体对象的where_keys属性进行指定key的where条件查询</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">&nbsp;&nbsp;&nbsp; * call_back </span><span style="font-size:24px;font-family:新宋体;color:green">【必选】回调函数，参数data</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">&nbsp;&nbsp;&nbsp; * where_keys</span><span style="font-size:24px;font-family:新宋体;color:green">参数可以多次指定参与where条件运算的key，并且可以指定顺序</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">&nbsp;&nbsp;&nbsp; * where_keys </span><span style="font-size:24px;font-family:新宋体;color:green">不传该参数就会使用所有不为null的属性进行条件查询，可以使用参数设置where_keys需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">&nbsp;&nbsp;&nbsp; */</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">.get_entitys = </span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (call_back, where_keys) {</span>
+             ................
+    </pre>
+    
+</body>
+</html>

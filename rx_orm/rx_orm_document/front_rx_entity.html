@@ -14,23 +14,24 @@
     <p>rx_entity本身要包含许多CRUD操作的属性</p>
     <p>rx_manager.js 文件中我写了非常详细的注释，我就不多解释了</p>
     <pre style="border:1px dotted #785;">
-    /* 前端orm中rx_entity与后端orm保持一致
-    * entity_name 【必选】
-    * instance_json 【可选】用于快速初始化rx_entity成员与其中rx_field成员的json对象，键值对填充
-    */
-    function rx_entity(entity_name, instance_json) {
-        if (entity_name == undefined || entity_name == null) {
-            throw "entity_name不能为null或者undefined";
-        }
-        var private_obj = [];
 
-        private_obj["entity_name"] = entity_name;
-        this.entity_name = private_obj["entity_name"];
-        Object.defineProperty(this, "entity_name", { get: function () { return private_obj["entity_name"]; } });
-
-        private_obj["command_type"] = dml_command_type.vague;
-        this.command_type = private_obj["command_type"];
-        ................
+    <span style="font-size:24px;font-family: 新宋体;color:green">/* </span><span style="font-size:24px;font-family:新宋体;color:green">前端orm中rx_entity与后端orm保持一致</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* entity_name </span><span style="font-size:24px;font-family:新宋体;color:green">【必选】</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* instance_json </span><span style="font-size:24px;font-family:新宋体;color:green">【可选】用于快速初始化rx_entity成员与其中rx_field成员的json对象，键值对填充</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">*/</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(entity_name, instance_json) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">if</span><span style="font-size: 24px;font-family: 新宋体"> (entity_name == undefined || entity_name == </span><span style="font-size:24px;font-family:新宋体;color:blue">null</span><span style="font-size: 24px;font-family: 新宋体">) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">throw</span> <span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;entity_name</span><span style="font-size:24px;font-family:新宋体;color:#A31515">不能为null或者undefined&quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> private_obj = [];</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; private_obj[</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;entity_name&quot;</span><span style="font-size: 24px;font-family: 新宋体">] = entity_name;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">.entity_name = private_obj[</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;entity_name&quot;</span><span style="font-size: 24px;font-family: 新宋体">];</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; Object.defineProperty(</span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;entity_name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { get: </span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> () { </span><span style="font-size:24px;font-family:新宋体;color:blue">return</span><span style="font-size: 24px;font-family: 新宋体"> private_obj[</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">&quot;entity_name&quot;</span><span style="font-size: 24px;font-family: 新宋体">]; } });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; private_obj[</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;command_type&quot;</span><span style="font-size: 24px;font-family: 新宋体">] = dml_command_type.vague;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">.command_type = private_obj[</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;command_type&quot;</span><span style="font-size: 24px;font-family: 新宋体">];</span>
+              ................
     </pre>
 </body>
 </html>

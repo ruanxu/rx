@@ -14,21 +14,22 @@
     <p>值需要进行细节操作的属性都在这里</p>
     <p>rx_manager.js 文件中我写了非常详细的注释，我就不多解释了</p>
     <pre style="border:1px dotted #785;">
-    /* rx系列orm对象中的rx_field，前端orm中你基本不需要使用这个类型，可以通过后端orm来了解这个类型
-    * key 字段的键【必选】
-    * value 字段的值【必选】
-    * entity_or_model 字段所属的实体【必选】
-    * date_time_format 【可选】字段如果为日期，则日期的格式化类型，参照date_format_type的枚举，默认为date_time
-    */
-    function rx_field(key, value, entity_or_model, date_time_format) {
-        if (entity_or_model == undefined) {
-            throw "entity_or_model是必须的参数，可以为rx_entity或者rx_strong_type(以及子类)的类型";
-        }
-        var private_obj = [];
-        this.key = key;
-        private_obj["base_value"] = value;
-        this.base_value = null;
-        ................
+
+    <span style="font-size:24px;font-family: 新宋体;color:green">/* rx</span><span style="font-size:24px;font-family:新宋体;color:green">系列orm对象中的rx_field，前端orm中你基本不需要使用这个类型，可以通过后端orm来了解这个类型</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* key </span><span style="font-size:24px;font-family:新宋体;color:green">字段的键【必选】</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* value </span><span style="font-size: 24px;font-family:新宋体;color:green">字段的值【必选】</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* entity_or_model </span><span style="font-size:24px;font-family:新宋体;color:green">字段所属的实体【必选】</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">* date_time_format </span><span style="font-size:24px;font-family:新宋体;color:green">【可选】字段如果为日期，则日期的格式化类型，参照date_format_type的枚举，默认为date_time</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">*/</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> rx_field(key, value, entity_or_model, date_time_format) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">if</span><span style="font-size: 24px;font-family: 新宋体"> (entity_or_model == undefined) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">throw</span> <span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;entity_or_model</span><span style="font-size:24px;font-family:新宋体;color:#A31515">是必须的参数，可以为rx_entity或者rx_strong_type(以及子类)的类型&quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> private_obj = [];</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">.key = key;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; private_obj[</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;base_value&quot;</span><span style="font-size: 24px;font-family: 新宋体">] = value;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">this</span><span style="font-size: 24px;font-family: 新宋体">.base_value = </span><span style="font-size: 24px;font-family:新宋体;color:blue">null</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+              ................
     </pre>
 </body>
 </html>

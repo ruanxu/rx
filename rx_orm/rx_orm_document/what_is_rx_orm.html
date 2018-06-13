@@ -3,6 +3,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("a").click(function () {
+                if ($(this).attr("href").indexOf("?") == -1) {
+                    $(this).attr("href", $(this).attr("href") + "?v=" + parseInt(Math.random() * 10000000))
+                }
+                else {
+                    $(this).attr("href", $(this).attr("href").split("?")[0] + "?v=" + parseInt(Math.random() * 10000000))
+                }
+            });
+        });
+    </script>
     <style>
         * {
             font-size:18px;
@@ -27,5 +40,15 @@
     <p style="color: red; font-size: 32px;">
         解决方案github地址：<a style="font-size:24px;" target="_blank" href="https://github.com/ruanxu/rx.git">https://github.com/ruanxu/rx.git</a>
     </p>
+
+        <fieldset>
+            <legend style="padding:8px; font-weight:bold;">公告内容</legend>
+            <p style="background-color:rgba(220,220,220,0.5); padding:8px; border-radius:8px;">
+                1.现阶段所有文档都已完成，后期会继续完善
+                <br />
+                2.现在准备录制视频
+            </p>
+        </fieldset>
+
 </body>
 </html>

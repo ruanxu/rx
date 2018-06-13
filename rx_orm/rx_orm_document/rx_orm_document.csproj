@@ -59,6 +59,8 @@
   <ItemGroup>
     <Content Include="css\index.css" />
     <Content Include="back_demo.html" />
+    <Content Include="front_rx_model.html" />
+    <Content Include="rx_model.html" />
     <Content Include="img\addin1.png" />
     <Content Include="img\addin2.png" />
     <Content Include="img\addin3.png" />
@@ -78,6 +80,7 @@
     <Content Include="rx_manger.html" />
     <Content Include="rx_orm_addin.html" />
     <Content Include="rx_orm_document.html" />
+    <Content Include="rx_view.html" />
     <Content Include="video.html" />
     <Content Include="Web.config" />
     <Content Include="what_is_rx_orm.html" />
@@ -87,11 +90,15 @@
     <Content Include="front_demo.html" />
     <Content Include="what_is_weak_type_development.html" />
     <Content Include="what_is_strong_type_development.html" />
+    <Content Include="strong_back_demo.html" />
+    <Content Include="front_rx_view.html" />
+    <Content Include="strong_front_demo.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="file\Addins.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

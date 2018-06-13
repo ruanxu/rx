@@ -21,6 +21,10 @@
             padding: 16px;
             border-radius: 8px;
         }
+
+        pre {
+            overflow: auto;
+        }
     </style>
 </head>
 <body>
@@ -72,18 +76,19 @@
         <div>
             <div>
                 <b>查询表person中所有的数据（也可以用查询视图）</b>
-                <a href="back_demo.html#all_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#all_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    &lt;script src="/Scripts/rx.js"> &lt;/script>
-    &lt;script src="/Scripts/rx_manager.js"> &lt;/script>
-    &lt;script>
-        rx_manager.get_all_entitys(function (data) {
-            console.info(data);
-            var name = data[0].name;
-            var age = data[0].age;
-        }, "person")
-    &lt;/script>
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;</span> <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;</span> <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_all_entitys(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> name = data[0].name;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> age = data[0].age;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">)</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -91,29 +96,23 @@
         <div>
             <div>
                 <b>根据id查询指定的单条或者多条person数据</b>
-                <a href="back_demo.html#id_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#id_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.get_entity_by_id(function (data) {
-            console.info(data)
-            var name = data.name;
-            var age = data.age;
-        }, "person", 1);
-    &lt;/script>
 
-    //id in 查询
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.get_entity_in_id(function (data) {
-            console.info(data)
-            var name = data.name;
-            var age = data.age;
-        }, "person", [1,2,3]);
-    &lt;/script>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//id </span><span style="font-size:24px;font-family:新宋体;color:green">查询</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_entity_by_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, 1);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//id in </span><span style="font-size: 24px;font-family:新宋体;color:green">查询</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_entity_in_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, [1, 2, 3]);</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -121,35 +120,32 @@
         <div>
             <div>
                 <b>根据指定条件查询对应的person数据</b>
-                <a href="back_demo.html#condition_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#condition_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.get_entitys_by_where_string(function (data) {
-            console.info(data);
-        }, "person", " and name like '%张%' and age in (16,17,18)");
-    &lt;/script>
 
-    //方式2
-    //查询name包含"张",且age在16，17，18中的person
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.get_entitys_by_where_keys(function (data) {
-            console.info(data);
-        },
-        new rx_entity(
-        {
-            name: "张",
-            age: "16,17,18"
-        })
-        <b style="color:red;">.set_rx_field("name", { compare: compare_symbol.like })
-        .set_rx_field("age", { compare: compare_symbol.contain })</b>
-        );
-    &lt;/script>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_entitys_by_where_string(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; and name like &#39;%</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张%&#39; and age in (16,17,18)&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">查询name包含&quot;张&quot;,且age在16，17，18中的person</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_entitys_by_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">张&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { compare: compare_symbol.like })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { compare: compare_symbol.contain })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -157,18 +153,19 @@
         <div>
             <div>
                 <b>使用任意的sql进行查询操作，只能是查询sql，注入无门</b>
-                <a href="back_demo.html#primordial_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#primordial_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.execute_select_sql(function (data) {
-            console.info(data);
-        }, "select * from person");
-    &lt;/script>
-    //我基本没用过这个方法，但是大家估计一看这个方法就明白是什么意思了
-    //可能真的是越原生越繁琐就越简单容易理解
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">我基本没用过这个方法，但是大家估计一看这个方法就明白是什么意思了</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">可能真的是越原生越繁琐就越简单容易理解</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.execute_select_sql(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;select * from person&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -176,16 +173,17 @@
         <div>
             <div>
                 <b>查询视图v_person_list中姓名是张三的数据</b>
-                <a href="back_demo.html#view_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#view_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.get_entitys_in_view(function (data) {
-            console.info(data);
-        }, "pro_person", " and name = '张三'");
-    &lt;/script>
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_entitys_in_view(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;pro_person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; and name = &#39;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张三&#39;&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -193,19 +191,20 @@
         <div>
             <div>
                 <b>查询存储过程pro_person</b>
-                <a href="back_demo.html#proc_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#proc_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.get_entitys_in_proc(function (data) {
-            console.info(data);
-        }, "pro_person",
-        [
-            new SqlParameter("@name", "张三")
-        ]);
-    &lt;/script>
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.get_entitys_in_proc(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;pro_person&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; [</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> SqlParameter(</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">&quot;@name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张三&quot;</span><span style="font-size: 24px;font-family: 新宋体">)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; ]);</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -213,65 +212,54 @@
         <div>
             <div>
                 <b>插入一条person数据</b>
-                <a href="back_demo.html#one_insert" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#one_insert" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var obj = new rx_entity("person",
-        {
-            //id : 1,
-            name: "jack",
-            age: 18,
-            gender: '男'
-        });
-        rx_manager.insert_entity(function (data) {
-            console.info(data);
-        }, obj);
-    &lt;/script>
 
-    //方式2
-    //insert_or_update_entity这种情况id不为0或者不为null就进行更新操作，否则还是添加
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var obj = new rx_entity("person",
-        {
-            <b style="color:red;">id : 1</b>,
-            name: "jack",
-            age: 18,
-            gender: '男'
-        });
-        rx_manager.<b style="color:red;">insert_or_update_entity</b>(function (data) {
-            console.info(data);
-        }, obj);
-    &lt;/script>
-
-    //方式3
-    //这种情况在web开发中经常使用，非常方便
-    //request_fill方法直接可以将请求中的参数填充到实体中
-    <b style="color:red;">//前端中request_fill方法只能接受url地址的显示传值</b>
-    <b style="color:red;">//弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.insert_or_update_entity(function (data) {
-            console.info(data);
-        }, new rx_entity("person", { name: "", age: "", gender: "" }).request_fill());
-    &lt;/script>
-
-    //方式4
-    //这个一看就懂，就不用做解释了，不限于insert
-    <b style="color:red;">//前端orm中对于dml操作需要接口开放对应权限才能使用</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.execute_non_query(function (data) {
-            console.info(data);
-        }, "insert into person values('jack',18,'男')");
-    &lt;/script>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//id : 1,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&#39;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">男&#39;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.insert_entity(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, obj);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//insert_or_update_entity</span><span style="font-size:24px;font-family:新宋体;color:green">这种情况id不为0或者不为null就进行更新操作，否则还是添加</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; id: 1,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&#39;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">男&#39;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.insert_or_update_entity(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, obj);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式3</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这种情况在web开发中经常使用，非常方便</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//request_fill</span><span style="font-size:24px;font-family:新宋体;color:green">方法直接可以将请求中的参数填充到实体中</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">前端中request_fill方法只能接受url地址的显示传值</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.insert_or_update_entity(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体"> }).request_fill());</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式4</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个一看就懂，就不用做解释了，不限于insert</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">前端orm中对于dml操作需要接口开放对应权限才能使用</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.execute_non_query(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;insert into person values(&#39;jack&#39;,18,&#39;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">男&#39;)&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -279,92 +267,81 @@
         <div>
             <div>
                 <b>插入多条person数据</b>
-                <a href="back_demo.html#many_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#many_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.insert_entitys(function (data) {
-            console.info(data);
-        },
-        [
-            new rx_entity("person", {
-                name: "jack",
-                age: 18,
-                gender: "男"
-            }),
-            new rx_entity("person", {
-                name: "tom",
-                age: 19,
-                gender: "男"
-            }),
-        ]);
-    &lt;/script>
 
-    //方式2
-    //transaction_execute_non_query可以将多个rx_entity对象同时进行事务级别dml操作，不限于insert
-    <b style="color:red;">//前端orm中对于dml操作需要接口开放对应权限才能使用</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.transaction_execute_non_query(function (data) {
-            console.info(data);
-        },
-        [
-            new rx_entity("person", {
-                command_type: dml_command_type.insert,
-                name: "jack",
-                age: 18,
-                gender: "男",
-    
-            }),
-            new rx_entity("person", {
-                command_type: dml_command_type.insert,
-                name: "tom",
-                age: 19,
-                gender: "男"
-            })
-        ]);
-    &lt;/script>
-
-    //方式3
-    //相信这个方法大家也是一看就懂了,这也是transaction_execute_non_query另一种重载
-    //与execute_non_query不同点<b style="color:red;">transaction_execute_non_query</b>是事务级别的用来多行dml语句的，不限于insert
-    <b style="color:red;">//前端orm中对于dml操作需要接口开放对应权限才能使用</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.transaction_execute_non_query(
-            function (data) {
-                console.info(data);
-            },
-            "insert into person values('jack',18,'男') insert into person values('tom',19,'男')"
-        );
-    &lt;/script>
-    
-    //方式4
-    //原理与方式3相同，先通过rx_entity产生需要添加的实体对象
-    //然后使用<b style="color:red;">transaction_insert_string_build方法将实体对象转换成insert语句</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var obj1 = new rx_entity("person", {
-            name: "jack",
-            age: 18,
-            gender: "男"
-        });
-        var obj2 = new rx_entity("person", {
-            name: "tom",
-            age: 19,
-            gender: "男"
-        });
-
-        rx_manager.transaction_execute_non_query(function (data) {
-            console.info(data);
-        }, full_sql_string);
-    &lt;/script>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.insert_entitys(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; [</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 19,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; ]);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//transaction_execute_non_query</span><span style="font-size:24px;font-family:新宋体;color:green">可以将多个rx_entity对象同时进行事务级别dml操作，不限于insert</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">前端orm中对于dml操作需要接口开放对应权限才能使用</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; [</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; command_type: dml_command_type.insert,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; command_type: dml_command_type.insert,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 19,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; ]);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式3</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">相信这个方法大家也是一看就懂了,这也是transaction_execute_non_query另一种重载</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">与execute_non_query不同点transaction_execute_non_query是事务级别的用来多行dml语句的，不限于insert</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">前端orm中对于dml操作需要接口开放对应权限才能使用</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;insert into person values(&#39;jack&#39;,18,&#39;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">男&#39;) insert into person values(&#39;tom&#39;,19,&#39;男&#39;)&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式4</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">原理与方式3相同，先通过rx_entity产生需要添加的实体对象</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">然后使用transaction_insert_string_build方法将实体对象转换成insert语句</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj1 = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;jack&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj2 = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 19,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, full_sql_string);</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -372,99 +349,93 @@
         <div>
             <div>
                 <b>添加一个部门，然后添加一个人属于这个部门</b>
-                <a href="back_demo.html#reunite_select" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#reunite_select" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var dept = new rx_entity("dept");
-        dept.add("name", "研发部");
-        rx_manager.insert_entity(function (data) {
-            <b style="color:red;">//添加成功后，data的tag中会out自增的id</b>
-            var pre = new rx_entity("person");
-            pre.Add("name", "张三");
-            pre.Add("age", 18);
-            pre.Add(gender, "男");
-            pre.Add("dept_id", data.tag);
-            rx_manager.insert_entity(function (data) {
-                console.info(data);
-            }, pre);
-        }, dept)
-    &lt;/script>
-    //这样看似可行，但是有个缺点，分别执行两次insert，没有使用事务机制整体执行，所以不可行
 
-    //方式2
-    //对象sql语句拼接方式
-    <b style="color:red;">//弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var full_sql_string = " declare @id int = 0 ";
-    
-        var dept = new rx_entity("dept",{
-            name: "研发部"
-        });
-
-        //将新的部门对象转换成insert语句
-        <b style="color:red;">full_sql_string += " " + rx_manager.transaction_insert_string_build(dept) + " ";</b>
-    
-        full_sql_string += " set @id = @@identity ";
-    
-        var pre = new rx_entity("person", {
-            name: "张三",
-            age: 18,
-            gender: "男",
-            <b style="color:red;">dept_id: "@id"</b>
-        })
-        <b style="color:red;">pre.dept_id.build_quote = false;//dept_id在进行sql生成操作时不会生成单引号(')</b>
-        //将新的人员对象转换成insert语句
-        <b style="color:red;">full_sql_string += " " + rx_manager.transaction_insert_string_build(pre) + " ";</b>
-    
-        rx_manager.transaction_execute_non_query(function (data) {
-            console.info(data)
-        }, full_sql_string);
-    &lt;/script>
-    //最终执行的sql如下所示
-    //declare @id int = 0
-    //insert into dept values('研发部')
-    //set @id = @@identity
-    //insert into person values('张三', 18, '男', @id)
-    
-    //方式3
-    //进一步简化了方式2的操作
-    <b style="color:red;">//弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var full_sql_string = " declare @@id int = 0 ";
-    
-        //将新的部门对象转换成insert语句
-        <b style="color:red;">full_sql_string += " " + rx_manager.transaction_insert_string_build(new rx_entity("dept", { name: "" }).request_fill()) + " ";</b>
-    
-        full_sql_string += " set @@id = @@identity ";
-    
-        //将新的人员对象转换成insert语句
-        <b style="color:red;">full_sql_string += " " + rx_manager.transaction_insert_string_build(new rx_entity("person", 
-                                                                              { 
-                                                                                  name: "", 
-                                                                                  age: "", 
-                                                                                  gender: "", 
-                                                                                  dept_id: ""
-                                                                              })
-                                                                              .request_fill()
-                                                                              .set_rx_field("dept_id", 
-                                                                              {
-                                                                                  build_quote: false, 
-                                                                                  value: "@id" 
-                                                                              })) + " ";</b>
-    
-        rx_manager.transaction_execute_non_query(function (data) {
-            console.info(data)
-        }, full_sql_string);
-    &lt;/script>
-    //整体操作起来还是比较繁琐，但是使用强类型开发能够进一步简化
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> dept = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;dept&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; dept.add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">研发部&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.insert_entity(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">添加成功后，data的tag中会out自增的id</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> pre = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pre.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张三&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pre.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, 18);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pre.Add(gender, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pre.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;dept_id&quot;</span><span style="font-size: 24px;font-family: 新宋体">, data.tag);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;rx_manager.insert_entity(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, pre);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, dept)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这样看似可行，但是有个缺点，分别执行两次insert，没有使用事务机制整体执行，所以不可行</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">对象sql语句拼接方式</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> full_sql_string = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; declare @id int = 0 &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> dept = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;dept&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">研发部&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将新的部门对象转换成insert语句</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; full_sql_string += </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体"> + rx_manager.transaction_insert_string_build(dept) + </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; full_sql_string += </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; set @id = @@identity &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> pre = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">张三&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: 18,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;</span><span style="font-size: 24px;font-family:新宋体;color:#A31515">男&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dept_id: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;@id&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; pre.dept_id.build_quote = </span><span style="font-size:24px;font-family:新宋体;color:blue">false</span><span style="font-size: 24px;font-family: 新宋体">;</span><span style="font-size:24px;font-family:新宋体;color:green">//dept_id</span><span style="font-size:24px;font-family:新宋体;color:green">在进行sql生成操作时不会生成单引号(&#39;)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将新的人员对象转换成insert语句</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; full_sql_string += </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体"> + rx_manager.transaction_insert_string_build(pre) + </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, full_sql_string);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">最终执行的sql如下所示</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//declare @id int = 0</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//insert into dept values(&#39;</span><span style="font-size:24px;font-family:新宋体;color:green">研发部&#39;)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//set @id = @@identity</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//insert into person values(&#39;</span><span style="font-size:24px;font-family:新宋体;color:green">张三&#39;, 18, &#39;男&#39;, @id)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式3</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">进一步简化了方式2的操作</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> full_sql_string = </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; declare @id int = 0 &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将新的部门对象转换成insert语句</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; full_sql_string += </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体"> + rx_manager.transaction_insert_string_build(</span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;dept&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体"> }).request_fill()) + </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; full_sql_string += </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; set @id = @@identity &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将新的人员对象转换成insert语句</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; full_sql_string += </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体"> + rx_manager.transaction_insert_string_build(</span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gender: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dept_id: </span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.request_fill()</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;dept_id&quot;</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; build_quote: </span><span style="font-size:24px;font-family: 新宋体;color:blue">false</span><span style="font-size: 24px;font-family: 新宋体">,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;@id&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})) + </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot; &quot;</span><span style="font-size: 24px;font-family: 新宋体">;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, full_sql_string);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">整体操作起来还是比较繁琐，但是使用强类型开发能够进一步简化</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -472,73 +443,61 @@
         <div>
             <div>
                 <b>修改一个person的信息</b>
-                <a href="back_demo.html#one_update" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#one_update" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        //将id为1的person对象的name修改为tom
-        var obj = new rx_entity("person", {
-            id: 1,
-            name: "tom"
-        });
-        //如果is_use_null为true，会将id为1的person对象的除name以外的字段全部修改为null
-        <b style="color:red;">//obj.is_use_null = true;//is_use_null默认为false</b>
-        rx_manager.update_entity_by_id(function (data) {
-            console.info(data);
-        }, obj);
-    &lt;/script>
 
-    //方式2
-    //简化了方式1的操作
-    <b style="color:red;">//弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.update_entity_by_id(function (data) {
-            console.info(data);
-        }, new rx_entity("person",{ name:"", age: "", gender: ""}).request_fill());
-    &lt;/script>
-                      
-    //方式3
-    //将person表中年龄为16，17，18的人员的name修改为tom，且性别不等于"女"
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var obj = new rx_entity("person");
-        obj.Add("age", "16,17,18");
-        //指定age字段的比较运算符为 in
-        <b style="color:red;">obj.age.compare_symbol = compare_symbol.contain;</b>
-        obj.Add("gender", "女");
-        //指定gender字段的比较运算符为不等于 !=
-        <b style="color:red;">obj.gender.compare_symbol = compare_symbol.not_equal;</b>
-        obj.Add("name", "tom");
-    
-        //指定参与条件运算的字段名称，可以多次指定
-        <b style="color:red;">obj.set_where_keys("age", "gender");</b>
-        rx_manager.<b style="color:red;">update_entity_by_where_keys</b>(function (data) {
-            console.info(data);
-        }, obj);
-    &lt;/script>
-      
-    //方式4
-    //简化了方式3
-    <b style="color:red;">//弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.update_entity_by_where_keys(function (data) {
-            console.info(data);
-        },
-            new rx_entity("person", { age: "", gender: "", name: "" }).<b style="color:red;">request_fill()
-            .set_rx_field("age", { compare: compare_symbol.contain })
-            .set_rx_field("gender", { compare: compare_symbol.not_equal })</b>
-        );
-    &lt;/script>
-    //set_rx_field方法会在where_keys中加入这个字段，但是不会重复加入
-            
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将id为1的person对象的name修改为tom</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; id: 1,</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; });</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">如果is_use_null为true，会将id为1的person对象的除name以外的字段全部修改为null</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//obj.is_use_null = true;//is_use_null</span><span style="font-size:24px;font-family:新宋体;color:green">默认为false</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.update_entity_by_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, obj);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">简化了方式1的操作</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.update_entity_by_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体"> }).request_fill());</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式3</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">将person表中年龄为16，17，18的人员的name修改为tom，且性别不等于&quot;女&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">指定age字段的比较运算符为 in</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.age.compare_symbol = compare_symbol.contain;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;gender&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">女&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">指定gender字段的比较运算符为不等于 !=</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.gender.compare_symbol = compare_symbol.not_equal;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">指定参与条件运算的字段名称，可以多次指定</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.set_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;gender&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.update_entity_by_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, obj);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式4</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">简化了方式3</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.update_entity_by_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, gender: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体"> }).request_fill()</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { compare: compare_symbol.contain })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;gender&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { compare: compare_symbol.not_equal })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//set_rx_field</span><span style="font-size:24px;font-family:新宋体;color:green">方法会在where_keys中加入这个字段，但是不会重复加入</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
 
@@ -546,119 +505,105 @@
         <div>
             <div>
                 <b>修改多个实体的信息</b>
-                <a href="back_demo.html#many_update" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#many_update" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    //修改person信息id为1的对象的name修改为"tom"、age修改为18，同时修改dept信息id为1的对象name修改为"项目部"
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        //修改person信息id为1的对象的name修改为"tom"、age修改为18，同时修改dept信息id为1的对象name修改为"项目部"
-        var per = new rx_entity("person");
-        <b style="color:red;">per.command_type = dml_command_type.update</b>;
-        per.Add("id", 1);
-        per.Add("name", "tom");
-        per.Add("age", 18);
-    
-        var dept = new rx_entity("dept");
-        <b style="color:red;">dept.command_type = dml_command_type.update</b>;
-        per.Add("id", 1);
-        per.Add("name", "项目部");
-    
-        rx_manager.transaction_execute_non_query(function (data) {
-            console.info(data);
-        }, [per, dept]);
-    &lt;/script>
 
-    //方式2
-    //简化方式1
-    <b style="color:red;">//弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</b>
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.transaction_execute_non_query(function (data) {
-            console.info(data);
-        },
-        [
-            new rx_entity("person", { id: "", name: "", age: "", command_type: dml_command_type.update }).request_fill(),
-            new rx_entity("dept", { id: "", name: "", command_type: dml_command_type.update }).request_fill()
-        ]);
-    &lt;/script>
-    //进一步的操作方式与insert相类似，我不就不多列出了，后期有时间我会全部列出
-
-                </pre>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size: 24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">修改person信息id为1的对象的name修改为&quot;tom&quot;、age修改为18，同时修改dept信息id为1的对象name修改为&quot;项目部&quot;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> per = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; per.command_type = dml_command_type.update;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; per.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;id&quot;</span><span style="font-size: 24px;font-family: 新宋体">, 1);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; per.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;tom&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; per.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, 18);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> dept = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;dept&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; dept.command_type = dml_command_type.update;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; per.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;id&quot;</span><span style="font-size: 24px;font-family: 新宋体">, 1);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; per.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">项目部&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, [per, dept]);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">简化方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">弱类型rx_entity在没有任何rx_filed成员时使用request_fill方法是无效的</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.transaction_execute_non_query(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; [</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { id: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, command_type: dml_command_type.update }).request_fill(),</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;dept&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { id: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;&quot;</span><span style="font-size: 24px;font-family: 新宋体">, command_type: dml_command_type.update }).request_fill()</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; ]);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">进一步的操作方式与insert相类似，我不就不多列出了，后期有时间我会全部列出</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+            </pre>
         </div>
 
         <input name="id_delete" type="text" style="width: 0px; height: 0px; opacity: 0;" />
         <div>
             <div>
                 <b>根据id删除一个或者多个person实体</b>
-                <a href="back_demo.html#id_delete" style="float:right; font-weight:bold;">对比后端</a>
+                <a href="back_demo.html#id_delete" style="float: right; font-weight: bold;">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    //方式1
-    //删除id为1的person
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.delete_entity_<b style="color:red;">by</b>_id(function (data) {
-            console.info(data);
-        }, "person", 1);
-    &lt;/script>
 
-    //方式2
-    //删除id为1,2,3的person
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.delete_entity_<b style="color:red;">in</b>_id(function (data) {
-            console.info(data);
-        }, "person", [1, 2, 3]);
-    &lt;/script>
-                </pre>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除id为1的person</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.delete_entity_by_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, 1);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除id为1,2,3的person</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.delete_entity_in_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, [1, 2, 3]);</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+            </pre>
         </div>
 
         <input name="condition_delete" type="text" style="width: 0px; height: 0px; opacity: 0;" />
         <div>
             <div>
                 <b>根据条件删除指定的person实体</b>
-                <a style="float:right; font-weight:bold;" href="back_demo.html#condition_delete">对比后端</a>
+                <a style="float: right; font-weight: bold;" href="back_demo.html#condition_delete">对比后端</a>
             </div>
             <pre style="border: 1px dotted #785;">
-    using rx;
-    
-    //方式1
-    //删除name包含"张"且age在"16,17,18"的person实体
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        var obj = new rx_entity("person");
-        obj.Add("name", "张");
-        <b style="color:red;">obj.name.compare_symbol = compare_symbol.like;</b>
-        obj.Add("age", "16,17,18");
-        <b style="color:red;">obj.age.compare_symbol = compare_symbol.contain;</b>
-        obj.set_where_keys("name", "age");
-        rx_manager.delete_entity_by_where_keys(function (data) {
-            console.info(data);
-        }, obj);
-    &lt;/script>
-    
-    //方式2
-    //简化了方式1的操作
-    &lt;script src="/Scripts/rx.js">&lt;/script>
-    &lt;script src="/Scripts/rx_manager.js">&lt;/script>
-    &lt;script>
-        rx_manager.delete_entity_by_where_keys(function (data) {
-            console.info(data);
-        },
-        new rx_entity("person", { name: "张", age: "16,17,18" })
-        <b style="color:red;">.set_rx_field("name", { compare: compare_symbol.like })
-        .set_rx_field("age", { compare: compare_symbol.contain })</b>
-        );
-    &lt;/script>
 
-                </pre>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除name包含&quot;张&quot;且age在&quot;16,17,18&quot;的person实体</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">var</span><span style="font-size: 24px;font-family: 新宋体"> obj = </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.name.compare_symbol = compare_symbol.like;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.Add(</span><span style="font-size:24px;font-family: 新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.age.compare_symbol = compare_symbol.contain;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; obj.set_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.delete_entity_by_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, obj);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式2</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">简化了方式1的操作</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; rx_manager.delete_entity_by_where_keys(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:blue">new</span><span style="font-size: 24px;font-family: 新宋体"> rx_entity(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { name: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;</span><span style="font-size:24px;font-family:新宋体;color:#A31515">张&quot;</span><span style="font-size: 24px;font-family: 新宋体">, age: </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;16,17,18&quot;</span><span style="font-size: 24px;font-family: 新宋体"> })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;name&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { compare: compare_symbol.like })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; .set_rx_field(</span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;age&quot;</span><span style="font-size: 24px;font-family: 新宋体">, { compare: compare_symbol.contain })</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; );</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+             </pre>
         </div>
 
     </div>
