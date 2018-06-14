@@ -1465,9 +1465,6 @@ function create_rx_get_and_set_property(obj, property_name) {
             return this.get_rx_field(property_name).value;
         },
         set: function (value) {
-            if (!(value instanceof rx_field)) {
-                throw "rx强实体对象的rx_field强属性成员" + property_name + "的set(赋值)操作必须给予rx_field类型的值";
-            }
             this.get_rx_field(property_name).value = value;
         }
     });
