@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
 namespace rx
 {
     /// <summary>
@@ -21,6 +22,8 @@ namespace rx
     /// </summary>
     public abstract class rx_handle : IHttpHandler, System.Web.SessionState.IRequiresSessionState
     {
+        protected string sign { get; set; }
+
         private static string[] date_format_type_names = typeof(date_format_type).GetEnumNames();
 
         protected HttpContext context { get; set; }
@@ -83,12 +86,21 @@ namespace rx
                     i_rx_risk_proc = this is i_rx_risk_proc,
                     i_rx_risk_update = this is i_rx_risk_update,
                     i_rx_risk_delete = this is i_rx_risk_delete,
-                    i_rx_risk_insert = this is i_rx_risk_insert
+                    i_rx_risk_insert = this is i_rx_risk_insert,
+                    i_rx_sign = this is i_rx_sign
                 });
                 return;
             }
 
-
+            if (this is i_rx_sign && !sign_validate())
+            {
+                response_write_json(new dml_result("")
+                {
+                    result_code = dml_result_code.error,
+                    message = "sign 签名不正确"
+                });
+                return;
+            }
 
             string rx_method = context.Request["rx_method"];
 
@@ -342,5 +354,30 @@ namespace rx
             return method.Invoke(null, input_parameters);
         }
 
+        private bool sign_validate()
+        {
+            this.sign = context.Request["sign"];
+            StringBuilder query = new StringBuilder();
+            foreach (string key in context.Request.QueryString)
+            {
+                if (key == "sign" || key == "rx_method") continue;
+                query.Append(key + "=" + context.Request.QueryString[key]);
+            }
+            foreach (string key in context.Request.Form)
+            {
+                if (key == "sign" || key == "rx_method") continue;
+                query.Append(key + "=" + context.Request.Form[key]);
+            }
+            byte[] sor = Encoding.UTF8.GetBytes(query.ToString());
+            MD5 md5 = MD5.Create();
+            byte[] result = md5.ComputeHash(sor);
+            StringBuilder md5_string = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                md5_string.Append(result[i].ToString("x2"));//加密结果"x2"结果为32位,"x3"结果为48位,"x4"结果为64位
+            }
+
+            return md5_string.ToString() == sign;
+        }
     }
 }

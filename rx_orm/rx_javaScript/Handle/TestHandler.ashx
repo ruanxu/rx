@@ -6,7 +6,7 @@ using System.Web;
 using rx;
 namespace rx_javaScript.Handle
 {
-    public class TestHandler : rx_handle, i_rx_risk
+    public class TestHandler : rx_handle, i_rx_risk, i_rx_sign
     {
     }
 }

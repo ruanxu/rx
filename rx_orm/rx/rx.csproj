@@ -103,6 +103,7 @@
     <Compile Include="rx_interface\i_rx_risk_update.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="rx_interface\i_rx_sign.cs" />
     <Compile Include="rx_interface\i_rx_view.cs" />
     <Compile Include="rx_manager.cs" />
     <Compile Include="rx_mvc_controller\rx_mvc_api_controller.cs">

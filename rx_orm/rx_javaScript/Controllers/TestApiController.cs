@@ -8,16 +8,7 @@ using rx;
 
 namespace rx_javaScript.Controllers
 {
-    public class TestApiController : rx_mvc_api_controller, i_rx_risk, i_rx_risk_proc, i_rx_risk_delete, i_rx_risk_update, i_rx_risk_insert
+    public class TestApiController : rx_mvc_api_controller, i_rx_risk, i_rx_risk_proc, i_rx_risk_delete, i_rx_risk_update, i_rx_risk_insert, i_rx_sign
     {
-        [HttpGet]
-        protected object test()
-        {
-            return new
-            {
-                id = context.Request["id"],
-                name = "jack"
-            };
-        }
     }
 }

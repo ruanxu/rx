@@ -15,13 +15,16 @@ var rx_manager = {
     /*服务接口地址需要在使用前或者使用中进行配置
     * asp.net mvc项目server_url要指定继承rx_mvc_controller的控制器的地址
     * asp.net mvc api项目server_url要指定继承rx_mvc_api_controller的api控制器的地址
-    * asp.net web_form项目server_url要指定继承rx_handle的一般处理程序的地址
+    * asp.net handle项目server_url要指定继承rx_handle的一般处理程序的地址
+    * asp.net web_form项目server_url要指定继承rx_web_form的web窗体的地址
     */
-    server_url: "/api/v1/TextApi",
+    server_url: "/WebForm/TestWebForm.aspx",
     //项目类型，具体参考枚举server_project_type中的值
-    project_type: server_project_type.asp_net_mvc_api,
+    project_type: server_project_type.asp_net_web_form,
     //是否启用默认的error事件
     is_show_error: true,
+    //是否启用参数加密签名(sign)
+    is_encryption: false,
     /*-----------------------------配置end*/
 
     /*-----------------------------各种orm方法begin*/
@@ -65,6 +68,7 @@ var rx_manager = {
                     where_string: where_string,
                     date_time_format: date_time_format
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -109,6 +113,7 @@ var rx_manager = {
                     select_display_keys: select_display_keys,
                     date_time_format: date_time_format
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -152,6 +157,7 @@ var rx_manager = {
                     proc_params: JSON.stringify(proc_params),
                     date_time_format: date_time_format
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -217,6 +223,7 @@ var rx_manager = {
                 url: server_project_type.build_url("transaction_execute_non_query"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "put" : "post",
                 data: data,
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -252,6 +259,7 @@ var rx_manager = {
                     sql: sql,
                     date_time_format: date_time_format
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -295,6 +303,7 @@ var rx_manager = {
                     param_array: JSON.stringify(param_array),
                     command_type: command_type
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -335,6 +344,7 @@ var rx_manager = {
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -380,6 +390,7 @@ var rx_manager = {
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -430,6 +441,7 @@ var rx_manager = {
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -484,6 +496,7 @@ var rx_manager = {
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -530,6 +543,7 @@ var rx_manager = {
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -578,6 +592,7 @@ var rx_manager = {
                 data: {
                     entity: JSON.stringify(do_entity)
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -625,6 +640,7 @@ var rx_manager = {
                 data: {
                     entity: JSON.stringify(do_entity)
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     if (data.code == "success") {
                         entity.id = new rx_field("id", data.tag, entity);
@@ -680,6 +696,7 @@ var rx_manager = {
                 url: server_project_type.build_url("insert_entitys"),
                 type: "post",
                 data: data,
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -724,6 +741,7 @@ var rx_manager = {
                 data: {
                     entity: JSON.stringify(do_entity)
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -772,6 +790,7 @@ var rx_manager = {
                 data: {
                     entity: JSON.stringify(do_entity)
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -811,6 +830,7 @@ var rx_manager = {
                     table_name: table_name,
                     id: id
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -850,6 +870,7 @@ var rx_manager = {
                     table_name: table_name,
                     id_array: id_array
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -889,6 +910,7 @@ var rx_manager = {
                     table_name: table_name,
                     where_string: where_string
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },
@@ -937,6 +959,7 @@ var rx_manager = {
                 data: {
                     entity: JSON.stringify(do_entity)
                 },
+                is_encryption: this.is_encryption,
                 success: function (data, xml) {
                     call_back(data, xml);
                 },

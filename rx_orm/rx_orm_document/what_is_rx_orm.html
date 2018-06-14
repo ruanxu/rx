@@ -18,7 +18,7 @@
     </script>
     <style>
         * {
-            font-size:18px;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -38,17 +38,29 @@
     <p>我的资料完全开源，没有为什么，开源了才有更多的人知道和参与我的项目进行改进，谢谢大家，我会继续更新这套项目</p>
 
     <p style="color: red; font-size: 32px;">
-        解决方案github地址：<a style="font-size:24px;" target="_blank" href="https://github.com/ruanxu/rx.git">https://github.com/ruanxu/rx.git</a>
+        解决方案github地址：<a style="font-size: 24px;" target="_blank" href="https://github.com/ruanxu/rx.git">https://github.com/ruanxu/rx.git</a>
     </p>
 
-        <fieldset>
-            <legend style="padding:8px; font-weight:bold;">公告内容</legend>
-            <p style="background-color:rgba(220,220,220,0.5); padding:8px; border-radius:8px;">
-                1.现阶段所有文档都已完成，后期会继续完善
-                <br />
-                2.现在准备录制视频
-            </p>
-        </fieldset>
+    <fieldset>
+        <legend style="padding: 8px; font-weight: bold;">公告内容</legend>
+        <ol type="1" style="background-color: rgba(220,220,220,0.5); padding: 8px 64px; border-radius: 8px;">
+            <li>完成rx_orm 1.0.0.1, 更新内容如下
+                <ul>
+                    <li>
+                        加强了前端orm的安全性设置，使用【签名加密验证】强制使用rx_orm前端api进行调用验证
+                        <br />
+                        <img src="news_img/1.png" />
+                    </li>
+                </ul>
+            </li>
+            <li>现在准备录制视频</li>
+        </ol>
+        <style>
+            ol > li {
+                padding: 8px;
+            }
+        </style>
+    </fieldset>
 
 </body>
 </html>

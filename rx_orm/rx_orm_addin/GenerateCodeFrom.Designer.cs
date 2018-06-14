@@ -48,6 +48,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.backChk = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.isSignChk = new System.Windows.Forms.CheckBox();
             this.methodChk = new System.Windows.Forms.CheckBox();
             this.procChk = new System.Windows.Forms.CheckBox();
             this.deleteChk = new System.Windows.Forms.CheckBox();
@@ -134,7 +135,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generateStatusLabel,
             this.generateProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 404);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 442);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.statusStrip1.Size = new System.Drawing.Size(1012, 29);
@@ -158,7 +159,7 @@
             // generateBtn
             // 
             this.generateBtn.Enabled = false;
-            this.generateBtn.Location = new System.Drawing.Point(796, 367);
+            this.generateBtn.Location = new System.Drawing.Point(796, 404);
             this.generateBtn.Name = "generateBtn";
             this.generateBtn.Size = new System.Drawing.Size(86, 32);
             this.generateBtn.TabIndex = 8;
@@ -260,6 +261,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.isSignChk);
             this.groupBox2.Controls.Add(this.methodChk);
             this.groupBox2.Controls.Add(this.procChk);
             this.groupBox2.Controls.Add(this.deleteChk);
@@ -282,6 +284,19 @@
             this.groupBox2.Size = new System.Drawing.Size(988, 125);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
+            // 
+            // isSignChk
+            // 
+            this.isSignChk.AutoSize = true;
+            this.isSignChk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.isSignChk.Location = new System.Drawing.Point(620, 128);
+            this.isSignChk.Name = "isSignChk";
+            this.isSignChk.Size = new System.Drawing.Size(119, 19);
+            this.isSignChk.TabIndex = 27;
+            this.isSignChk.Tag = "i_rx_sign";
+            this.isSignChk.Text = "签名加密验证";
+            this.isSignChk.UseVisualStyleBackColor = true;
+            this.isSignChk.CheckedChanged += new System.EventHandler(this.jurisdictionChk_CheckedChanged);
             // 
             // methodChk
             // 
@@ -366,7 +381,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(615, 125);
+            this.pictureBox2.Location = new System.Drawing.Point(746, 125);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 20);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -482,7 +497,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(913, 367);
+            this.button1.Location = new System.Drawing.Point(913, 404);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 32);
             this.button1.TabIndex = 16;
@@ -494,7 +509,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 433);
+            this.ClientSize = new System.Drawing.Size(1012, 471);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.entityCountLab);
             this.Controls.Add(this.procedureCountLab);
@@ -569,5 +584,6 @@
         private System.Windows.Forms.CheckBox apiJurisdictionChk;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.CheckBox backChk;
+        private System.Windows.Forms.CheckBox isSignChk;
     }
 }

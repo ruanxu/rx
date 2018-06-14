@@ -1,6 +1,7 @@
 ﻿/// <reference path="jquery-3.3.1.min.js" />
 
 $(function () {
+    $("#frame_content").attr("src", "what_is_rx_orm.html?v=" + parseInt(Math.random() * 10000000));
     $("#main").height(window.innerHeight);
     window.onresize = function () { $("#main").height(window.innerHeight); };
 

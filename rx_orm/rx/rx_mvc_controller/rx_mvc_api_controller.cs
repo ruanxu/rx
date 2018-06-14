@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,6 +26,10 @@ namespace rx
         private static string[] route_template_split { get; set; }
         private static int version_index { get; set; }
         private static string[] versions { get; set; }
+        /// <summary>
+        /// 是否开启签名信息
+        /// </summary>
+        protected string sign { get; set; }
         public override Task<System.Net.Http.HttpResponseMessage> ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext controllerContext, System.Threading.CancellationToken cancellationToken)
         {
             return base.ExecuteAsync(controllerContext, cancellationToken);
@@ -174,10 +179,19 @@ namespace rx
                     i_rx_risk_proc = this is i_rx_risk_proc,
                     i_rx_risk_update = this is i_rx_risk_update,
                     i_rx_risk_delete = this is i_rx_risk_delete,
-                    i_rx_risk_insert = this is i_rx_risk_insert
+                    i_rx_risk_insert = this is i_rx_risk_insert,
+                    i_rx_sign = this is i_rx_sign
                 };
             }
 
+            if (this is i_rx_sign && !sign_validate())
+            {
+                return new dml_result("")
+                {
+                    result_code = dml_result_code.error,
+                    message = "sign 签名不正确"
+                };
+            }
 
             if (!(this is i_rx_risk))
             {
@@ -440,6 +454,32 @@ namespace rx
             }
 
             return data;
+        }
+
+        private bool sign_validate()
+        {
+            this.sign = context.Request["sign"];
+            StringBuilder query = new StringBuilder();
+            foreach (string key in context.Request.QueryString)
+            {
+                if (key == "sign" || key == "api_action") continue;
+                query.Append(key + "=" + context.Request.QueryString[key]);
+            }
+            foreach (string key in context.Request.Form)
+            {
+                if (key == "sign" || key == "api_action") continue;
+                query.Append(key + "=" + context.Request.Form[key]);
+            }
+            byte[] sor = Encoding.UTF8.GetBytes(query.ToString());
+            MD5 md5 = MD5.Create();
+            byte[] result = md5.ComputeHash(sor);
+            StringBuilder md5_string = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                md5_string.Append(result[i].ToString("x2"));//加密结果"x2"结果为32位,"x3"结果为48位,"x4"结果为64位
+            }
+
+            return md5_string.ToString() == sign;
         }
     }
 }

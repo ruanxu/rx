@@ -6,7 +6,7 @@ using rx;
 
 namespace rx_javaScript.WebForm
 {
-    public class TestWebForm : rx_web_form, i_rx_risk
+    public class TestWebForm : rx_web_form, i_rx_risk,i_rx_sign
     {
     }
 }

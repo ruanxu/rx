@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Collections;
+using System.Security.Cryptography;
 namespace rx
 {
     /// <summary>
@@ -22,6 +23,11 @@ namespace rx
     /// </summary>
     public abstract class rx_mvc_controller : Controller
     {
+        /// <summary>
+        /// 是否开启签名信息
+        /// </summary>
+        protected string sign { get; set; }
+
         #region 让Controller的Json方法能适应rx_entity
         protected new JsonResult Json(object data)
         {
@@ -104,7 +110,8 @@ namespace rx
                 i_rx_risk_proc = this is i_rx_risk_proc,
                 i_rx_risk_update = this is i_rx_risk_update,
                 i_rx_risk_delete = this is i_rx_risk_delete,
-                i_rx_risk_insert = this is i_rx_risk_insert
+                i_rx_risk_insert = this is i_rx_risk_insert,
+                i_rx_sign = this is i_rx_sign
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -119,6 +126,15 @@ namespace rx
             if (!(this is i_rx_risk))
             {
                 throw new Exception("当前控制器或者handle必须继承i_rx_risk才能开启前端orm调用接口");
+            }
+
+            if (this is i_rx_sign && !sign_validate())
+            {
+                return Json(new dml_result("")
+                {
+                    result_code = dml_result_code.error,
+                    message = "sign 签名不正确"
+                });
             }
 
             List<MethodInfo> methods = rx_manager.method_list.Where(a => a.Name == rx_method).OrderByDescending(a => a.GetParameters().Length).ToList();
@@ -355,5 +371,30 @@ namespace rx
             return method.Invoke(null, input_parameters);
         }
 
+        private bool sign_validate()
+        {
+            this.sign = Request["sign"];
+            StringBuilder query = new StringBuilder();
+            foreach (string key in Request.QueryString)
+            {
+                if (key == "sign" || key == "rx_method") continue;
+                query.Append(key + "=" + Request.QueryString[key]);
+            }
+            foreach (string key in Request.Form)
+            {
+                if (key == "sign" || key == "rx_method") continue;
+                query.Append(key + "=" + Request.Form[key]);
+            }
+            byte[] sor = Encoding.UTF8.GetBytes(query.ToString());
+            MD5 md5 = MD5.Create();
+            byte[] result = md5.ComputeHash(sor);
+            StringBuilder md5_string = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                md5_string.Append(result[i].ToString("x2"));//加密结果"x2"结果为32位,"x3"结果为48位,"x4"结果为64位
+            }
+
+            return md5_string.ToString() == sign;
+        }
     }
 }

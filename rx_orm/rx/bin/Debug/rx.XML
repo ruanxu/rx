@@ -99,7 +99,7 @@
             <summary>
             rx_orm中的基础实体类，弱类型
             <para>键值对规则</para>
-            <para>直接使用rx_manager进行弱类型开发，性能搞</para>
+            <para>直接使用rx_manager进行弱类型开发，性能高</para>
             <para>rx_manager要求物理表中必须存在字段id，类型int，自增(1,1)</para>
             </summary>
         </member>
@@ -1072,6 +1072,12 @@
             <para>这个接口本身没有任何需要实现的成员</para>
             </summary>
         </member>
+        <member name="T:rx.i_rx_sign">
+            <summary>
+            rx系列控制器或者handle中开启前端orm的签名验证功能
+            <para>这个接口本身没有任何需要实现的成员</para>
+            </summary>
+        </member>
         <member name="T:rx.rx_manager">
             <summary>
             <para>rx_manager要求数据库的任何一张表必须有（int）主键</para>
@@ -1656,6 +1662,11 @@
             </summary>
             <param name="versions">如"v1","v2","v3"......</param>
         </member>
+        <member name="P:rx.rx_mvc_api_controller.sign">
+            <summary>
+            是否开启签名信息
+            </summary>
+        </member>
         <member name="T:rx.rx_mvc_controller">
             <summary>
             rx_mvc_controller
@@ -1675,6 +1686,11 @@
             </summary>
             <param name="rx_method">rx_manager中静态方法的名称</param>
             <returns></returns>
+        </member>
+        <member name="P:rx.rx_mvc_controller.sign">
+            <summary>
+            是否开启签名信息
+            </summary>
         </member>
         <member name="M:rx.rx_web_form.rx_obj_build(System.Object@)">
             <summary>

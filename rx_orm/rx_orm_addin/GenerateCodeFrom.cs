@@ -167,14 +167,15 @@ namespace rx_orm_addin
                     try
                     {
                         Dictionary<string, object> dic = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(out_string);
-                        MessageBox.Show(string.Format("rx后端orm版本：{0}\n接口类型：{1}\n基础权限：{2}\n添加权限：{3}\n修改权限：{4}\n删除权限：{5}\n存储过程：{6}",
+                        MessageBox.Show(string.Format("rx后端orm版本：{0}\n接口类型：{1}\n基础权限：{2}\n添加权限：{3}\n修改权限：{4}\n删除权限：{5}\n存储过程：{6}\n签名验证：{7}",
                                     dic["version"].ToString(),
                                     dic["api_type"].ToString(),
                                     dic["i_rx_risk"].ToString(),
                                     dic["i_rx_risk_insert"].ToString(),
                                     dic["i_rx_risk_update"].ToString(),
                                     dic["i_rx_risk_delete"].ToString(),
-                                    dic["i_rx_risk_proc"].ToString()
+                                    dic["i_rx_risk_proc"].ToString(),
+                                    dic["i_rx_sign"].ToString()
                                     )
                                     , "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -406,6 +407,7 @@ namespace rx_orm_addin
                                 dic["i_rx_risk_update"].ToString();
                                 dic["i_rx_risk_delete"].ToString();
                                 dic["i_rx_risk_proc"].ToString();
+                                dic["i_rx_sign"].ToString();
                             }
                             catch (Exception ex)
                             {
@@ -900,7 +902,11 @@ namespace rx_orm_addin
                 textDoc = (doc.Object("TextDocument") as TextDocument);
                 textDoc.Selection.SelectAll();
                 textDoc.Selection.Delete();
-                textDoc.Selection.Insert(Properties.Resources.rx_manager.Replace("{$server_url}", (this.serverProjectTypeCob.Text == "asp_net_mvc_api" && this.isProjectGenerateChk.Checked ? "/api/v1" : "") + this.apiUrlTxt.Text.Replace("\\", "/").Trim()).Replace("{$project_type}", outer_project_type.Trim() != "" ? outer_project_type : this.serverProjectTypeCob.Text.Trim()) + "\r" + script_text);
+                textDoc.Selection.Insert(Properties.Resources.rx_manager
+                    .Replace("{$server_url}", (this.serverProjectTypeCob.Text == "asp_net_mvc_api" && this.isProjectGenerateChk.Checked ? "/api/v1" : "") + this.apiUrlTxt.Text.Replace("\\", "/").Trim())
+                    .Replace("{$project_type}", outer_project_type.Trim() != "" ? outer_project_type : this.serverProjectTypeCob.Text.Trim()) 
+                    .Replace("{$is_sign}", this.isSignChk.Checked.ToString().ToLower())
+                    + "\r" + script_text);
 
                 this.application_object.Documents.SaveAll();
             }
@@ -2068,7 +2074,8 @@ asp_net_mvc_api 也会在Controllers目录下生成对应的APIController，类�
 添加权限：前端接口中对SQL进行添加（insert）操作时的权限，权限接口 i_rx_risk_insert。
 修改权限：前端接口中对SQL进行修改（update）操作时的权限，权限接口 i_rx_risk_update。
 删除权限：前端接口中对SQL进行删除（delete）操作时的权限，权限接口 i_rx_risk_delete。
-存储过程：前端接口中对SQL进行存储过程（proc）操作时的权限，权限接口 i_rx_risk_proc。", "什么是前端接口的权限？", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+存储过程：前端接口中对SQL进行存储过程（proc）操作时的权限，权限接口 i_rx_risk_proc。
+签名加密验证：前端orm在与后端交互时的签名验证机制，可以提高安全性，接口 i_rx_sign。", "什么是前端接口的权限？", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void apiUrlTxt_KeyPress(object sender, KeyPressEventArgs e)
@@ -2091,14 +2098,15 @@ asp_net_mvc_api 也会在Controllers目录下生成对应的APIController，类�
                         try
                         {
                             Dictionary<string, object> dic = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(out_string);
-                            MessageBox.Show(string.Format("rx后端orm版本：{0}\n接口类型：{1}\n基础权限：{2}\n添加权限：{3}\n修改权限：{4}\n删除权限：{5}\n存储过程：{6}",
+                            MessageBox.Show(string.Format("rx后端orm版本：{0}\n接口类型：{1}\n基础权限：{2}\n添加权限：{3}\n修改权限：{4}\n删除权限：{5}\n存储过程：{6}\n签名验证：{7}",
                                     dic["version"].ToString(),
                                     dic["api_type"].ToString(),
                                     dic["i_rx_risk"].ToString(),
                                     dic["i_rx_risk_insert"].ToString(),
                                     dic["i_rx_risk_update"].ToString(),
                                     dic["i_rx_risk_delete"].ToString(),
-                                    dic["i_rx_risk_proc"].ToString()
+                                    dic["i_rx_risk_proc"].ToString(),
+                                    dic["i_rx_sign"].ToString()
                                     )
                                     , "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
