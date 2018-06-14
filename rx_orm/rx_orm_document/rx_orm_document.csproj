@@ -60,10 +60,10 @@
     <Content Include="css\index.css" />
     <Content Include="back_demo.html" />
     <Content Include="front_rx_model.html" />
+    <Content Include="img\addin2.png" />
     <Content Include="news_img\1.png" />
     <Content Include="rx_model.html" />
     <Content Include="img\addin1.png" />
-    <Content Include="img\addin2.png" />
     <Content Include="img\addin3.png" />
     <Content Include="img\addin4.png" />
     <Content Include="img\addin5.png" />

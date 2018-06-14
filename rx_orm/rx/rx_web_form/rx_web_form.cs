@@ -362,6 +362,7 @@ namespace rx
                 if (key == "sign" || key == "rx_method") continue;
                 query.Append(key + "=" + Request.Form[key]);
             }
+
             byte[] sor = Encoding.UTF8.GetBytes(query.ToString());
             MD5 md5 = MD5.Create();
             byte[] result = md5.ComputeHash(sor);

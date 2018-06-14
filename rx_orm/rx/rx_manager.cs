@@ -38,7 +38,7 @@ namespace rx
     /// </summary>
     public sealed class rx_manager
     {
-        internal const string version = "1.0.0.0";
+        internal const string version = "1.0.0.1";
 
         /// <summary>
         /// 性能模式

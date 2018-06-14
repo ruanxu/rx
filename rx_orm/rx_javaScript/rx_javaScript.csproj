@@ -120,7 +120,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="CSS\default.css" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="Script\rx.js" />
     <Content Include="Script\rx_assembly_config.js" />
     <Content Include="Script\rx_assembly.js" />

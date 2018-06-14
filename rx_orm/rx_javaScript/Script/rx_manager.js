@@ -24,7 +24,7 @@ var rx_manager = {
     //是否启用默认的error事件
     is_show_error: true,
     //是否启用参数加密签名(sign)
-    is_encryption: false,
+    is_encryption: true,
     /*-----------------------------配置end*/
 
     /*-----------------------------各种orm方法begin*/
