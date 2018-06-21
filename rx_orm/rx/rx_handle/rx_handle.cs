@@ -115,6 +115,16 @@ namespace rx
                 throw new Exception("当前控制器或者handle必须继承i_rx_risk才能开启前端orm调用接口");
             }
 
+            if (rx_manager.rx_function_md5.ContainsKey(rx_method))
+            {
+                if (rx_manager.rx_function_md5[rx_method] != context.Request["rx_function"])
+                {
+                    response_write("检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？");
+                    return;
+                }
+            }
+
+
             List<MethodInfo> methods = rx_manager.method_list.Where(a => a.Name == rx_method).OrderByDescending(a => a.GetParameters().Length).ToList();
 
             if (methods.Count == 0)

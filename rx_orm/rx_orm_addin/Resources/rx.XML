@@ -1102,6 +1102,11 @@
             rx_manager子类对象的缓存
             </summary>
         </member>
+        <member name="F:rx.rx_manager.rx_function_md5">
+            <summary>
+            前端orm用于验证的md5
+            </summary>
+        </member>
         <member name="M:rx.rx_manager.rx_manager_init">
             <summary>
             rx_manager初始化

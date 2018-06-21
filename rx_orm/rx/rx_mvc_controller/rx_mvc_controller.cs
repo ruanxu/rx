@@ -137,6 +137,19 @@ namespace rx
                 });
             }
 
+            if (rx_manager.rx_function_md5.ContainsKey(rx_method))
+            {
+                if (rx_manager.rx_function_md5[rx_method] != Request["rx_function"])
+                {
+                    return Json(
+                        new dml_result("")
+                        {
+                            result_code = dml_result_code.error,
+                            message = "检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？"
+                        });
+                }
+            }
+
             List<MethodInfo> methods = rx_manager.method_list.Where(a => a.Name == rx_method).OrderByDescending(a => a.GetParameters().Length).ToList();
 
             if (methods.Count == 0)
@@ -266,7 +279,7 @@ namespace rx
                         }
                         entity.select_display_keys = dic["select_display_keys"] == null ? null : dic["select_display_keys"].ToString();
                         entity.where_keys = dic["where_keys"] == null ? null : ((ArrayList)dic["where_keys"]).OfType<string>().ToList();
-                        
+
                         input_parameters[j] = entity;
                     }
                     else

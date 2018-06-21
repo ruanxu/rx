@@ -34,6 +34,7 @@
             <tr>
                 <td><a href="#all_select">全部查询</a></td>
                 <td><a href="#id_select">id查询</a></td>
+                <td><a href="#paging_select">分页查询</a></td>
                 <td><a href="#condition_select">条件查询</a></td>
                 <td><a href="#view_select">视图查询</a></td>
                 <td><a href="#proc_select">存储过程查询</a></td>
@@ -110,6 +111,25 @@
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; person.get_entitys_in_id(</span><span style="font-size:24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, [1, 2, 3]);</span>
+    <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+            </pre>
+        </div>
+
+        <input name="paging_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询person实体中第1页的10条数据</b>
+                <a href="strong_back_demo.html#paging_select" style="float: right; font-weight: bold;">对比后端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span> <span style="font-size:24px;font-family:新宋体;color:red">src</span><span style="font-size:24px;font-family:新宋体;color:blue">=&quot;/Scripts/rx_manager.js&quot;&gt;&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">返回的对象包含rows(行数据)，row_count(总行数)</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; person.get_entitys_by_page(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; }, 0, 10);</span>
     <span style="font-size:24px;font-family:新宋体;color:blue">&lt;/</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
             </pre>
         </div>
@@ -365,7 +385,7 @@
     <span style="font-size:24px;font-family: 新宋体;color:blue">&lt;</span><span style="font-size:24px;font-family:新宋体;color:maroon">script</span><span style="font-size:24px;font-family:新宋体;color:blue">&gt;</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">方式1</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; </span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">删除id为1的person</span>
-    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; web_user.delete_entity_in_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; person.delete_entity_in_id(</span><span style="font-size: 24px;font-family:新宋体;color:blue">function</span><span style="font-size: 24px;font-family: 新宋体"> (data) {</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.info(data);</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp; },[1]);</span>
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;&nbsp;&nbsp;&nbsp; </span>

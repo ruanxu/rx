@@ -34,6 +34,7 @@
             <tr>
                 <td><a href="#all_select">全部查询</a></td>
                 <td><a href="#id_select">id查询</a></td>
+                <td><a href="#paging_select">分页查询</a></td>
                 <td><a href="#condition_select">条件查询</a></td>
                 <td><a href="#primordial_select">原生查询</a></td>
                 <td><a href="#view_select">视图查询</a></td>
@@ -102,6 +103,23 @@
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
     <span style="font-size:24px;font-family:新宋体;color:green">//id in </span><span style="font-size:24px;font-family: 新宋体;color:green">查询</span>
     <span style="font-size: 24px; font-family: 新宋体; color: rgb(43, 145, 175);">List</span><span style="font-size: 24px; font-family: 新宋体;">&lt;</span><span style="font-size: 24px; font-family: 新宋体; color: rgb(43, 145, 175);">rx_entity</span><span style="font-size: 24px; font-family: 新宋体;">&gt; list = </span><span style="font-size: 24px; font-family: 新宋体; color: rgb(43, 145, 175);">rx_manager</span><span style="font-size: 24px; font-family: 新宋体;">.get_entitys_in_id(</span><span style="font-size: 24px; font-family: 新宋体; color: rgb(163, 21, 21);">&quot;person&quot;</span><span style="font-size: 24px; font-family: 新宋体;">, </span><span style="font-size: 24px; font-family: 新宋体; color: blue;">new</span>&nbsp;<span style="font-size: 24px; font-family: 新宋体; color: blue;">int</span><span style="font-size: 24px; font-family: 新宋体;">[] { 1, 2, 3 });</span>
+            </pre>
+        </div>
+
+        <input name="paging_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询person实体中第1页的10条数据</b>
+                <a href="front_demo.html#paging_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:green">//row_count</span><span style="font-size: 24px;font-family:新宋体;color:green">用于引用传递获取总行数</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">int</span><span style="font-size: 24px;font-family: 新宋体"> row_count = 0;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family: 新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_entity</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">rx_manager</span><span style="font-size: 24px;font-family: 新宋体">.get_entitys_by_page(0, 10, </span><span style="font-size:24px;font-family:新宋体;color:blue">ref</span><span style="font-size: 24px;font-family: 新宋体"> row_count, </span><span style="font-size:24px;font-family:新宋体;color:#A31515">&quot;person&quot;</span><span style="font-size: 24px;font-family: 新宋体">);</span>
             </pre>
         </div>
 

@@ -758,6 +758,8 @@ function rx_repeater(repeater_element, setting) {
             add_foot: !(setting.add_foot instanceof Function) ? null : setting.add_foot.toString(),
             //数据加载完毕时执行的事件
             load_success: !(setting.load_success instanceof Function) ? null : setting.load_success.toString(),
+            //数据呈现完毕时执行的事件
+            load_complete: !(setting.load_complete instanceof Function) ? null : setting.load_complete.toString(),
             //异常时执行的事件
             error: !(setting.error instanceof Function) ? null : setting.error.toString()
         }
@@ -942,7 +944,10 @@ function rx_repeater(repeater_element, setting) {
                 repeater.innerHTML = repeater_inner_text[0];
                 break;
         }
-        
+        if (setting.load_complete != null) {
+            eval("var change =" + setting.load_complete);
+            change(json_data);
+        }
     }
 
     function refresh() { init(); }

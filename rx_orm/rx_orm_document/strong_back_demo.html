@@ -34,6 +34,7 @@
             <tr>
                 <td><a href="#all_select">全部查询</a></td>
                 <td><a href="#id_select">id查询</a></td>
+                <td><a href="#paging_select">分页查询</a></td>
                 <td><a href="#condition_select">条件查询</a></td>
                 <td><a href="#view_select">视图查询</a></td>
                 <td><a href="#proc_select">存储过程查询</a></td>
@@ -103,6 +104,21 @@
     <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
     <span style="font-size:24px;font-family: 新宋体;color:green">//id in </span><span style="font-size: 24px;font-family:新宋体;color:green">查询</span>
     <span style="font-size:24px;font-family:新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size: 24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.get_entitys_in_id(1, 2, 3);</span>
+            </pre>
+        </div>
+
+        <input name="paging_select" type="text" style="width: 0px; height: 0px; opacity: 0;" />
+        <div>
+            <div>
+                <b>查询person实体中第1页的10条数据</b>
+                <a href="strong_front_demo.html#paging_select" style="float: right; font-weight: bold;">对比前端</a>
+            </div>
+            <pre style="border: 1px dotted #785;">
+
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> models;</span><span style="font-size:24px;font-family:新宋体;color:green">//</span><span style="font-size:24px;font-family:新宋体;color:green">这个namespace是你自己定义的实体类的namespace</span>
+    <span style="font-size:24px;font-family: 新宋体;color:blue">using</span><span style="font-size: 24px;font-family: 新宋体"> rx;</span>
+    <span style="font-size: 24px;font-family: 新宋体">&nbsp;</span>
+    <span style="font-size:24px;font-family:新宋体;color:#2B91AF">List</span><span style="font-size: 24px;font-family: 新宋体">&lt;</span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">&gt; list = </span><span style="font-size:24px;font-family:新宋体;color:#2B91AF">person</span><span style="font-size: 24px;font-family: 新宋体">.get_entitys_by_page(0, 10);</span>
             </pre>
         </div>
 

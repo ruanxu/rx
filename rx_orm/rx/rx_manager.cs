@@ -38,7 +38,7 @@ namespace rx
     /// </summary>
     public sealed class rx_manager
     {
-        internal const string version = "1.0.0.1";
+        internal const string version = "1.0.0.3";
 
         /// <summary>
         /// 性能模式
@@ -86,6 +86,33 @@ namespace rx
         /// rx_manager中所有的静态方法的MethodInfo的集合
         /// </summary>
         public static List<MethodInfo> method_list { get; private set; }
+
+        /// <summary>
+        /// 前端orm用于验证的md5
+        /// </summary>
+        public static Dictionary<string, string> rx_function_md5 = new Dictionary<string, string>()
+        {
+            {"get_entitys_by_page","264f74f838f6e76e9b6d6b2f9a8e78c4"},
+            {"get_entitys_in_view","990b7b48b7aa51651d2320e6cd6251f1"},
+            {"get_entitys_in_proc","1aab4b6de4a9d1142ff005f851788141"},
+            {"transaction_execute_non_query","03bea2db2c1466311bce8d414f4a1352"},
+            {"execute_select_sql","6b87e3b7e245dfffe013250797097354"},
+            {"execute_non_query","e729b46cceede1e136523729a7350ab3"},
+            {"get_all_entitys","384e6022b7aa341aea392a523c7894ff"},
+            {"get_entity_by_id","2cee9157d4237e645350a673c4f00fef"},
+            {"get_entitys_in_id","eaa6f9c512a729b545179b7003ebad24"},
+            {"get_entitys_by_where_keys","fdbf54ce2cfb9dbf0192a2b6b64aee7b"},
+            {"get_entitys_by_where_string","1dfaefbf89d72d46d430252feda090d9"},
+            {"insert_or_update_entity","82bc5dd9002ed9a1c3a04d5d62f12824"},
+            {"insert_entity","2836c9debd02dd553cb3a2aab3d4adf7"},
+            {"insert_entitys","1032d074d250ab42a347b3c45ee91f0b"},
+            {"update_entity_by_id","0f00675e8e79b5c74b4b92e3e5af1eb0"},
+            {"update_entity_by_where_keys","837e600a377ba78d6b1aae09eaea2d83"},
+            {"delete_entity_by_id","2a74003a59ea2895cdac71cbecf83ddb"},
+            {"delete_entity_in_id","47aefe32d5dd2198623fa1e72c6c5ee5"},
+            {"delete_entity_by_where_string","c0fc39ac86282160fb3fd034e2287731"},
+            {"delete_entity_by_where_keys","29ba296e27287d333ee4103c67e92b9f"}
+        };
 
         /// <summary>
         /// rx_manager初始化

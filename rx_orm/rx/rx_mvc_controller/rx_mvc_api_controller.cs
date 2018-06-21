@@ -198,12 +198,26 @@ namespace rx
                 throw new Exception("当前控制器或者handle必须继承i_rx_risk才能开启前端orm调用接口");
             }
 
+            if (rx_manager.rx_function_md5.ContainsKey(api_action))
+            {
+                if (rx_manager.rx_function_md5[api_action] != context.Request["rx_function"])
+                {
+                    return new dml_result("")
+                    {
+                        result_code = dml_result_code.error,
+                        message = "检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？"
+                    };
+                }
+            }
+
             List<MethodInfo> methods = rx_manager.method_list.Where(a => a.Name == api_action).OrderByDescending(a => a.GetParameters().Length).ToList();
 
             if (methods.Count == 0)
             {
                 return invoke_method(api_action);
             }
+
+
             JavaScriptSerializer jss = new JavaScriptSerializer();
             for (int i = 0; i < methods.Count; i++)
             {

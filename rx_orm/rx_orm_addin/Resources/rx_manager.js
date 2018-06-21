@@ -39,6 +39,7 @@ var rx_manager = {
      * date_time_format 服务端对数据中时间类型对象的格式化方式，默认值：date_format_type.date_time。例:date_format_type中的的枚举值
      */
     get_entitys_by_page: function (call_back, page_index, page_size, table_or_view_name, order_identity_string, field_string, where_string, date_time_format) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -60,6 +61,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entitys_by_page"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entitys_by_page.toString().replace(/[ |\r|\n]/g, "")),
                     page_index: page_index,
                     page_size: page_size,
                     table_or_view_name: table_or_view_name,
@@ -93,6 +95,7 @@ var rx_manager = {
      * date_time_format 服务端对数据中时间类型对象的格式化方式，默认值：date_format_type.date_time。例:date_format_type中的的枚举值
      */
     get_entitys_in_view: function (call_back, view_name, where_string, select_display_keys, date_time_format) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -108,6 +111,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entitys_in_view"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entitys_in_view.toString().replace(/[ |\r|\n]/g, "")),
                     view_name: view_name,
                     where_string: where_string,
                     select_display_keys: select_display_keys,
@@ -136,6 +140,7 @@ var rx_manager = {
      * date_time_format 服务端对数据中时间类型对象的格式化方式，默认值：date_format_type.date_time。例:date_format_type中的的枚举值
      */
     get_entitys_in_proc: function (call_back, proc_name, proc_params, date_time_format) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -153,6 +158,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entitys_in_proc"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entitys_in_proc.toString().replace(/[ |\r|\n]/g, "")),
                     proc_name: proc_name,
                     proc_params: JSON.stringify(proc_params),
                     date_time_format: date_time_format
@@ -183,6 +189,7 @@ var rx_manager = {
      * rx_entity(rx_model)对象的entity_name必须包含在当前数据库的表名中
      */
     transaction_execute_non_query: function (call_back, rx_entitys_or_full_sql_string) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -217,7 +224,7 @@ var rx_manager = {
         else {
             throw "rx_entitys_or_full_sql_string必须是rx_entity(rx_model)的数组或者是多条dml（t-sql）语句的字符串";
         }
-
+        data.rx_function = md5(this.transaction_execute_non_query.toString().replace(/[ |\r|\n]/g, ""));
         try {
             ajax({
                 url: server_project_type.build_url("transaction_execute_non_query"),
@@ -245,6 +252,7 @@ var rx_manager = {
      * date_time_format 服务端对数据中时间类型对象的格式化方式，默认值：date_format_type.date_time。例:date_format_type中的的枚举值
      */
     execute_select_sql: function (call_back, sql, date_time_format) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -256,6 +264,7 @@ var rx_manager = {
                 url: server_project_type.build_url("execute_select_sql"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.execute_select_sql.toString().replace(/[ |\r|\n]/g, "")),
                     sql: sql,
                     date_time_format: date_time_format
                 },
@@ -282,6 +291,7 @@ var rx_manager = {
      * command_type 与ADO.NET的CommandType一致，默认为StoredProcedure（执行存储过程）
      */
     execute_non_query: function (call_back, sql_or_proc_name, param_array, command_type) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -299,6 +309,7 @@ var rx_manager = {
                 url: server_project_type.build_url("execute_non_query"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "put" : "post",
                 data: {
+                    rx_function: md5(this.execute_non_query.toString().replace(/[ |\r|\n]/g, "")),
                     sql_or_proc_name: sql_or_proc_name,
                     param_array: JSON.stringify(param_array),
                     command_type: command_type
@@ -326,6 +337,7 @@ var rx_manager = {
      * select_display_keys:指定需要显示的列名，null或者undefined为*，分隔符","，例：id,name,age
      */
     get_all_entitys: function (call_back, table_or_view_name, date_time_format, select_display_keys) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -340,6 +352,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_all_entitys"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_all_entitys.toString().replace(/[ |\r|\n]/g, "")),
                     table_or_view_name: table_or_view_name,
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
@@ -368,6 +381,7 @@ var rx_manager = {
      * select_display_keys:指定需要显示的列名，null或者undefined为*，分隔符","，例：id,name,age
      */
     get_entity_by_id: function (call_back, table_name, id, date_time_format, select_display_keys) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -385,6 +399,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entity_by_id"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entity_by_id.toString().replace(/[ |\r|\n]/g, "")),
                     table_name: table_name,
                     id: id,
                     date_time_format: date_time_format,
@@ -414,6 +429,7 @@ var rx_manager = {
      * select_display_keys:指定需要显示的列名，null或者undefined为*，分隔符","，例：id,name,age
      */
     get_entitys_in_id: function (call_back, table_name, id_array, date_time_format, select_display_keys) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -436,6 +452,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entitys_in_id"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entitys_in_id.toString().replace(/[ |\r|\n]/g, "")),
                     table_name: table_name,
                     id_array: id_array.join("[{@}]"),
                     date_time_format: date_time_format,
@@ -463,6 +480,7 @@ var rx_manager = {
     * date_time_format 服务端对数据中时间类型对象的格式化方式，默认值：date_format_type.date_time。例:date_format_type中的的枚举值
     */
     get_entitys_by_where_keys: function (call_back, entity, select_display_keys, date_time_format) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -492,6 +510,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entitys_by_where_keys"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entitys_by_where_keys.toString().replace(/[ |\r|\n]/g, "")),
                     entity: JSON.stringify(do_entity),
                     date_time_format: date_time_format,
                     select_display_keys: select_display_keys
@@ -520,6 +539,7 @@ var rx_manager = {
      * date_time_format 服务端对数据中时间类型对象的格式化方式，默认值：date_format_type.date_time。例:date_format_type中的的枚举值
      */
     get_entitys_by_where_string: function (call_back, table_name, where_string, select_display_keys, date_time_format) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -538,6 +558,7 @@ var rx_manager = {
                 url: server_project_type.build_url("get_entitys_by_where_string"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
                 data: {
+                    rx_function: md5(this.get_entitys_by_where_string.toString().replace(/[ |\r|\n]/g, "")),
                     table_name: table_name,
                     where_string: where_string,
                     date_time_format: date_time_format,
@@ -565,6 +586,7 @@ var rx_manager = {
      * entity 要进行添加的rx_entity的对象【必选】
      */
     insert_or_update_entity: function (call_back, entity) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -590,6 +612,7 @@ var rx_manager = {
                 url: server_project_type.build_url("insert_or_update_entity"),
                 type: "post",
                 data: {
+                    rx_function: md5(this.insert_or_update_entity.toString().replace(/[ |\r|\n]/g, "")),
                     entity: JSON.stringify(do_entity)
                 },
                 is_encryption: this.is_encryption,
@@ -613,6 +636,7 @@ var rx_manager = {
      * entity 要进行添加的rx_entity的对象【必选】
      */
     insert_entity: function (call_back, entity) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -638,6 +662,7 @@ var rx_manager = {
                 url: server_project_type.build_url("insert_entity"),
                 type: "post",
                 data: {
+                    rx_function: md5(this.insert_entity.toString().replace(/[ |\r|\n]/g, "")),
                     entity: JSON.stringify(do_entity)
                 },
                 is_encryption: this.is_encryption,
@@ -664,6 +689,7 @@ var rx_manager = {
      * entitys rx_entity的数组【必选】
      */
     insert_entitys: function (call_back, entitys) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -690,7 +716,7 @@ var rx_manager = {
         else {
             throw "entitys必须是rx_entity的数组";
         }
-
+        data.rx_function = md5(this.insert_entitys.toString().replace(/[ |\r|\n]/g, ""));
         try {
             ajax({
                 url: server_project_type.build_url("insert_entitys"),
@@ -717,6 +743,7 @@ var rx_manager = {
      * entity 需要进行修改操作的rx_entity对象【必选】
      */
     update_entity_by_id: function (call_back, entity) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -739,6 +766,7 @@ var rx_manager = {
                 url: server_project_type.build_url("update_entity_by_id"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "put" : "post",
                 data: {
+                    rx_function: md5(this.update_entity_by_id.toString().replace(/[ |\r|\n]/g, "")),
                     entity: JSON.stringify(do_entity)
                 },
                 is_encryption: this.is_encryption,
@@ -762,6 +790,7 @@ var rx_manager = {
      * entity 需要进行修改操作的rx_entity对象【必选】
      */
     update_entity_by_where_keys: function (call_back, entity) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -788,6 +817,7 @@ var rx_manager = {
                 url: server_project_type.build_url("update_entity_by_where_keys"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "put" : "post",
                 data: {
+                    rx_function: md5(this.update_entity_by_where_keys.toString().replace(/[ |\r|\n]/g, "")),
                     entity: JSON.stringify(do_entity)
                 },
                 is_encryption: this.is_encryption,
@@ -812,6 +842,7 @@ var rx_manager = {
      * id 表的id值,必须是一个数字【必选】
      */
     delete_entity_by_id: function (call_back, table_name, id) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -827,6 +858,7 @@ var rx_manager = {
                 url: server_project_type.build_url("delete_entity_by_id"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "delete" : "post",
                 data: {
+                    rx_function: md5(this.delete_entity_by_id.toString().replace(/[ |\r|\n]/g, "")),
                     table_name: table_name,
                     id: id
                 },
@@ -852,6 +884,7 @@ var rx_manager = {
      * id_array 表的id值的数组,数组元素必须是数字【必选】
      */
     delete_entity_in_id: function (call_back, table_name, id_array) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -867,6 +900,7 @@ var rx_manager = {
                 url: server_project_type.build_url("delete_entity_in_id"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "delete" : "post",
                 data: {
+                    rx_function: md5(this.delete_entity_in_id.toString().replace(/[ |\r|\n]/g, "")),
                     table_name: table_name,
                     id_array: id_array
                 },
@@ -892,6 +926,7 @@ var rx_manager = {
      * where_string 条件语句字符串【必选】
      */
     delete_entity_by_where_string: function (call_back, table_name, where_string) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -907,6 +942,7 @@ var rx_manager = {
                 url: server_project_type.build_url("delete_entity_by_where_string"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "delete" : "post",
                 data: {
+                    rx_function: md5(this.delete_entity_by_where_string.toString().replace(/[ |\r|\n]/g, "")),
                     table_name: table_name,
                     where_string: where_string
                 },
@@ -931,6 +967,7 @@ var rx_manager = {
      * entity 需要进行修改操作的rx_entity对象【必选】
      */
     delete_entity_by_where_keys: function (call_back, entity) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
         if (!(call_back instanceof Function)) {
             throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
         }
@@ -957,6 +994,7 @@ var rx_manager = {
                 url: server_project_type.build_url("delete_entity_by_where_keys"),
                 type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "put" : "post",
                 data: {
+                    rx_function: md5(this.delete_entity_by_where_keys.toString().replace(/[ |\r|\n]/g, "")),
                     entity: JSON.stringify(do_entity)
                 },
                 is_encryption: this.is_encryption,

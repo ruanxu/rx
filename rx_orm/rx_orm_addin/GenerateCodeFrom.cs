@@ -981,7 +981,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "long?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as long?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (long?)Convert.ToInt64(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -997,7 +997,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "bool?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as bool?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (bool?)Convert.ToBoolean(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1030,7 +1030,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "DateTime?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as DateTime?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (DateTime?)Convert.ToDateTime(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1046,7 +1046,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "DateTimeOffset?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as DateTimeOffset?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : this[""" + field_name + @"""].base_value is string ? DateTimeOffset.Parse(this[""" + field_name + @"""].base_value.ToString()) : this[""" + field_name + @"""].base_value as DateTimeOffset?;");
                     }
                     else
                     {
@@ -1063,7 +1063,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "decimal?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as decimal?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (decimal?)Convert.ToDecimal(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1079,7 +1079,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "float?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as float?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (float?)Convert.ToDecimal(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1105,7 +1105,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "int?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as int?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (int?)Convert.ToInt32(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1121,7 +1121,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "Single?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as Single?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (Single?)Convert.ToSingle(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1137,7 +1137,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "short?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as short?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? (short?)Convert.ToInt16(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1153,7 +1153,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "byte?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as byte?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (byte?)Convert.ToByte(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {
@@ -1169,7 +1169,7 @@ namespace rx_orm_addin
                     {
                         code = code.
                                Replace("{$type}", "Guid?").
-                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value as Guid?;");
+                               Replace("{$getcode}", @"return this[""" + field_name + @"""].base_value == null ? null : (Guid?)(this[""" + field_name + @"""].base_value);");
                     }
                     else
                     {

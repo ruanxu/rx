@@ -57,6 +57,15 @@ namespace rx
 
             string rx_method = Request["rx_method"];
 
+            if (rx_manager.rx_function_md5.ContainsKey(rx_method))
+            {
+                if (rx_manager.rx_function_md5[rx_method] != Request["rx_function"])
+                {
+                    response_write("检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？");
+                    return;
+                }
+            }
+
             if (rx_method == null || rx_method.Trim() == "")
             {
                 response_write("该Web窗体承了rx_web_form,所以请按照规则或者rx_manager前端sdk进行调用！");
