@@ -8,7 +8,7 @@ namespace rx_orm_addin
 {
     public class ConstHelper
     {
-        public const string handler_class_content = @"<%@ WebHandler Language=""C#"" Class=""{$namespace}.{$routes}.{$action}"" %>
+        public const string handler_class_content = @"<%@ WebHandler Language=""C#"" Class=""{$namespace}{$routes}.{$action}"" %>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace {$namespace}{$routes}
                 .Replace("{$jurisdiction}", jurisdiction);
         }
 
-        public const string web_form_content = @"<%@ Page Language=""C#"" AutoEventWireup=""true"" CodeBehind=""{$class_name}"" Inherits=""{$namespace}.{$routes}.{$action}"" %>";
+        public const string web_form_content = @"<%@ Page Language=""C#"" AutoEventWireup=""true"" CodeBehind=""{$class_name}"" Inherits=""{$namespace}{$routes}.{$action}"" %>";
 
         public static string get_web_form_content(string _namespace, string routes, string action, string class_name)
         {

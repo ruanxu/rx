@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body style="text-align:center;">
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        1.将<a href="file/Addins.zip" style="font-weight: bold;">Addins</a>放入C:\Users\【你的用户名】\Documents\Visual Studio 2012目录中（我会在视频中具体演示）
+            <br />
+        <b style="color: red;">项目：rx_orm_addin 就是插件项目的源码</b>
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        2.打开一个项目右键你的项目
+            <br />
+        <br />
+        <img src="img/addin1.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        3.插件运行界面如下，按照界面设定你需要的设置
+            <br />
+        <br />
+        <img src="img/addin2.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        4.点击<b>开始生成</b>后会自动为你生成和包装DB对象映射关系类（实体类）
+            <br />
+        <br />
+        <img src="img/addin3.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        5.生成完成后会在项目下看见models（表）、views（视图）、procedures（存储过程）的类文件
+            <br />
+        <br />
+        <img src="img/addin4.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        6.同时也能看见生成的两个js文件，rx.js是前端orm底层的一些基础对象与方式，rx_manager.js就是核心对象与方法其中也包括前端models（表）、views（视图）、procedures（存储过程）的类
+            <br />
+        <br />
+        <img src="img/addin5.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        7.一个后端C#的演示，查询web_user表id为1的行信息
+            <br />
+        <br />
+        <img src="img/addin6.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        8.一个前端js的演示，查询web_user表id为1的行信息
+            <br />
+        <br />
+        <img src="img/addin7.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px; font-weight: bold;">
+        归纳小结：大家可以看见强类型开发确实比弱类型开发卓越的多，更多的例子可以参考【前端】与【后端】例子
+    </p>
+</body>
+</html>

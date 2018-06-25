@@ -138,7 +138,7 @@ namespace rx_orm_addin
 
             GenerateCodeFrom from = new GenerateCodeFrom(_applicationObject);
             from.ShowDialog();
-
+            
             handled = false;
             if (executeOption == vsCommandExecOption.vsCommandExecOptionDoDefault)
             {
@@ -152,8 +152,6 @@ namespace rx_orm_addin
 
         private void AddGenerateCodeBtn()
         {
-            
-
             Command findCommand = null;
             object[] contextUIGuids = new object[] { };
             CommandBarButton findCommandBarButtonButton = null;

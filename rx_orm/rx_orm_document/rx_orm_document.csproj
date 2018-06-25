@@ -57,9 +57,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="addin_vs2012.html" />
     <Content Include="css\index.css" />
     <Content Include="back_demo.html" />
     <Content Include="front_rx_model.html" />
+    <Content Include="img\2017\addin1.png" />
+    <Content Include="img\2017\addin2.png" />
+    <Content Include="img\2017\addin3.png" />
+    <Content Include="img\2017\addin4.png" />
+    <Content Include="img\2017\addin5.png" />
+    <Content Include="img\2017\addin6.png" />
+    <Content Include="img\2017\addin7.png" />
     <Content Include="img\addin2.png" />
     <Content Include="news_img\1.png" />
     <Content Include="rx_model.html" />
@@ -94,12 +102,14 @@
     <Content Include="strong_back_demo.html" />
     <Content Include="front_rx_view.html" />
     <Content Include="strong_front_demo.html" />
+    <Content Include="addin_vs2017.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="file\Addins.zip" />
+    <Content Include="file\VSIX.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

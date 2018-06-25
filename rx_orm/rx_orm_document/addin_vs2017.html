@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        * {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body style="text-align:center;">
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        1.下载并安装 <a href="file/VSIX.zip" style="font-weight: bold;">VSIX</a>
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        2.打开Visual Studio创建一个mvx的web应用程序
+            <br />
+        <br />
+        <img src="img/2017/addin1.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        3.插件运行界面如下，按照界面设定你需要的设置
+            <br />
+        <br />
+        <img src="img/2017/addin2.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        4.点击<b>开始生成</b>后会自动为你生成和包装DB对象映射关系类（实体类）
+            <br />
+        <br />
+        <img src="img/2017/addin3.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        5.生成完成后会在项目下看见models（表）、views（视图）、procedures（存储过程）的类文件
+            <br />
+        <br />
+        <img src="img/2017/addin4.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        6.同时也能看见生成的两个js文件，rx.js是前端orm底层的一些基础对象与方式，rx_manager.js就是核心对象与方法其中也包括前端models（表）、views（视图）、procedures（存储过程）的类
+            <br />
+        <br />
+        <img src="img/2017/addin5.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        7.一个后端C#的演示，查询web_user表id为1的行信息
+            <br />
+        <br />
+        <img src="img/2017/addin6.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px;">
+        8.一个前端js的演示，查询web_user表id为1的行信息
+            <br />
+        <br />
+        <img src="img/2017/addin7.png" />
+    </p>
+    <p style="border-bottom: 1px dashed lightgray; padding: 8px; font-weight: bold;">
+        归纳小结：大家可以看见强类型开发确实比弱类型开发卓越的多，更多的例子可以参考【前端】与【后端】例子
+    </p>
+</body>
+</html>
