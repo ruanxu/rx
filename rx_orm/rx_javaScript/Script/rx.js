@@ -402,7 +402,7 @@ function show_element(element) {
         element = try_dom_by_id(element);
     }
     if (element.style.display == "none") {
-        document.getElementById("sel").style.display = "";
+        element.style.display = "";
     }
 }
 
@@ -414,7 +414,7 @@ function hide_element(element) {
         element = try_dom_by_id(element);
     }
     if (element.style.display != "none") {
-        document.getElementById("sel").style.display = "none";
+        element.style.display = "none";
     }
 }
 
