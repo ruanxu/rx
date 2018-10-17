@@ -474,6 +474,7 @@ namespace rx_orm_addin
                     this.generateStatusLabel.Text = "准备生成rx系列强实体类......";
                     this.application_object.Documents.CloseAll();
                     StringBuilder script_text = new StringBuilder();
+                    StringBuilder wx_models_public = new StringBuilder();
                     for (int i = 0; i < object_count; i++)
                     {
                         //Model
@@ -519,6 +520,7 @@ namespace rx_orm_addin
                             using (DataTable dt = rx_ms_sql_dbhelper.execute_sql_or_proc(sql))
                             {
                                 bool contain_id = false;
+                                wx_models_public.Append("    " + entity_array[j] + ":" + entity_array[j] + ",\n");
                                 script_text.Append(@"function " + entity_array[j] + @"(instance_json) {
     rx_model.call(this, """ + entity_array[j] + @""", instance_json);" + "\r");
                                 foreach (DataRow row in dt.Rows)
@@ -635,6 +637,7 @@ namespace rx_orm_addin
                             string view_first_column = null;
                             using (DataTable dt = rx_ms_sql_dbhelper.execute_sql_or_proc(sql))
                             {
+                                wx_models_public.Append("    " + view_array[j] + ":" + view_array[j] + ",\n");
                                 script_text.Append(@"function " + view_array[j] + @"(instance_json) {
     rx_view.call(this, """ + view_array[j] + @""", instance_json);" + "\r");
                                 foreach (DataRow row in dt.Rows)
@@ -655,7 +658,7 @@ namespace rx_orm_addin
                                     ) + "\r");
                                 }
                                 script_text.Append("\r" + @"}
-(function () { var Super = function () { }; Super.prototype = rx_view.prototype; " + view_array[j] + @".prototype = new Super(); for (var key in rx_view.static_method) { " + view_array[j] + @"[key] = rx_view.static_method[key]; } " + view_array[j] + @".view_first_column = """ + view_first_column + @"""; })();" + "\r");
+(function () { var Super = function () { }; Super.prototype = rx_view.prototype; " + view_array[j] + @".prototype = new Super(); for (var key in rx_view.static_method) { " + view_array[j] + @"[key] = rx_view.static_method[key]; } " + view_array[j] + @".view_first_column = """ + view_first_column + @"""; view_first_columns['" + view_array[j] + "'] = '" + view_first_column + "'; })();" + "\r");
                             }
 
                             code.Append(generate_view_method_code(view_array[j], view_first_column));
@@ -749,6 +752,7 @@ namespace rx_orm_addin
                                     param_info.Add(info);
                                 }
                             }
+                            wx_models_public.Append("    " + procedure_array[j] + ":" + procedure_array[j] + ",\n");
                             script_text.Append(@"var " + procedure_array[j] + @" = {" + "\r");
                             code.Append(generate_procedure_method_code(procedure_array[j], param_info));
                             script_text.Append(generate_procedure_method_script_code(procedure_array[j], param_info));
@@ -772,7 +776,7 @@ namespace rx_orm_addin
                     if (this.frontChk.Checked)
                     {
                         this.generateStatusLabel.Text = "正在导入rx前端orm脚本";
-                        import_rx_javascript(this.active_project, script_text.ToString());
+                        import_rx_javascript(this.active_project, script_text.ToString(), wx_models_public.ToString());
                     }
 
                 }
@@ -847,7 +851,7 @@ namespace rx_orm_addin
             pro.Refresh();
         }
 
-        private void import_rx_javascript(Project project, string script_text = "")
+        private void import_rx_javascript(Project project, string script_text = "", string wx_models_public = "")
         {
             try
             {
@@ -907,6 +911,26 @@ namespace rx_orm_addin
                     .Replace("{$project_type}", outer_project_type.Trim() != "" ? outer_project_type : this.serverProjectTypeCob.Text.Trim()) 
                     .Replace("{$is_sign}", this.isSignChk.Checked.ToString().ToLower())
                     + "\r" + script_text);
+
+                if (this.wxCheck.Checked)
+                {
+                    try { p_items.Item("wx_rx_manager.js").Remove(); }
+                    catch { }
+                    try { File.Delete(director_name + "\\" + "wx_rx_manager.js"); }
+                    catch { }
+                    p_items.AddFromTemplate(templatePath, "wx_rx_manager.js");
+                    doc = this.application_object.Documents.Item("wx_rx_manager.js");
+                    textDoc = (doc.Object("TextDocument") as TextDocument);
+                    textDoc.Selection.SelectAll();
+                    textDoc.Selection.Delete();
+                    textDoc.Selection.Insert(Properties.Resources.wx_rx_manager
+                        .Replace("{$server_url}", (this.serverProjectTypeCob.Text == "asp_net_mvc_api" && this.isProjectGenerateChk.Checked ? "/api/v1" : "") + this.apiUrlTxt.Text.Replace("\\", "/").Trim())
+                        .Replace("{$project_type}", outer_project_type.Trim() != "" ? outer_project_type : this.serverProjectTypeCob.Text.Trim())
+                        .Replace("{$is_sign}", this.isSignChk.Checked.ToString().ToLower())
+                        .Replace("{$models_code}", script_text)
+                        .Replace("{$models_public}",wx_models_public));
+                }
+
 
                 this.application_object.Documents.SaveAll();
             }
@@ -2082,7 +2106,7 @@ asp_net_mvc_api 也会在Controllers目录下生成对应的APIController，类�
         {
             if (e.KeyChar == 13)
             {
-                if (serverProjectTypeCob.Enabled)
+                if (!serverProjectTypeCob.Enabled)
                 {
                     string out_string = "";
                     if (validate_front_orm_api_url(this.apiUrlTxt.Text.Trim(), ref out_string).Contains("error"))
@@ -2121,6 +2145,11 @@ asp_net_mvc_api 也会在Controllers目录下生成对应的APIController，类�
                     }
                 }
             }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("会生成wx_rx_manager.js,可以直接在微信小程序中使用。", "什么是前端的接口地址？", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
     }
 

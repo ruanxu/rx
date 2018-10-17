@@ -1,0 +1,105 @@
+﻿<link href="/CSS/default.css" rel="stylesheet" />
+<script src="/Script/rx.js"></script>
+<script src="/Script/rx_assembly_config.js"></script>
+<script src="/Script/rx_assembly.js"></script>
+
+<input type="button" value="refresh" id="refresh" />
+<input type="button" value="download" id="download" />
+<table id="tab1" style="margin-left: 100px;">
+</table>
+
+<script>
+
+    document.querySelector("#refresh").onclick = function () {
+        rx_report("#tab1", {
+            method: "refresh",
+            report_title: "测试报表头部123123123",
+            //x_statis_fixed: 3,
+            is_editor: true,
+            y_statis_type: "avg"
+        });
+    }
+    rx_report("#tab1", {
+        //指定ajax请求地址
+        url: "/Home/GetData",
+        //列信息参数
+        columns: [
+            {
+                title: "姓名",
+                html_tag: "{@@name}",
+                ident: "姓名",
+                style: "width:100px; height:60px; text-align:center; font-weight:bold;",
+            },
+            {
+                title: "学期",
+                html_tag: "{@@学期}",
+                ident: "学期",
+                style: "width:100px; height:60px; text-align:center;"
+            },
+            {
+                title: "语文",
+                html_tag: "{@@语文}",
+                ident: "语文",
+                style: "width:100px; height:60px; text-align:center;"
+            },
+            {
+                title: "数学",
+                html_tag: "{@@数学}",
+                ident: "数学",
+                style: "width:100px; height:60px; text-align:center;"
+            },
+            {
+                title: "英语",
+                html_tag: "{@@英语}",
+                ident: "英语",
+                style: "width:100px; height:60px; text-align:center;"
+            }
+        ],
+
+        //添加头行时执行的事件
+        add_head_tr: function (thead_tr) {
+        },
+        //添加头列时执行的事件
+        add_head_th: function (th, index) {
+        },
+        //添加行时执行的事件
+        add_tr: function (tr, index, data) {
+        },
+        //添加列时执行的事件
+        add_td: function (td, index, filed_name, index) {
+        },
+        //数据加载完毕时执行的事件
+        load_success: function (rows) {
+            console.info(rows)
+        },
+        report_title: "测试报表头部",
+        report_title_style: String.Format("height:60px; text-align:center; font-weight:bold; font-size:24px; background-color:{0};", rx_report.report_colors.rgb_150_150_150),
+        is_editor: true,
+        x_statis: true,
+        x_statis_fixed: 1,
+        x_statis_type: "sum",
+        x_statis_title: "总分",
+        x_statis_style: String.Format("width:100px; height:60px; text-align:center; font-weight:bold; background-color:{0};", rx_report.report_colors.rgb_0_255_255),
+        y_statis: true,
+        y_statis_type: "avg",
+        y_statis_title: "平均分",
+        y_statis_style: String.Format("width:100px; height:60px; text-align:center; font-weight:bold; background-color:{0};", rx_report.report_colors.rgb_0_255_255),
+        contrast_ident: "x_statis",
+        use_contrast_ident: ["语文", "数学", "英语"],
+        row_group_idents: ["姓名", "学期"]
+    });
+
+
+
+    download.onclick = function () {
+        rx_report_download({
+            sheets: {
+                "报表1": "#tab1"
+            },
+            handler_url: "/Home/download_excel",
+            file_name: "测试"
+        });
+    }
+</script>
+
+

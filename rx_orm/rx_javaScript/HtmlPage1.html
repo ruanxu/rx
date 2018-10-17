@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="/CSS/default.css" rel="stylesheet" />
+    <script src="/Script/rx.js"></script>
+    <script src="/Script/rx_assembly_config.js"></script>
+    <script src="/Script/rx_assembly.js"></script>
+    <script>
+        window.onload = function () {
+            document.querySelector("#refresh").onclick = function () {
+                rx_report("#tab1", {
+                    method: "refresh",
+                    columns: [
+                    {
+                        title: "姓名",
+                        html_tag: "{@@name}",
+                    },
+                    {
+                        title: "语文",
+                        html_tag: "{@@语文}",
+                    }
+                    
+                    ],
+                    report_title: "测试报表头部123123123",
+                    x_statis_fixed: 3,
+                    is_editor: true,
+                    y_statis_type: "avg"
+                });
+            }
+            rx_report("#tab1", {
+                //指定ajax请求地址
+                url: "/Home/GetData",
+                //列信息参数
+                columns: [
+                    {
+                        title: "姓名",
+                        html_tag: "{@@name}",
+                    },
+                    {
+                        title: "语文",
+                        html_tag: "{@@语文}",
+                    },
+                    {
+                        title: "数学",
+                        html_tag: "{@@数学}",
+                    },
+                    {
+                        title: "英语",
+                        html_tag: "{@@英语}",
+                    }
+                ],
+
+                //添加头行时执行的事件
+                add_head_tr: function (thead_tr) {
+                },
+                //添加头列时执行的事件
+                add_head_th: function (th, index) {
+                },
+                //添加行时执行的事件
+                add_tr: function (tr, index, data) {
+                    console.info(data)
+                },
+                //添加列时执行的事件
+                add_td: function (td, index, filed_name, index) {
+                },
+                //数据加载完毕时执行的事件
+                load_success: function (rows) {
+                    console.info(rows)
+                },
+                report_title: "测试报表头部",
+                x_statis: true,
+                x_statis_fixed: 1,
+                x_statis_type: "avg",
+                y_statis: true,
+                y_statis_type: "sum"
+
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="refresh" id="refresh" />
+    <table id="tab1" style="margin-left: 200px;"></table>
+</body>
+</html>

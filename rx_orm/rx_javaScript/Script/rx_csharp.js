@@ -65,8 +65,9 @@ ArrayList.prototype.Insert = function (index, obj) {
         }
     }
 
-    for (var i = index; i < length + 1; i++) {
-        this[i + 1] = this[i];
+    var length = this.length;
+    for (var i = length + 1; i > index ; i--) {
+        this[i] = this[i - 1];
     }
     this[index] = obj;
     return true;

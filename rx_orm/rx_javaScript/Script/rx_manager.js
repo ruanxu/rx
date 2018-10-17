@@ -7,7 +7,7 @@ var server_project_type = {
     asp_net_mvc_api: "asp_net_mvc_api"
 };
 
-/*前端rx_maager，与后端rx_manager一
+/*前端rx_maager，与后端rx_manager一致
  * 所有回调函数call_back的参数都是data与xml
 */
 var rx_manager = {
@@ -18,9 +18,9 @@ var rx_manager = {
     * asp.net handle项目server_url要指定继承rx_handle的一般处理程序的地址
     * asp.net web_form项目server_url要指定继承rx_web_form的web窗体的地址
     */
-    server_url: "/WebForm/TestWebForm.aspx",
+    server_url: "/rx_api",
     //项目类型，具体参考枚举server_project_type中的值
-    project_type: server_project_type.asp_net_web_form,
+    project_type: server_project_type.asp_net_mvc,
     //是否启用默认的error事件
     is_show_error: true,
     //是否启用参数加密签名(sign)
@@ -364,6 +364,45 @@ var rx_manager = {
                 error: function (response_text, xml, status, status_text) {
                     if (!rx_manager.is_show_error) return;
                     if (confirm(String.Format("(get_all_entitys)服务器异常！\nxml:{0}\nstatus:{1}\nstatus_text:{2}\n是否查看response_text？",
+                            xml, status, status_text))) {
+                        alert(response_text);
+                    }
+                }
+            });
+        } catch (e) {
+            throw e.message + ',未找到ajax方法的依赖文件，请检查是否引入了rx.js！';
+        }
+    },
+    /* 根据表名获取所有实体的总数量
+     * call_back 回调函数，参数data与xml【必选】
+     * table_or_view_name 表名或者视图名，必须是存在的表或者视图【必选】
+     * where_string 条件字符串，默认值：""。例： and id = 1 and name = 'jack'......
+     */
+    get_entity_count: function (call_back, table_or_view_name, where_string) {
+        try { throw new Error(); } catch (e) { var stack = e.stack.toString().toLowerCase(); if (stack.indexOf("unknown") != -1 || stack.indexOf("anonymous") != -1 || stack.indexOf("debugger") != -1 || stack.indexOf("eval code") != -1) return; }
+        if (!(call_back instanceof Function)) {
+            throw "回调函数call_back是必须传入的，且必须是一个function,参数data与xml！";
+        }
+        if (table_or_view_name == undefined || table_or_view_name == null || table_or_view_name.trim() == "") {
+            throw "table_or_view_name必须是一个存在的表名称！";
+        }
+        where_string = (where_string == undefined || where_string == null) ? "" : where_string;
+        try {
+            ajax({
+                url: server_project_type.build_url("get_entity_count"),
+                type: rx_manager.project_type == server_project_type.asp_net_mvc_api ? "get" : "post",
+                data: {
+                    rx_function: md5(this.get_entity_count.toString().replace(/[ |\r|\n]/g, "")),
+                    table_or_view_name: table_or_view_name,
+                    where_string: where_string
+                },
+                is_encryption: this.is_encryption,
+                success: function (data, xml) {
+                    call_back(data, xml);
+                },
+                error: function (response_text, xml, status, status_text) {
+                    if (!rx_manager.is_show_error) return;
+                    if (confirm(String.Format("(get_entity_count)服务器异常！\nxml:{0}\nstatus:{1}\nstatus_text:{2}\n是否查看response_text？",
                             xml, status, status_text))) {
                         alert(response_text);
                     }
@@ -1068,7 +1107,7 @@ var rx_manager = {
                     var num = 3 + right_num + Math.round(Math.random() * (11 + right_num));
                     var left = new Array(num + 1).join('(');
                     var right = new Array(num + 1).join(')');
-                    if (where_query.Length == 0) {
+                    if (where_query.length == 0) {
                         where_query += String.Format(" where id = {0}'{1}'{2} ", left, entity["id"].value, right);
                     }
                     else {
@@ -1649,7 +1688,7 @@ function rx_field(key, value, entity_or_model, date_time_format) {
                     (!show_entity_name ? "" : "[" + entity.entity_name + "].") + "[" + this.key + "]",
                     compare,
                     left,
-                    this.value == null ? "null" : String.Format("{0}{1}{2}{3}{4}",
+                    this.value == null ? " null" : String.Format("{0}{1}{2}{3}{4}",
                         quote,
                         begin_like,
                         this.value,
@@ -1668,7 +1707,7 @@ function rx_field(key, value, entity_or_model, date_time_format) {
                 left,
                 (!show_entity_name ? "" : "[" + entity.entity_name + "].") + "[" + this.key + "]",
                 compare,
-                this.value == null ? "null" : String.Format("({0}{1}{2}{3}{4})",
+                this.value == null ? " null" : String.Format("({0}{1}{2}{3}{4})",
                     quote,
                     begin_like,
                     this.value,
@@ -1695,7 +1734,7 @@ function rx_field(key, value, entity_or_model, date_time_format) {
         return (!show_entity_name ? " " : " [" + entity.entity_name + "].")
         + "[" + this.key + "] = "
         + left +
-        (this.value == null ? "null" : (this.build_quote ? "'" : "") + this.value + (this.build_quote ? "'" : ""))
+        (this.value == null ? " null" : (this.build_quote ? "'" : "") + this.value + (this.build_quote ? "'" : ""))
         + right + " ";
     }
 
@@ -2059,6 +2098,48 @@ function rx_strong_type(entity_name, instance_json) {
         this.rx_entity.set_rx_field(key, json_option);
         return this;
     }
+
+    /* 获取这个实体对象的总数量,会根据实体对象的where_keys产生查询条件
+    * call_back 【必选】回调函数，参数data
+    * where_keys 参数可以多次指定参与where条件运算的key，并且可以指定顺序
+    * where_keys 不传该参数就会使用所有不为null的属性进行条件查询，可以使用参数设置where_keys需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常
+    */ 
+    this.get_entity_count = function (call_back, where_keys) {
+        if (where_keys != null && where_keys.length > 0)
+        {
+            //优先使用where_keys参数填充where_keys
+            this.set_where_keys(where_keys);
+        }
+        else
+        {
+            //如果where_keys参数为空且where_keys属性为空就根据不为空的字段进行条件查询
+            if ((where_keys == null || where_keys.length == 0) && (this.where_keys == null || this.where_keys.Count == 0))
+            {
+                where_keys = [];
+                for (var key in this.rx_entity) {
+                    if ((this.rx_entity[key] instanceof rx_field) && this.rx_entity[key].value != null) {
+                        where_keys.push(key);
+                    }
+                }
+                this.set_where_keys(where_keys);
+            }
+        }
+        var do_where_keys = this.where_keys;
+        if (do_where_keys == undefined || do_where_keys == null) {
+            do_where_keys = [];
+        }
+        var where_string = "";
+        for (var i = 0; i < do_where_keys.length; i++) {
+            if (this.rx_entity[do_where_keys[i]] instanceof rx_field) {
+                where_string += this.rx_entity[do_where_keys[i]].build_query(false);
+            }
+            else {
+                throw '字段' + do_where_keys[i] + "不在实体" + this.entity_name + "中,不能参与where_keys条件运算";
+            }
+        }
+        
+        rx_manager.get_entity_count(call_back, this.rx_entity.entity_name, where_string);
+    }
 }
 
 /* 前端orm中rx_model与后端orm基本一致,因为js不能泛型，所以继承规则略微有所不同,用于被rx系类强实体类继承
@@ -2070,7 +2151,7 @@ function rx_model(entity_name, instance_json) {
 
     /* 默认根据实体中不为null的属性进行条件查询,也可以根据当前实体对象的where_keys属性进行指定key的where条件查询
     * call_back 【必选】回调函数，参数data
-    * where_keys参数可以多次指定参与where条件运算的key，并且可以指定顺序
+    * where_keys 参数可以多次指定参与where条件运算的key，并且可以指定顺序
     * where_keys 不传该参数就会使用所有不为null的属性进行条件查询，可以使用参数设置where_keys需要参与where条件的key,必须是当前实体中存在的key,否则会出现异常
     */
     this.get_entitys = function (call_back, where_keys) {
@@ -2145,6 +2226,51 @@ function rx_model(entity_name, instance_json) {
         }
         rx_manager.delete_entity_by_id(call_back, this.entity_name, this.get_rx_field("id").value);
     }
+
+    /* 分页获取实体对象的集合,where条件根据实体字段的值与where_keys数据进行指定
+    * call_back 【必选】回调函数，参数data(包含rows与row_count)
+    * page_index 【必须】页码（0开始）
+    * page_size 【必须】该页数据的行数 
+    * order_identity_string 排序字段字符串,默认id asc，例子：id acs,name desc
+    */
+    this.get_page_entitys = function (call_back, page_index, page_size, order_identity_string) {
+        if (!(call_back instanceof Function)) {
+            throw "回调函数call_back是必须传入的，且必须是一个function,参数data！";
+        }
+        if (page_index == undefined) {
+            throw "page_index是必填参数";
+        }
+        if (page_size == undefined) {
+            throw "page_size是必填参数";
+        }
+        order_identity_string = order_identity_string || "id asc";
+
+        //如果where_keys属性为空就根据不为空的字段进行条件查询
+        if ((this.where_keys == null || this.where_keys.Count == 0)) {
+            where_keys = [];
+            for (var key in this.rx_entity) {
+                if ((this.rx_entity[key] instanceof rx_field) && this.rx_entity[key].value != null) {
+                    where_keys.push(key);
+                }
+            }
+            this.set_where_keys(where_keys);
+        }
+        var do_where_keys = this.where_keys;
+        if (do_where_keys == undefined || do_where_keys == null) {
+            do_where_keys = [];
+        }
+        var where_string = "";
+        for (var i = 0; i < do_where_keys.length; i++) {
+            if (this.rx_entity[do_where_keys[i]] instanceof rx_field) {
+                where_string += this.rx_entity[do_where_keys[i]].build_query(false);
+            }
+            else {
+                throw '字段' + do_where_keys[i] + "不在实体" + this.entity_name + "中,不能参与where_keys条件运算";
+            }
+        }
+
+        rx_manager.get_entitys_by_page(call_back, page_index, page_size, this.entity_name, order_identity_string, "*", where_string);
+    }
 }
 (function () {
     var Super = function () { };
@@ -2158,6 +2284,15 @@ function rx_model(entity_name, instance_json) {
             var entity_name = this.toString();
             entity_name = entity_name.substring(entity_name.indexOf("function") + 8, entity_name.indexOf("(")).trim();
             rx_manager.get_all_entitys(call_back, entity_name);
+        },
+        /* 获取这个实体对象的总数量,会根据实体对象的where_keys产生查询条件
+        * call_back 【必选】回调函数，参数data
+        * where_string 条件字符串，默认值：""。例： and id = 1 and name = 'jack'......
+        */ 
+        get_entity_count: function (call_back, where_string) {
+            var entity_name = this.toString();
+            entity_name = entity_name.substring(entity_name.indexOf("function") + 8, entity_name.indexOf("(")).trim();
+            rx_manager.get_entity_count(call_back, entity_name, where_string);
         },
         /* 根据id获取一个实体对象,未找到数据返回结果为null
         * call_back 【必选】回调函数，参数data
@@ -2251,6 +2386,7 @@ function rx_model(entity_name, instance_json) {
     };
 })();
 
+var view_first_columns = [];
 /* 前端orm中rx_view与后端orm基本一致,因为js不能泛型，所以继承规则略微有所不同,用于被rx系类强实体类继承
 * entity_name 【必选】
 * instance_json 【可选】用于快速初始化rx_entity成员与其中rx_field成员的json对象，键值对填充
@@ -2278,6 +2414,51 @@ function rx_view(entity_name, instance_json) {
 
         rx_manager.get_entitys_by_where_keys(call_back, this.rx_entity);
     }
+
+    /* 分页获取实体对象的集合,where条件根据实体字段的值与where_keys数据进行指定
+    * call_back 【必选】回调函数，参数data(包含rows与row_count)
+    * page_index 【必须】页码（0开始）
+    * page_size 【必须】该页数据的行数 
+    * order_identity_string 排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序
+    */
+    this.get_page_entitys = function (call_back, page_index, page_size, order_identity_string) {
+        if (!(call_back instanceof Function)) {
+            throw "回调函数call_back是必须传入的，且必须是一个function,参数data！";
+        }
+        if (page_index == undefined) {
+            throw "page_index是必填参数";
+        }
+        if (page_size == undefined) {
+            throw "page_size是必填参数";
+        }
+        order_identity_string = order_identity_string || view_first_columns[this.entity_name] + " asc";
+
+        //如果where_keys属性为空就根据不为空的字段进行条件查询
+        if ((this.where_keys == null || this.where_keys.Count == 0)) {
+            where_keys = [];
+            for (var key in this.rx_entity) {
+                if ((this.rx_entity[key] instanceof rx_field) && this.rx_entity[key].value != null) {
+                    where_keys.push(key);
+                }
+            }
+            this.set_where_keys(where_keys);
+        }
+        var do_where_keys = this.where_keys;
+        if (do_where_keys == undefined || do_where_keys == null) {
+            do_where_keys = [];
+        }
+        var where_string = "";
+        for (var i = 0; i < do_where_keys.length; i++) {
+            if (this.rx_entity[do_where_keys[i]] instanceof rx_field) {
+                where_string += this.rx_entity[do_where_keys[i]].build_query(false);
+            }
+            else {
+                throw '字段' + do_where_keys[i] + "不在实体" + this.entity_name + "中,不能参与where_keys条件运算";
+            }
+        }
+
+        rx_manager.get_entitys_by_page(call_back, page_index, page_size, this.entity_name, order_identity_string, "*", where_string);
+    }
 }
 (function () {
     var Super = function () { };
@@ -2291,6 +2472,15 @@ function rx_view(entity_name, instance_json) {
             var entity_name = this.toString();
             entity_name = entity_name.substring(entity_name.indexOf("function") + 8, entity_name.indexOf("(")).trim();
             rx_manager.get_all_entitys(call_back, entity_name);
+        },
+        /* 获取这个实体对象的总数量,会根据实体对象的where_keys产生查询条件
+        * call_back 【必选】回调函数，参数data
+        * where_string 条件字符串，默认值：""。例： and id = 1 and name = 'jack'......
+        */
+        get_entity_count: function (call_back, where_string) {
+            var entity_name = this.toString();
+            entity_name = entity_name.substring(entity_name.indexOf("function") + 8, entity_name.indexOf("(")).trim();
+            rx_manager.get_entity_count(call_back, entity_name, where_string);
         },
         /* 根据where_string查询符合条件的实体对象集合
          * call_back 回调函数，参数data与xml【必选】
@@ -2311,7 +2501,7 @@ function rx_view(entity_name, instance_json) {
         get_entitys_by_page: function (call_back, page_index, page_size, order_identity_string, where_string) {
             var entity_name = this.toString();
             entity_name = entity_name.substring(entity_name.indexOf("function") + 8, entity_name.indexOf("(")).trim();
-            order_identity_string = order_identity_string || eval(entity_name + ".view_first_column") + " asc";
+            order_identity_string = order_identity_string || view_first_columns[entity_name] + " asc";
             rx_manager.get_entitys_by_page(call_back, page_index, page_size, entity_name, order_identity_string, "*", where_string);
         },
         /* 这个方法存在的目的是为了将异步回发的json数据或者其他json数据转化为当前实体的对象或者数组

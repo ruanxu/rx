@@ -65,8 +65,9 @@ ArrayList.prototype.Insert = function (index, obj) {
         }
     }
 
-    for (var i = index; i < length + 1; i++) {
-        this[i + 1] = this[i];
+    var length = this.length;
+    for (var i = length + 1; i > index ; i--) {
+        this[i] = this[i - 1];
     }
     this[index] = obj;
     return true;
@@ -120,14 +121,14 @@ Array.prototype.Distinct = function () {
     return n;
 }
 
-//控制台
+//C#_____Console
 var Console = {};
-Console.WriteLine = function (text) {
-    console.info(text);
+Console.WriteLine = function (obj) {
+    console.info(obj);
 }
 
 Console.ReadLine = function (message) {
-    return prompt(message == undefined ? "" : message, "")
+    return prompt(message || "")
 }
 
 

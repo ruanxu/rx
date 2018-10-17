@@ -14,7 +14,7 @@ function ajax(options) {
     //创建 - 第一步
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
-    } else if (window.ActiveObject) {         //IE6及以下
+    } else if (window.ActiveObject) { //IE6及以下
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
@@ -23,8 +23,7 @@ function ajax(options) {
         xhr.open(options.type, options.url + (options.url.indexOf("?") != -1 ? "&" : "?") + params, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send();
-    }
-    else {
+    } else {
         xhr.open(options.type, options.url, true);
         //设置表单提交时的内容类型
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -40,8 +39,7 @@ function ajax(options) {
                     case "auto":
                         if (ajax.text_is_json(xhr.responseText)) {
                             options.success && options.success(JSON.parse(xhr.responseText), xhr.responseXML);
-                        }
-                        else {
+                        } else {
                             options.success && options.success(xhr.responseText, xhr.responseXML);
                         }
                         break;
@@ -76,7 +74,7 @@ ajax.get = function (url, data, success, is_encryption, data_type, error) {
     //创建 - 第一步
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
-    } else if (window.ActiveObject) {         //IE6及以下
+    } else if (window.ActiveObject) { //IE6及以下
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
@@ -94,8 +92,7 @@ ajax.get = function (url, data, success, is_encryption, data_type, error) {
                     case "auto":
                         if (ajax.text_is_json(xhr.responseText)) {
                             success && success(JSON.parse(xhr.responseText), xhr.responseXML);
-                        }
-                        else {
+                        } else {
                             success && success(xhr.responseText, xhr.responseXML);
                         }
                         break;
@@ -130,7 +127,7 @@ ajax.post = function (url, data, success, is_encryption, data_type, error) {
     //创建 - 第一步
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
-    } else if (window.ActiveObject) {         //IE6及以下
+    } else if (window.ActiveObject) { //IE6及以下
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
@@ -149,8 +146,7 @@ ajax.post = function (url, data, success, is_encryption, data_type, error) {
                     case "auto":
                         if (ajax.text_is_json(xhr.responseText)) {
                             success && success(JSON.parse(xhr.responseText), xhr.responseXML);
-                        }
-                        else {
+                        } else {
                             success && success(xhr.responseText, xhr.responseXML);
                         }
                         break;
@@ -185,7 +181,7 @@ ajax.put = function (url, data, success, is_encryption, data_type, error) {
     //创建 - 第一步
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
-    } else if (window.ActiveObject) {         //IE6及以下
+    } else if (window.ActiveObject) { //IE6及以下
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
@@ -204,8 +200,7 @@ ajax.put = function (url, data, success, is_encryption, data_type, error) {
                     case "auto":
                         if (ajax.text_is_json(xhr.responseText)) {
                             success && success(JSON.parse(xhr.responseText), xhr.responseXML);
-                        }
-                        else {
+                        } else {
                             success && success(xhr.responseText, xhr.responseXML);
                         }
                         break;
@@ -240,7 +235,7 @@ ajax.delete = function (url, data, success, is_encryption, data_type, error) {
     //创建 - 第一步
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
-    } else if (window.ActiveObject) {         //IE6及以下
+    } else if (window.ActiveObject) { //IE6及以下
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
 
@@ -259,8 +254,7 @@ ajax.delete = function (url, data, success, is_encryption, data_type, error) {
                     case "auto":
                         if (ajax.text_is_json(xhr.responseText)) {
                             success && success(JSON.parse(xhr.responseText), xhr.responseXML);
-                        }
-                        else {
+                        } else {
                             success && success(xhr.responseText, xhr.responseXML);
                         }
                         break;
@@ -308,14 +302,13 @@ ajax.format_params = function (data, is_encryption) {
 //字符串是否是json
 ajax.text_is_json = function (text) {
     if (text.trim() == "") return false;
-    return (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
-    replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-    replace(/(?:^|:|,)(?:\s*\[)+/g, '')));
+    return (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, '')));
 }
 
 /* 用于获取url地址中的参数 */
 function get_url_param(key) {
-    var vars = [], hash;
+    var vars = [],
+		hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for (var i = 0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -340,12 +333,10 @@ function try_dom_by_id(id, is_throw) {
     if (obj == null) {
         if (is_throw) {
             throw String.Format("id:{0} 不存在！", id);
-        }
-        else {
+        } else {
             return false;
         }
-    }
-    else {
+    } else {
         return obj;
     }
 }
@@ -402,7 +393,7 @@ function show_element(element) {
         element = try_dom_by_id(element);
     }
     if (element.style.display == "none") {
-        document.getElementById("sel").style.display = "";
+        element.style.display = "";
     }
 }
 
@@ -414,7 +405,7 @@ function hide_element(element) {
         element = try_dom_by_id(element);
     }
     if (element.style.display != "none") {
-        document.getElementById("sel").style.display = "none";
+        element.style.display = "none";
     }
 }
 
@@ -427,8 +418,7 @@ function toggle_element(element) {
     }
     if (element.style.display != "none") {
         element.style.display = "none";
-    }
-    else {
+    } else {
         element.style.display = "";
     }
 }
@@ -437,24 +427,24 @@ function toggle_element(element) {
 function create_element(html_tag) {
     // 创建一个可复用的包装元素  
     var recycled = document.createElement('div'),
-    // 创建标签简易匹配  
-    reg = /^<([a-zA-Z]+)(?=\s|\/>|>)[\s\S]*>$/,
-    // 某些元素HTML标签必须插入特定的父标签内，才能产生合法元素  
-    // 另规避：ie7-某些元素innerHTML只读  
-    // 创建这些需要包装的父标签hash  
-    hash = {
-        'colgroup': 'table',
-        'col': 'colgroup',
-        'thead': 'table',
-        'tfoot': 'table',
-        'tbody': 'table',
-        'tr': 'tbody',
-        'th': 'tr',
-        'td': 'tr',
-        'optgroup': 'select',
-        'option': 'optgroup',
-        'legend': 'fieldset'
-    };
+		// 创建标签简易匹配  
+		reg = /^<([a-zA-Z]+)(?=\s|\/>|>)[\s\S]*>$/,
+		// 某些元素HTML标签必须插入特定的父标签内，才能产生合法元素  
+		// 另规避：ie7-某些元素innerHTML只读  
+		// 创建这些需要包装的父标签hash  
+		hash = {
+		    'colgroup': 'table',
+		    'col': 'colgroup',
+		    'thead': 'table',
+		    'tfoot': 'table',
+		    'tbody': 'table',
+		    'tr': 'tbody',
+		    'th': 'tr',
+		    'td': 'tr',
+		    'optgroup': 'select',
+		    'option': 'optgroup',
+		    'legend': 'fieldset'
+		};
     // 闭包重载方法（预定义变量避免重复创建，调用执行更快，成员私有化）  
     create_element = function (html_tag) {
         // 若不包含标签，调用内置方法创建并返回元素
@@ -469,7 +459,8 @@ function create_element(html_tag) {
             return (recycled.children.length > 1 ? recycled.children : recycled.children[0]);
         }
         // 若匹配hash标签，迭代包装父标签，并保存迭代层次  
-        var deep = 0, element = recycled;
+        var deep = 0,
+			element = recycled;
         do {
             html_tag = '<' + tagName + '>' + html_tag + '</' + tagName + '>';
             deep++;
@@ -496,37 +487,35 @@ function create_element(html_tag) {
 }
 
 /* 显示加载中弹出层
-* parent_tag 弹出层的父容器,可以是一个dom元素或者是dom的id，默认为body
-* loading_text 加载中的文本
-* is_fade 是否为谈进弹出，默认值true
-* background_color 弹出背景颜色，默认值rgba(0,0,0,0.75)
-* z_index 默认值100
-*/
+ * parent_tag 弹出层的父容器,可以是一个dom元素或者是dom的id，默认为body
+ * loading_text 加载中的文本
+ * is_fade 是否为谈进弹出，默认值true
+ * background_color 弹出背景颜色，默认值rgba(0,0,0,0.75)
+ * z_index 默认值100
+ */
 function show_loading(loading_text, parent_tag, is_fade, background_color, z_index) {
     if (parent_tag == undefined) parent_tag = document.body;
     else if (typeof (parent_tag) == "string") parent_tag = try_dom_by_id(parent_tag);
     loading_text = (loading_text == undefined ? (is_pc() ? "l o a d i n g . . ." : "loading...") : loading_text.toString());
     is_fade = (is_fade == undefined || (typeof (is_fade)).toLowerCase() != "boolean" ? true : is_fade);
-    background_color = (background_color == undefined || (typeof (background_color)).toLowerCase() != "string" ? "rgba(0,0,0,0.75)" : background_color.replace(";", ""));
+    background_color = (background_color == undefined || (typeof (background_color)).toLowerCase() != "string" ? "rgba(0,0,0,0.6)" : background_color.replace(";", ""));
     z_index = (z_index == undefined || parseInt(z_index).toString() == "NaN" ? 100 : z_index);
     var loading_view = create_element(String.Format(
-        "<div style='transition:{0}; z_index:{1}; left:0px; top:0px; width:100%; height:100%; opacity:0; cursor:default; -moz-user-select:none;'>{2}</div>",
-        (is_fade ? "0.3s" : "0.0s"),
-        z_index,
-        "<div style='width:15%; height:10%; min-width:48px; min-height:32px; margin:auto; position:relative; top:45%; text-shadow:0px 0px 12px white; font-family:Juice ITC;'><div style='width:48px; height:20px; margin:auto; margin-top:-24px; color:white; text-align:center;'><nobr>" + loading_text + "</nobr></div><div style='width:48px; height:48px; transform:rotate(0deg); text-align:center; transition:120s; line-height:48px; margin:auto; color:white; font-size:3em;' class='load_elm'>↻</div></div>"
-        ));
+		"<div style='transition:{0}; z_index:{1}; left:0px; top:0px; width:100%; height:100%; opacity:0; cursor:default; -moz-user-select:none;'>{2}</div>",
+		(is_fade ? "0.3s" : "0.0s"),
+		z_index,
+		"<div style='width:20%; height:10%; min-width:48px; min-height:32px; margin:auto; position:relative; top:45%; text-shadow:0px 0px 12px white; font-family:Juice ITC;'><div style='width:48px; height:48px; transform:rotate(0deg); text-align:center; transition:120s; line-height:48px; margin:auto; color:white; font-size:3em;' class='load_elm'>◌</div><div style='color:#fff; text-align:center; margin-top: 10px;'><nobr>" + loading_text + "</nobr></div></div>"
+	));
     loading_view.setAttribute("name", "loading_view");
     if (parent_tag.tagName.toLocaleLowerCase() == "body") {
         loading_view.style.position = "fixed";
-    }
-    else {
+    } else {
         if (parent_tag.style.position != "fixed" && parent_tag.style.position != "absolute" && parent_tag.style.position != "relative") {
             parent_tag.style.position = "relative";
         }
         loading_view.style.position = "absolute";
     }
     parent_tag.appendChild(loading_view);
-
 
     setTimeout(function () {
         loading_view.style.backgroundColor = background_color;
@@ -544,8 +533,7 @@ function show_loading(loading_text, parent_tag, is_fade, background_color, z_ind
             setTimeout(function () {
                 remove_element(loading_view);
             }, parseFloat(loading_view.style.transition.replace("s", "")) * 1000)
-        }
-        else {
+        } else {
             remove_element(loading_view);
         }
     }
@@ -560,25 +548,27 @@ function hide_loading() {
     }
 }
 hide_loading.do_remove = function (view, times) {
-    setTimeout(function () { remove_element(view); }, times);
+    setTimeout(function () {
+        remove_element(view);
+    }, times);
 }
 
 /* 消息提示
-* text_or_html 需要显示的文本或者html字符串
-* show_times 显示持续的时间，默认是3000毫秒
-* show_close 是否显示关闭按钮
-* z_index 默认值100
-*/
+ * text_or_html 需要显示的文本或者html字符串
+ * show_times 显示持续的时间，默认是3000毫秒
+ * show_close 是否显示关闭按钮
+ * z_index 默认值100
+ */
 function show_message(text_or_html, show_times, show_close, z_index) {
     text_or_html = text_or_html || "";
     show_close = show_close || false;
     z_index = z_index || 100;
     var message_tag = create_element(String.Format("<div style='max-width:{0} overflow: hidden; text-align:center; padding:12px; font-size:18px; margin:auto; border-radius:16px; color:white; background-color:rgba(0,0,0,0.6); position:fixed; left:0px; top:0px; opacity:0; word-wrap:break-word; box-shadow:0px 0px 3px rgba(0,0,0,1); z-index:{1};'><div style='width:100%; overflow:auto;'>{2}</div>{3}</div>",
-        is_pc() ? "480px;" : "95%; max-height:70%;",
-        z_index,
-        text_or_html,
-        show_close ? "<p onclick='remove_element(this.parentNode)' style='background-color:white; border:1px solid black; box-shadow:0px 0px 3px black; text-shadow:0px 0px 3px rgba(0,0,0,0.5); border-radius:50%; width:24px; height:24px; position:absolute; right:4px; top:4px; cursor: pointer;'><b style='color:black; font-size:18px;'>×</b></p>" : ""
-        ));
+		is_pc() ? "480px;" : "95%; max-height:70%;",
+		z_index,
+		text_or_html,
+		show_close ? "<p onclick='remove_element(this.parentNode)' style='background-color:white; border:1px solid black; box-shadow:0px 0px 3px black; text-shadow:0px 0px 3px rgba(0,0,0,0.5); border-radius:50%; width:24px; height:24px; position:absolute; right:4px; top:4px; cursor: pointer;'><b style='color:black; font-size:18px;'>×</b></p>" : ""
+	));
     show_times = ((typeof show_times).toString().toLocaleLowerCase() != "number" ? 3000 : show_times);
 
     document.body.appendChild(message_tag);
@@ -601,22 +591,24 @@ function show_message(text_or_html, show_times, show_close, z_index) {
     return message_tag;
 }
 
-
 //判断设备，pc设备（true），移动设备（false）
 function is_pc() {
     var user_agent_info = navigator.userAgent;
     var agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
     var flag = true;
     for (var v = 0; v < agents.length; v++) {
-        if (user_agent_info.indexOf(agents[v]) > 0) { flag = false; break; }
+        if (user_agent_info.indexOf(agents[v]) > 0) {
+            flag = false;
+            break;
+        }
     }
     return flag;
 }
 
 /* js多线程
-* 允许当前浏览器窗口分出一个单独执行js的线程
-* 不能使用任何js中的全局dom对象与函数（window、document、alert()）
-*/
+ * 允许当前浏览器窗口分出一个单独执行js的线程
+ * 不能使用任何js中的全局dom对象与函数（window、document、alert()）
+ */
 function thread(using_scripts) {
     if (using_scripts != undefined) {
         if (!(using_scripts instanceof Array)) {
@@ -642,7 +634,7 @@ function thread(using_scripts) {
         }
     }
 
-    worker = null;//new Worker();
+    worker = null; //new Worker();
     var alignment = [];
     this.onmessage = null;
 
@@ -668,10 +660,11 @@ function thread(using_scripts) {
         }
         delegate = delegate.toString().split("\n");
         if (worker != null) {
-            var obj = JSON.stringify({ send_delegate: delegate });
+            var obj = JSON.stringify({
+                send_delegate: delegate
+            });
             worker.postMessage(obj);
-        }
-        else {
+        } else {
             alignment[alignment.length] = '{"send_delegate":' + JSON.stringify(delegate) + '}';
         }
     }
@@ -736,42 +729,49 @@ onmessage = function (event) {
     }
 }
 
-
 /* md5加密 */
 (function ($) {
     'use strict';
+
     function safe_add(x, y) {
         var lsw = (x & 0xFFFF) + (y & 0xFFFF),
-            msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+			msw = (x >> 16) + (y >> 16) + (lsw >> 16);
         return (msw << 16) | (lsw & 0xFFFF);
     }
+
     function bit_rol(num, cnt) {
         return (num << cnt) | (num >>> (32 - cnt));
     }
+
     function md5_cmn(q, a, b, x, s, t) {
         return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b);
     }
+
     function md5_ff(a, b, c, d, x, s, t) {
         return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
     }
+
     function md5_gg(a, b, c, d, x, s, t) {
         return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
     }
+
     function md5_hh(a, b, c, d, x, s, t) {
         return md5_cmn(b ^ c ^ d, a, b, x, s, t);
     }
+
     function md5_ii(a, b, c, d, x, s, t) {
         return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
     }
+
     function binl_md5(x, len) {
         x[len >> 5] |= 0x80 << (len % 32);
         x[(((len + 64) >>> 9) << 4) + 14] = len;
 
         var i, olda, oldb, oldc, oldd,
-            a = 1732584193,
-            b = -271733879,
-            c = -1732584194,
-            d = 271733878;
+			a = 1732584193,
+			b = -271733879,
+			c = -1732584194,
+			d = 271733878;
 
         for (i = 0; i < x.length; i += 16) {
             olda = a;
@@ -854,17 +854,19 @@ onmessage = function (event) {
         }
         return [a, b, c, d];
     }
+
     function binl2rstr(input) {
         var i,
-            output = '';
+			output = '';
         for (i = 0; i < input.length * 32; i += 8) {
             output += String.fromCharCode((input[i >> 5] >>> (i % 32)) & 0xFF);
         }
         return output;
     }
+
     function rstr2binl(input) {
         var i,
-            output = [];
+			output = [];
         output[(input.length >> 2) - 1] = undefined;
         for (i = 0; i < output.length; i += 1) {
             output[i] = 0;
@@ -874,15 +876,17 @@ onmessage = function (event) {
         }
         return output;
     }
+
     function rstr_md5(s) {
         return binl2rstr(binl_md5(rstr2binl(s), s.length * 8));
     }
+
     function rstr_hmac_md5(key, data) {
         var i,
-            bkey = rstr2binl(key),
-            ipad = [],
-            opad = [],
-            hash;
+			bkey = rstr2binl(key),
+			ipad = [],
+			opad = [],
+			hash;
         ipad[15] = opad[15] = undefined;
         if (bkey.length > 16) {
             bkey = binl_md5(bkey, key.length * 8);
@@ -894,30 +898,36 @@ onmessage = function (event) {
         hash = binl_md5(ipad.concat(rstr2binl(data)), 512 + data.length * 8);
         return binl2rstr(binl_md5(opad.concat(hash), 512 + 128));
     }
+
     function rstr2hex(input) {
         var hex_tab = '0123456789abcdef',
-            output = '',
-            x,
-            i;
+			output = '',
+			x,
+			i;
         for (i = 0; i < input.length; i += 1) {
             x = input.charCodeAt(i);
             output += hex_tab.charAt((x >>> 4) & 0x0F) +
-                hex_tab.charAt(x & 0x0F);
+				hex_tab.charAt(x & 0x0F);
         }
         return output;
     }
+
     function str2rstr_utf8(input) {
         return unescape(encodeURIComponent(input));
     }
+
     function raw_md5(s) {
         return rstr_md5(str2rstr_utf8(s));
     }
+
     function hex_md5(s) {
         return rstr2hex(raw_md5(s));
     }
+
     function raw_hmac_md5(k, d) {
         return rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d));
     }
+
     function hex_hmac_md5(k, d) {
         return rstr2hex(raw_hmac_md5(k, d));
     }
@@ -943,3 +953,194 @@ onmessage = function (event) {
         $.md5 = md5;
     }
 }(this));
+
+/* html 转码&解码 */
+var html_utility = {
+    /*1.用浏览器内部转换器实现html转码*/
+    html_encode: function (html) {
+        //1.首先动态创建一个容器标签元素，如DIV
+        var temp = document.createElement("div");
+        //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+        (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+        //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+        var output = temp.innerHTML;
+        temp = null;
+        return output;
+    },
+    /*2.用浏览器内部转换器实现html解码*/
+    html_decode: function (text) {
+        //1.首先动态创建一个容器标签元素，如DIV
+        var temp = document.createElement("div");
+        //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+        temp.innerHTML = text;
+        //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+        var output = temp.innerText || temp.textContent;
+        temp = null;
+        return output;
+    }
+};
+
+/* 将一个数组中的元素顺序进行打乱 */
+function random_array(array) {
+    if (!(array instanceof Array)) {
+        throw "参数array必须是一个数组";
+    }
+    var random_index = [];
+
+    for (var i = 0; i < array.length; i++) {
+        var index = parseInt(Math.random() * array.length);
+        if (random_index.Contains(index)) {
+            i--;
+            continue;
+        }
+        random_index[random_index.length] = index;
+    }
+
+    var do_array = [];
+    for (var i = 0; i < random_index.length; i++) {
+        do_array[i] = array[random_index[i]];
+    }
+    return do_array;
+}
+
+//双击最大化开关
+function double_click_full_screen_toggle(double_click_obj, full_screen_obj, background_color, call_back) {
+    if (full_screen_obj.style.transition == undefined || full_screen_obj.style.transition == null || full_screen_obj.style.transition == "") full_screen_obj.style.transition = "0.4s";
+
+    background_color = background_color == undefined ? "transparent" : background_color;
+
+    double_click_obj.setAttribute("state", "Normal");
+    double_click_obj.setAttribute("nBackgroundColor", full_screen_obj.style.backgroundColor);
+    double_click_obj.setAttribute("nWidth", full_screen_obj.style.width == "" ? "auto" : full_screen_obj.style.width);
+    double_click_obj.setAttribute("nHeight", full_screen_obj.style.height == "" ? "auto" : full_screen_obj.style.height);
+    double_click_obj.setAttribute("nPosition", full_screen_obj.style.position);
+    double_click_obj.setAttribute("nLeft", full_screen_obj.style.left == "auto" ? "0px" : full_screen_obj.style.left);
+    double_click_obj.setAttribute("nRight", full_screen_obj.style.right == "auto" ? "0px" : full_screen_obj.style.right);
+    double_click_obj.setAttribute("nTop", full_screen_obj.style.top == "auto" ? "0px" : full_screen_obj.style.top);
+    double_click_obj.setAttribute("nBottom", full_screen_obj.style.bottom == "auto" ? "0px" : full_screen_obj.style.bottom);
+    double_click_obj.setAttribute("nZIndex", full_screen_obj.style.zIndex);
+    if (full_screen_obj.getAttribute("id") == null) full_screen_obj.setAttribute("id", "full_" + Math.random().toString().replace(".", ""));
+    double_click_obj.setAttribute("FullScreenObjId", full_screen_obj.getAttribute("id"));
+
+    double_click_obj.addEventListener("dblclick", function () {
+        full_screen_obj.style.backgroundColor = background_color;
+        double_click_obj.setAttribute("sHeight", full_screen_obj.style.height);
+        var times = full_screen_obj.style.transition.indexOf("ms") != -1 ?
+                parseFloat(full_screen_obj.style.transition.replace("ms", "")) :
+                parseFloat(full_screen_obj.style.transition.replace("s", "")) * 1000;
+
+        if (double_click_obj.getAttribute("state") == "Normal") {
+            double_click_obj.setAttribute("state", "Full");
+            full_screen_obj.style.zIndex = "500";
+            double_click_obj.setAttribute("sTop", get_offset(full_screen_obj).top + "px");
+            double_click_obj.setAttribute("sLeft", get_offset(full_screen_obj).left + "px");
+            double_click_obj.setAttribute("sWidth", full_screen_obj.clientWidth + "px");
+            full_screen_obj.style.width = full_screen_obj.clientWidth + "px";
+            full_screen_obj.style.position = "fixed";
+            full_screen_obj.style.top = double_click_obj.getAttribute("sTop");
+            full_screen_obj.style.left = double_click_obj.getAttribute("sLeft");
+            full_screen_obj.style.overflowY = "auto";
+
+            setTimeout(function () {
+                full_screen_obj.style.top = "0px";
+                full_screen_obj.style.left = "0px";
+                full_screen_obj.style.right = "0px";
+                full_screen_obj.style.bottom = "0px";
+                full_screen_obj.style.width = "100%";
+                full_screen_obj.style.height = "100%";
+            }, 10);
+            setTimeout(function () {
+                if (call_back != undefined) {
+                    call_back(double_click_obj);
+                }
+            }, times)
+
+        }
+        else {
+            double_click_obj.setAttribute("state", "Normal");
+            full_screen_obj.style.overflowY = "hidden";
+
+            full_screen_obj.style.top = double_click_obj.getAttribute("sTop");
+            full_screen_obj.style.left = double_click_obj.getAttribute("sLeft");
+            full_screen_obj.style.right = double_click_obj.getAttribute("nRight");
+            full_screen_obj.style.bottom = double_click_obj.getAttribute("nBottom");
+            full_screen_obj.style.width = double_click_obj.getAttribute("sWidth");
+            full_screen_obj.style.height = double_click_obj.getAttribute("sHeight");
+
+            setTimeout(function () {
+                full_screen_obj.style.position = double_click_obj.getAttribute("nPosition");
+                full_screen_obj.style.zIndex = double_click_obj.getAttribute("nZIndex");
+                full_screen_obj.style.top = double_click_obj.getAttribute("nTop");
+                full_screen_obj.style.left = double_click_obj.getAttribute("nLeft");
+                full_screen_obj.style.backgroundColor = double_click_obj.getAttribute("nBackgroundColor");
+                full_screen_obj.style.width = double_click_obj.getAttribute("nWidth");
+                full_screen_obj.style.height = double_click_obj.getAttribute("nHeight");
+
+                if (call_back != undefined) {
+                    call_back(double_click_obj);
+                }
+            }, times)
+        }
+    });
+
+}
+
+//时间格式化部分
+function rx_datetime(format_string, date, add_years, add_monthes, add_days) {
+    var year;
+    var month;
+    var day;
+    var hour;
+    var minute;
+    var second;
+
+    if (format_string == undefined) format_string = "yyyy-MM-dd HH:mm:ss";
+
+    if (date == undefined && (typeof date).toString() != "object") {
+        year = new Date().getFullYear();
+        month = (new Date().getMonth() + 1).toString().length == 1 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1);
+        day = new Date().getDate().toString().length == 1 ? "0" + new Date().getDate() : new Date().getDate();
+        hour = (new Date().getHours().toString().length == 1 ? "0" + new Date().getHours() : new Date().getHours());
+        minute = (new Date().getMinutes().toString().length == 1 ? "0" + new Date().getMinutes() : new Date().getMinutes());
+        second = (new Date().getSeconds().toString().length == 1 ? "0" + new Date().getSeconds() : new Date().getSeconds());
+    }
+    else {
+        var y = date.getFullYear() + (add_years != undefined ? parseFloat(add_years) : 0);
+        var m = date.getMonth() + (add_monthes != undefined ? parseFloat(add_monthes) : 0);
+        var d = date.getDate() + (add_days != undefined ? parseFloat(add_days) : 0);
+
+        if (add_days == undefined) {
+            switch (m) {
+                case 3:
+                case 5:
+                case 8:
+                case 10:
+                    if (date.getDate() >= 31) {
+                        d = 30;
+                    }
+                    break;
+                case 1:
+                    if (date.getDate() >= 28) {
+                        d = 28
+                    }
+            }
+        }
+
+        date = new Date(y, m, d);
+
+        year = date.getFullYear();
+        month = (date.getMonth() + 1).toString().length == 1 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
+        day = date.getDate().toString().length == 1 ? "0" + date.getDate() : date.getDate();
+        hour = (date.getHours().toString().length == 1 ? "0" + date.getHours() : date.getHours());
+        minute = (date.getMinutes().toString().length == 1 ? "0" + date.getMinutes() : date.getMinutes());
+        second = (date.getSeconds().toString().length == 1 ? "0" + date.getSeconds() : date.getSeconds());
+    }
+
+    return format_string
+        .replace("yyyy", year)
+        .replace("MM", month)
+        .replace("dd", day)
+        .replace("HH", hour)
+        .replace("mm", minute)
+        .replace("ss", second);
+}

@@ -59,7 +59,7 @@ namespace rx
 
             if (rx_manager.rx_function_md5.ContainsKey(rx_method))
             {
-                if (rx_manager.rx_function_md5[rx_method] != Request["rx_function"])
+                if (!rx_manager.rx_function_md5[rx_method].Contains(Request["rx_function"]))
                 {
                     response_write("检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？");
                     return;

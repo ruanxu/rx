@@ -122,6 +122,7 @@
     <Content Include="Resources\rx_assembly_config.js" />
     <Content Include="Resources\rx_csharp.js" />
     <Content Include="Resources\rx_manager.js" />
+    <None Include="Resources\wx_rx_manager.js" />
     <Content Include="rx_orm_addin.AddIn" />
   </ItemGroup>
   <ItemGroup>

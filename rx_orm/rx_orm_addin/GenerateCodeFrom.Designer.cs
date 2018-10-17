@@ -48,6 +48,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.backChk = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.wxCheck = new System.Windows.Forms.CheckBox();
             this.isSignChk = new System.Windows.Forms.CheckBox();
             this.methodChk = new System.Windows.Forms.CheckBox();
             this.procChk = new System.Windows.Forms.CheckBox();
@@ -69,6 +71,7 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -261,6 +264,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.pictureBox3);
+            this.groupBox2.Controls.Add(this.wxCheck);
             this.groupBox2.Controls.Add(this.isSignChk);
             this.groupBox2.Controls.Add(this.methodChk);
             this.groupBox2.Controls.Add(this.procChk);
@@ -284,6 +289,33 @@
             this.groupBox2.Size = new System.Drawing.Size(988, 125);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(816, 125);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(24, 20);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 29;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // wxCheck
+            // 
+            this.wxCheck.AutoSize = true;
+            this.wxCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.wxCheck.Enabled = false;
+            this.wxCheck.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.wxCheck.Location = new System.Drawing.Point(845, 128);
+            this.wxCheck.Name = "wxCheck";
+            this.wxCheck.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.wxCheck.Size = new System.Drawing.Size(134, 19);
+            this.wxCheck.TabIndex = 28;
+            this.wxCheck.Text = "针对微信小程序";
+            this.wxCheck.UseVisualStyleBackColor = true;
             // 
             // isSignChk
             // 
@@ -539,6 +571,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -585,5 +618,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.CheckBox backChk;
         private System.Windows.Forms.CheckBox isSignChk;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.CheckBox wxCheck;
     }
 }

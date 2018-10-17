@@ -32,40 +32,78 @@ namespace rx
         protected new JsonResult Json(object data)
         {
             rx_obj_build(ref data);
-            return base.Json(data);
+            JsonResult json = new JsonResult()
+            {
+                Data = data,
+                MaxJsonLength = int.MaxValue,
+                ContentType = "application/json"
+            };
+            return json;
         }
 
         protected new JsonResult Json(object data, JsonRequestBehavior behavior)
         {
             rx_obj_build(ref data);
-
-            return base.Json(data, behavior);
+            JsonResult json = new JsonResult()
+            {
+                Data = data,
+                MaxJsonLength = int.MaxValue,
+                ContentType = "application/json",
+                JsonRequestBehavior = behavior
+            };
+            return json;
         }
 
         protected new JsonResult Json(object data, string contentType)
         {
             rx_obj_build(ref data);
-            return base.Json(data, contentType);
+            JsonResult json = new JsonResult()
+            {
+                Data = data,
+                MaxJsonLength = int.MaxValue,
+                ContentType = contentType
+            };
+            return json;
         }
 
         protected new JsonResult Json(object data, string contentType, JsonRequestBehavior behavior)
         {
             rx_obj_build(ref data);
-            return base.Json(data, contentType, behavior);
+            JsonResult json = new JsonResult()
+            {
+                Data = data,
+                MaxJsonLength = int.MaxValue,
+                ContentType = contentType,
+                JsonRequestBehavior = behavior
+            };
+            return json;
         }
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding)
         {
             rx_obj_build(ref data);
-
-            return base.Json(data, contentType, contentEncoding);
+            JsonResult json = new JsonResult()
+            {
+                Data = data,
+                MaxJsonLength = int.MaxValue,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding
+            };
+            return json;
         }
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
             rx_obj_build(ref data);
-
-            return base.Json(data, contentType, contentEncoding, behavior);
+            JsonResult json = new JsonResult()
+            {
+                Data = data,
+                MaxJsonLength = int.MaxValue,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior
+            };
+            return json;
         }
 
         /// <summary>
@@ -139,13 +177,13 @@ namespace rx
 
             if (rx_manager.rx_function_md5.ContainsKey(rx_method))
             {
-                if (rx_manager.rx_function_md5[rx_method] != Request["rx_function"])
+                if (!rx_manager.rx_function_md5[rx_method].Contains(Request["rx_function"]))
                 {
                     return Json(
                         new dml_result("")
                         {
                             result_code = dml_result_code.error,
-                            message = "检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？"
+                            message = "检测到非法的调用，你是否调用了尝试修改的rx_manager进行注入调用？"
                         });
                 }
             }

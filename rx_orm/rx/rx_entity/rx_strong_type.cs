@@ -168,5 +168,29 @@ namespace rx
         protected abstract T remove<T>(string key)
             where T : rx_strong_type, new();
 
+        /// <summary>
+        /// 获取这个实体对象的总数量
+        /// 会根据实体对象的where_keys产生查询条件
+        /// </summary>
+        /// <param name="where_keys"></param>
+        public int get_entity_count(params string[] where_keys)
+        {
+            if (where_keys != null && where_keys.Length > 0)
+            {
+                //优先使用where_keys参数填充where_keys
+                this.set_where_keys(where_keys);
+            }
+            else
+            {
+                //如果where_keys参数为空且where_keys属性为空就根据不为空的字段进行条件查询
+                if ((where_keys == null || where_keys.Length == 0) && (this.where_keys == null || this.where_keys.Count == 0))
+                {
+                    where_keys = this.Keys.Join(rx_manager.empty_entity_keys[this.rx_entity.entity_name], a => a, b => b, (a, b) => a).Where(a => this[a].value != null).ToArray();
+                    this.set_where_keys(where_keys);
+                }
+            }
+
+            return rx_manager.get_entity_count(this.rx_entity);
+        }
     }
 }

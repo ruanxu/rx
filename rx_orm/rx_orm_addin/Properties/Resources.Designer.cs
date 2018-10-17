@@ -162,13 +162,11 @@ namespace rx_orm_addin.Properties {
         ///    options.type = (options.type || &quot;GET&quot;).toUpperCase();
         ///    options.data_type = (options.data_type || &quot;auto&quot;).toLowerCase();
         ///    options.data = options.data || {};
-        ///    var params = ajax.format_params(options.data);
+        ///    var params = ajax.format_params(options.data, options.is_encryption);
         ///    var xhr;
-        ///
         ///    //创建 - 第一步
         ///    if (window.XMLHttpRequest) {
-        ///        xhr = new XMLHttpRequest();
-        ///    } [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///        xhr = new XML [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string rx_js {
             get {
@@ -186,14 +184,14 @@ namespace rx_orm_addin.Properties {
         ///    asp_net_mvc_api: &quot;asp_net_mvc_api&quot;
         ///};
         ///
-        ////*前端rx_maager，与后端rx_manager一
+        ////*前端rx_maager，与后端rx_manager一致
         /// * 所有回调函数call_back的参数都是data与xml
         ///*/
         ///var rx_manager = {
         ///    /*-----------------------------配置begin*/
         ///    /*服务接口地址需要在使用前或者使用中进行配置
         ///    * asp.net mvc项目server_url要指定继承rx_mvc_controller的控制器的地址
-        ///    * asp.net mvc api项目server_url要指定继承rx_mvc_api_contro [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    * asp.net mvc api项目server_url要指定继承rx_mvc_api_contr [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string rx_manager {
             get {
@@ -208,22 +206,49 @@ namespace rx_orm_addin.Properties {
         ///        &lt;name&gt;rx&lt;/name&gt;
         ///    &lt;/assembly&gt;
         ///    &lt;members&gt;
-        ///        &lt;member name=&quot;T:rx.dml_result&quot;&gt;
+        ///        &lt;member name=&quot;T:rx.rx_risk_procAttribute&quot;&gt;
         ///            &lt;summary&gt;
-        ///            dml操作的结果类型
+        ///            允许执行存储过程的特性
         ///            &lt;/summary&gt;
         ///        &lt;/member&gt;
-        ///        &lt;member name=&quot;M:rx.dml_result.#ctor(System.String,rx.dml_command_type)&quot;&gt;
+        ///        &lt;member name=&quot;T:rx.rx_risk_deleteAttribute&quot;&gt;
         ///            &lt;summary&gt;
-        ///            实例化一个dml操作结果对象
+        ///            允许删除的特性
         ///            &lt;/summary&gt;
-        ///            &lt;param name=&quot;entity_name&quot;&gt;实体名称&lt;/param&gt;
-        ///            &lt;param name=&quot;result_type&quot;&gt;dml操作结果类型&lt;/param&gt;
-        ///        &lt;/me [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///        &lt;/member&gt;
+        ///        &lt;member name=&quot;T:rx.rx_risk_insertAttribute&quot;&gt;
+        ///            &lt;summary&gt;
+        ///            允许添加的特性
+        ///            &lt;/summary&gt;
+        ///    [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string rx_xml {
             get {
                 return ResourceManager.GetString("rx_xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 //----------wx_rx_manager----------
+        /////微信小程序专用
+        /////edition：1.0.0.0 
+        /////work begin date：2018-02-03
+        /////作者：阮旭
+        ///
+        /////ajax方法 与JQuery的ajax方法基本一致
+        ///function ajax(options) {
+        ///    options.data = options.data || {};
+        ///    options.is_encryption = options.is_encryption || false;
+        ///    options.type = options.type || {};
+        ///    options.error = options.error || function (e) { console.info(e); };
+        ///    if (options.is_encryption) {
+        ///        var sign_arr = [];
+        ///        for (var name in options.data) {
+        ///            sign_arr.push(name [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string wx_rx_manager {
+            get {
+                return ResourceManager.GetString("wx_rx_manager", resourceCulture);
             }
         }
     }

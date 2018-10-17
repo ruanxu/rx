@@ -184,6 +184,13 @@ namespace rx
                 };
             }
 
+            List<MethodInfo> methods = rx_manager.method_list.Where(a => a.Name == api_action).OrderByDescending(a => a.GetParameters().Length).ToList();
+
+            if (methods.Count == 0)
+            {
+                return invoke_method(api_action);
+            }
+
             if (this is i_rx_sign && !sign_validate())
             {
                 return new dml_result("")
@@ -200,7 +207,7 @@ namespace rx
 
             if (rx_manager.rx_function_md5.ContainsKey(api_action))
             {
-                if (rx_manager.rx_function_md5[api_action] != context.Request["rx_function"])
+                if (!rx_manager.rx_function_md5[api_action].Contains(context.Request["rx_function"]))
                 {
                     return new dml_result("")
                     {
@@ -208,13 +215,6 @@ namespace rx
                         message = "检测到非法的调用，你是否调用了尝试修改rx_manager进行注入调用？"
                     };
                 }
-            }
-
-            List<MethodInfo> methods = rx_manager.method_list.Where(a => a.Name == api_action).OrderByDescending(a => a.GetParameters().Length).ToList();
-
-            if (methods.Count == 0)
-            {
-                return invoke_method(api_action);
             }
 
 

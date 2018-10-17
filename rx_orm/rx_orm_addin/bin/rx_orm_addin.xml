@@ -152,19 +152,23 @@
                     &lt;name&gt;rx&lt;/name&gt;
                 &lt;/assembly&gt;
                 &lt;members&gt;
-                    &lt;member name=&quot;T:rx.dml_result&quot;&gt;
+                    &lt;member name=&quot;T:rx.rx_risk_procAttribute&quot;&gt;
                         &lt;summary&gt;
-                        dml操作的结果类型
+                        允许执行存储过程的特性
                         &lt;/summary&gt;
                     &lt;/member&gt;
-                    &lt;member name=&quot;M:rx.dml_result.#ctor(System.String,rx.dml_command_type)&quot;&gt;
+                    &lt;member name=&quot;T:rx.rx_risk_deleteAttribute&quot;&gt;
                         &lt;summary&gt;
-                        实例化一个dml操作结果对象
+                        允许删除的特性
                         &lt;/summary&gt;
-                        &lt;param name=&quot;entity_name&quot;&gt;实体名称&lt;/param&gt;
-                        &lt;param name=&quot;result_type&quot;&gt;dml操作结果类型&lt;/param&gt;
-                    &lt;/me [字符串的其余部分被截断]&quot;; 的本地化字符串。
+                    &lt;/member&gt;
+                    &lt;member name=&quot;T:rx.rx_risk_insertAttribute&quot;&gt;
+                        &lt;summary&gt;
+                        允许添加的特性
+                        &lt;/summary&gt;
+                [字符串的其余部分被截断]&quot;; 的本地化字符串。
              </summary>
         </member>
+        <!-- 对于成员“P:rx_orm_addin.Properties.Resources.wx_rx_manager”忽略有格式错误的 XML 注释 -->
     </members>
 </doc>

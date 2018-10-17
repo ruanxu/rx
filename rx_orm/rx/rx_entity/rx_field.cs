@@ -294,7 +294,7 @@ namespace rx
                         (!show_entity_name ? "" : "[" + this.entity.entity_name + "].") + "[" + this.key + "]",
                         compare,
                         left,
-                        this.value == null ? "null" : string.Format("{0}{1}{2}{3}{4}",
+                        this.value == null ? " null" : string.Format("{0}{1}{2}{3}{4}",
                             quote,
                             begin_like,
                             this.value,
@@ -315,7 +315,7 @@ namespace rx
                     left,
                     (!show_entity_name ? "" : "[" + this.entity.entity_name + "].") + "[" + this.key + "]",
                     compare,
-                    this.value == null ? "null" : string.Format("({0}{1}{2}{3}{4})",
+                    this.value == null ? " null" : string.Format("({0}{1}{2}{3}{4})",
                         quote,
                         begin_like,
                         this.value,
@@ -359,7 +359,7 @@ namespace rx
             (!show_entity_name ? " " : " [" + this.entity.entity_name + "].")
             + "[" + this.key + "] = "
             + left +
-            (this.value == null ? "null" : (this.build_quote ? "'" : "") + this.value + (this.build_quote ? "'" : ""))
+            (this.value == null ? " null" : (this.build_quote ? "'" : "") + this.value + (this.build_quote ? "'" : ""))
             + right + " ";
         }
 

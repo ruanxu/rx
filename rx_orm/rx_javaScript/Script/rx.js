@@ -81,7 +81,7 @@ ajax.get = function (url, data, success, is_encryption, data_type, error) {
     }
 
     //连接 和 发送 - 第二步
-    xhr.open("GET", url + (options.url.indexOf("?") != -1 ? "&" : "?") + params, true);
+    xhr.open("GET", url + (url.indexOf("?") != -1 ? "&" : "?") + params, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(null);
 
@@ -190,7 +190,7 @@ ajax.put = function (url, data, success, is_encryption, data_type, error) {
     }
 
     //连接 和 发送 - 第二步
-    xhr.open("PUT", url + (options.url.indexOf("?") != -1 ? "&" : "?") + params, true);
+    xhr.open("PUT", url + (url.indexOf("?") != -1 ? "&" : "?") + params, true);
     //设置表单提交时的内容类型
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(null);
@@ -245,7 +245,7 @@ ajax.delete = function (url, data, success, is_encryption, data_type, error) {
     }
 
     //连接 和 发送 - 第二步
-    xhr.open("DELETE", url + (options.url.indexOf("?") != -1 ? "&" : "?") + params, true);
+    xhr.open("DELETE", url + (url.indexOf("?") != -1 ? "&" : "?") + params, true);
     //设置表单提交时的内容类型
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(null);
@@ -333,30 +333,18 @@ String.Format = function (text) {
     return text;
 }
 
-//检测是否存在这个id的dom元素,存在会返回该dom元素，不存在会抛出异常或者false【is_throw】
-function try_dom_by_id(id, is_throw) {
-    is_throw = is_throw || true;
-    var obj = document.getElementById(id);
-    if (obj == null) {
-        if (is_throw) {
-            throw String.Format("id:{0} 不存在！", id);
-        }
-        else {
-            return false;
-        }
-    }
-    else {
-        return obj;
-    }
-}
-
 //删除这个dom元素
 function remove_element(element) {
     if (element == null || element == undefined)
-        throw "remove_element方法的参数element是必须存在的，可以是一个dom对象或者是一个dom对象的id";
+        throw "remove_element方法的参数element是必须存在的，可以是一个dom对象或者是一个dom对象的选择器";
 
     if (typeof (element) == "string") {
-        element = try_dom_by_id(element);
+        var do_element = element;
+        element = document.querySelector(element);
+        if (element == null) {
+            throw do_element + ' 这个元素或者选择器不存在！';
+            return;
+        }
     }
     if (element.parentNode != null)
         element.parentNode.removeChild(element);
@@ -370,10 +358,20 @@ function before_element(element, ref_element) {
         throw "before_element方法的参数ref_element是必须存在的，可以是一个dom对象或者是一个dom对象的id";
 
     if (typeof (element) == "string") {
-        element = try_dom_by_id(element);
+        var do_element = element;
+        element = document.querySelector(element);
+        if (element == null) {
+            throw do_element + ' element这个元素或者选择器不存在！';
+            return;
+        }
     }
     if (typeof (ref_element) == "string") {
-        ref_element = try_dom_by_id(ref_element);
+        var do_ref_element = ref_element;
+        ref_element = document.querySelector(element);
+        if (ref_element == null) {
+            throw do_ref_element + ' ref_element这个元素或者选择器不存在！';
+            return;
+        }
     }
     ref_element.parentNode.insertBefore(element, ref_element);
 }
@@ -386,10 +384,20 @@ function after_element(element, ref_element) {
         throw "after_element方法的参数ref_element是必须存在的，可以是一个dom对象或者是一个dom对象的id";
 
     if (typeof (element) == "string") {
-        element = try_dom_by_id(element);
+        var do_element = element;
+        element = document.querySelector(element);
+        if (element == null) {
+            throw do_element + ' element这个元素或者选择器不存在！';
+            return;
+        }
     }
     if (typeof (ref_element) == "string") {
-        ref_element = try_dom_by_id(ref_element);
+        var do_ref_element = ref_element;
+        ref_element = document.querySelector(element);
+        if (ref_element == null) {
+            throw do_ref_element + ' ref_element这个元素或者选择器不存在！';
+            return;
+        }
     }
     ref_element.parentNode.insertBefore(element, ref_element.nextSibling);
 }
@@ -399,7 +407,12 @@ function show_element(element) {
     if (element == null || element == undefined)
         throw "show_element方法的参数element是必须存在的，可以是一个dom对象或者是一个dom对象的id";
     if (typeof (element) == "string") {
-        element = try_dom_by_id(element);
+        var do_element = element;
+        element = document.querySelector(element);
+        if (element == null) {
+            throw do_element + ' element这个元素或者选择器不存在！';
+            return;
+        }
     }
     if (element.style.display == "none") {
         element.style.display = "";
@@ -411,7 +424,12 @@ function hide_element(element) {
     if (element == null || element == undefined)
         throw "hide_element方法的参数element是必须存在的，可以是一个dom对象或者是一个dom对象的id";
     if (typeof (element) == "string") {
-        element = try_dom_by_id(element);
+        var do_element = element;
+        element = document.querySelector(element);
+        if (element == null) {
+            throw do_element + ' element这个元素或者选择器不存在！';
+            return;
+        }
     }
     if (element.style.display != "none") {
         element.style.display = "none";
@@ -423,7 +441,12 @@ function toggle_element(element) {
     if (element == null || element == undefined)
         throw "toggle_element方法的参数element是必须存在的，可以是一个dom对象或者是一个dom对象的id";
     if (typeof (element) == "string") {
-        element = try_dom_by_id(element);
+        var do_element = element;
+        element = document.querySelector(element);
+        if (element == null) {
+            throw do_element + ' element这个元素或者选择器不存在！';
+            return;
+        }
     }
     if (element.style.display != "none") {
         element.style.display = "none";
@@ -461,6 +484,7 @@ function create_element(html_tag) {
         if (!reg.test(html_tag)) {
             return document.createElement(html_tag);
         }
+        
         // hash中是否包含匹配的标签名  
         var tagName = hash[RegExp.$1.toLowerCase()];
         // 若无，向包装元素innerHTML，返回元素  
@@ -473,10 +497,10 @@ function create_element(html_tag) {
         do {
             html_tag = '<' + tagName + '>' + html_tag + '</' + tagName + '>';
             deep++;
-        }
+        }  
         while (tagName = hash[tagName]);
         element.innerHTML = html_tag;
-
+        
         // 根据迭代层次截取被包装的子元素  
         do {
             if (deep == 0) {
@@ -496,7 +520,7 @@ function create_element(html_tag) {
 }
 
 /* 显示加载中弹出层
-* parent_tag 弹出层的父容器,可以是一个dom元素或者是dom的id，默认为body
+* parent_tag 弹出层的父容器,可以是一个dom元素或者是dom的选择器，默认为body
 * loading_text 加载中的文本
 * is_fade 是否为谈进弹出，默认值true
 * background_color 弹出背景颜色，默认值rgba(0,0,0,0.75)
@@ -504,7 +528,14 @@ function create_element(html_tag) {
 */
 function show_loading(loading_text, parent_tag, is_fade, background_color, z_index) {
     if (parent_tag == undefined) parent_tag = document.body;
-    else if (typeof (parent_tag) == "string") parent_tag = try_dom_by_id(parent_tag);
+    else if (typeof (parent_tag) == "string") {
+        var do_element = element;
+        parent_tag = document.querySelector(parent_tag);
+        if (element == null) {
+            throw parent_tag + ' parent_tag这个元素或者选择器不存在！';
+            return;
+        }
+    }
     loading_text = (loading_text == undefined ? (is_pc() ? "l o a d i n g . . ." : "loading...") : loading_text.toString());
     is_fade = (is_fade == undefined || (typeof (is_fade)).toLowerCase() != "boolean" ? true : is_fade);
     background_color = (background_color == undefined || (typeof (background_color)).toLowerCase() != "string" ? "rgba(0,0,0,0.75)" : background_color.replace(";", ""));
@@ -968,3 +999,168 @@ var html_utility = {
         return output;
     }
 };
+
+/* 将一个数组中的元素顺序进行打乱 */
+function random_array(array) {
+    if (!(array instanceof Array)) {
+        throw "参数array必须是一个数组";
+    }
+    var random_index = [];
+
+    for (var i = 0; i < array.length; i++) {
+        var index = parseInt(Math.random() * array.length);
+        if (random_index.Contains(index)) {
+            i--;
+            continue;
+        }
+        random_index[random_index.length] = index;
+    }
+
+    var do_array = [];
+    for (var i = 0; i < random_index.length; i++) {
+        do_array[i] = array[random_index[i]];
+    }
+    return do_array;
+}
+
+//双击最大化开关
+function double_click_full_screen_toggle(double_click_obj, full_screen_obj, background_color, call_back) {
+    if (full_screen_obj.style.transition == undefined || full_screen_obj.style.transition == null || full_screen_obj.style.transition == "") full_screen_obj.style.transition = "0.4s";
+
+    background_color = background_color == undefined ? "transparent" : background_color;
+
+    double_click_obj.setAttribute("state", "Normal");
+    double_click_obj.setAttribute("nBackgroundColor", full_screen_obj.style.backgroundColor);
+    double_click_obj.setAttribute("nWidth", full_screen_obj.style.width == "" ? "auto" : full_screen_obj.style.width);
+    double_click_obj.setAttribute("nHeight", full_screen_obj.style.height == "" ? "auto" : full_screen_obj.style.height);
+    double_click_obj.setAttribute("nPosition", full_screen_obj.style.position);
+    double_click_obj.setAttribute("nLeft", full_screen_obj.style.left == "auto" ? "0px" : full_screen_obj.style.left);
+    double_click_obj.setAttribute("nRight", full_screen_obj.style.right == "auto" ? "0px" : full_screen_obj.style.right);
+    double_click_obj.setAttribute("nTop", full_screen_obj.style.top == "auto" ? "0px" : full_screen_obj.style.top);
+    double_click_obj.setAttribute("nBottom", full_screen_obj.style.bottom == "auto" ? "0px" : full_screen_obj.style.bottom);
+    double_click_obj.setAttribute("nZIndex", full_screen_obj.style.zIndex);
+    if (full_screen_obj.getAttribute("id") == null) full_screen_obj.setAttribute("id", "full_" + Math.random().toString().replace(".", ""));
+    double_click_obj.setAttribute("FullScreenObjId", full_screen_obj.getAttribute("id"));
+
+    double_click_obj.addEventListener("dblclick", function () {
+        full_screen_obj.style.backgroundColor = background_color;
+        double_click_obj.setAttribute("sHeight", full_screen_obj.style.height);
+        var times = full_screen_obj.style.transition.indexOf("ms") != -1 ?
+                parseFloat(full_screen_obj.style.transition.replace("ms", "")) :
+                parseFloat(full_screen_obj.style.transition.replace("s", "")) * 1000;
+
+        if (double_click_obj.getAttribute("state") == "Normal") {
+            double_click_obj.setAttribute("state", "Full");
+            full_screen_obj.style.zIndex = "500";
+            double_click_obj.setAttribute("sTop", get_offset(full_screen_obj).top + "px");
+            double_click_obj.setAttribute("sLeft", get_offset(full_screen_obj).left + "px");
+            double_click_obj.setAttribute("sWidth", full_screen_obj.clientWidth + "px");
+            full_screen_obj.style.width = full_screen_obj.clientWidth + "px";
+            full_screen_obj.style.position = "fixed";
+            full_screen_obj.style.top = double_click_obj.getAttribute("sTop");
+            full_screen_obj.style.left = double_click_obj.getAttribute("sLeft");
+            full_screen_obj.style.overflowY = "auto";
+
+            setTimeout(function () {
+                full_screen_obj.style.top = "0px";
+                full_screen_obj.style.left = "0px";
+                full_screen_obj.style.right = "0px";
+                full_screen_obj.style.bottom = "0px";
+                full_screen_obj.style.width = "100%";
+                full_screen_obj.style.height = "100%";
+            }, 10);
+            setTimeout(function () {
+                if (call_back != undefined) {
+                    call_back(double_click_obj);
+                }
+            }, times)
+
+        }
+        else {
+            double_click_obj.setAttribute("state", "Normal");
+            full_screen_obj.style.overflowY = "hidden";
+
+            full_screen_obj.style.top = double_click_obj.getAttribute("sTop");
+            full_screen_obj.style.left = double_click_obj.getAttribute("sLeft");
+            full_screen_obj.style.right = double_click_obj.getAttribute("nRight");
+            full_screen_obj.style.bottom = double_click_obj.getAttribute("nBottom");
+            full_screen_obj.style.width = double_click_obj.getAttribute("sWidth");
+            full_screen_obj.style.height = double_click_obj.getAttribute("sHeight");
+
+            setTimeout(function () {
+                full_screen_obj.style.position = double_click_obj.getAttribute("nPosition");
+                full_screen_obj.style.zIndex = double_click_obj.getAttribute("nZIndex");
+                full_screen_obj.style.top = double_click_obj.getAttribute("nTop");
+                full_screen_obj.style.left = double_click_obj.getAttribute("nLeft");
+                full_screen_obj.style.backgroundColor = double_click_obj.getAttribute("nBackgroundColor");
+                full_screen_obj.style.width = double_click_obj.getAttribute("nWidth");
+                full_screen_obj.style.height = double_click_obj.getAttribute("nHeight");
+
+                if (call_back != undefined) {
+                    call_back(double_click_obj);
+                }
+            }, times)
+        }
+    });
+
+}
+
+//时间格式化部分
+function rx_datetime(format_string, date, add_years, add_monthes, add_days) {
+    var year;
+    var month;
+    var day;
+    var hour;
+    var minute;
+    var second;
+
+    if (format_string == undefined) format_string = "yyyy-MM-dd HH:mm:ss";
+
+    if (date == undefined && (typeof date).toString() != "object") {
+        year = new Date().getFullYear();
+        month = (new Date().getMonth() + 1).toString().length == 1 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1);
+        day = new Date().getDate().toString().length == 1 ? "0" + new Date().getDate() : new Date().getDate();
+        hour = (new Date().getHours().toString().length == 1 ? "0" + new Date().getHours() : new Date().getHours());
+        minute = (new Date().getMinutes().toString().length == 1 ? "0" + new Date().getMinutes() : new Date().getMinutes());
+        second = (new Date().getSeconds().toString().length == 1 ? "0" + new Date().getSeconds() : new Date().getSeconds());
+    }
+    else {
+        var y = date.getFullYear() + (add_years != undefined ? parseFloat(add_years) : 0);
+        var m = date.getMonth() + (add_monthes != undefined ? parseFloat(add_monthes) : 0);
+        var d = date.getDate() + (add_days != undefined ? parseFloat(add_days) : 0);
+
+        if (add_days == undefined) {
+            switch (m) {
+                case 3:
+                case 5:
+                case 8:
+                case 10:
+                    if (date.getDate() >= 31) {
+                        d = 30;
+                    }
+                    break;
+                case 1:
+                    if (date.getDate() >= 28) {
+                        d = 28
+                    }
+            }
+        }
+
+        date = new Date(y, m, d);
+
+        year = date.getFullYear();
+        month = (date.getMonth() + 1).toString().length == 1 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
+        day = date.getDate().toString().length == 1 ? "0" + date.getDate() : date.getDate();
+        hour = (date.getHours().toString().length == 1 ? "0" + date.getHours() : date.getHours());
+        minute = (date.getMinutes().toString().length == 1 ? "0" + date.getMinutes() : date.getMinutes());
+        second = (date.getSeconds().toString().length == 1 ? "0" + date.getSeconds() : date.getSeconds());
+    }
+
+    return format_string
+        .replace("yyyy", year)
+        .replace("MM", month)
+        .replace("dd", day)
+        .replace("HH", hour)
+        .replace("mm", minute)
+        .replace("ss", second);
+}

@@ -38,7 +38,7 @@ namespace rx
     /// </summary>
     public sealed class rx_manager
     {
-        internal const string version = "1.0.0.3";
+        internal const string version = "1.0.0.4";
 
         /// <summary>
         /// 性能模式
@@ -90,28 +90,29 @@ namespace rx
         /// <summary>
         /// 前端orm用于验证的md5
         /// </summary>
-        public static Dictionary<string, string> rx_function_md5 = new Dictionary<string, string>()
+        public static Dictionary<string, string[]> rx_function_md5 = new Dictionary<string, string[]>()
         {
-            {"get_entitys_by_page","264f74f838f6e76e9b6d6b2f9a8e78c4"},
-            {"get_entitys_in_view","990b7b48b7aa51651d2320e6cd6251f1"},
-            {"get_entitys_in_proc","1aab4b6de4a9d1142ff005f851788141"},
-            {"transaction_execute_non_query","03bea2db2c1466311bce8d414f4a1352"},
-            {"execute_select_sql","6b87e3b7e245dfffe013250797097354"},
-            {"execute_non_query","e729b46cceede1e136523729a7350ab3"},
-            {"get_all_entitys","384e6022b7aa341aea392a523c7894ff"},
-            {"get_entity_by_id","2cee9157d4237e645350a673c4f00fef"},
-            {"get_entitys_in_id","eaa6f9c512a729b545179b7003ebad24"},
-            {"get_entitys_by_where_keys","fdbf54ce2cfb9dbf0192a2b6b64aee7b"},
-            {"get_entitys_by_where_string","1dfaefbf89d72d46d430252feda090d9"},
-            {"insert_or_update_entity","82bc5dd9002ed9a1c3a04d5d62f12824"},
-            {"insert_entity","2836c9debd02dd553cb3a2aab3d4adf7"},
-            {"insert_entitys","1032d074d250ab42a347b3c45ee91f0b"},
-            {"update_entity_by_id","0f00675e8e79b5c74b4b92e3e5af1eb0"},
-            {"update_entity_by_where_keys","837e600a377ba78d6b1aae09eaea2d83"},
-            {"delete_entity_by_id","2a74003a59ea2895cdac71cbecf83ddb"},
-            {"delete_entity_in_id","47aefe32d5dd2198623fa1e72c6c5ee5"},
-            {"delete_entity_by_where_string","c0fc39ac86282160fb3fd034e2287731"},
-            {"delete_entity_by_where_keys","29ba296e27287d333ee4103c67e92b9f"}
+            {"get_entitys_by_page",new string[2]{"264f74f838f6e76e9b6d6b2f9a8e78c4", "ede9b7faa3a2e1a4a83efd79b8d326ee"}},
+            {"get_entitys_in_view",new string[2]{"990b7b48b7aa51651d2320e6cd6251f1","1803a419ff8626942bc97ccef333a2fa"}},
+            {"get_entitys_in_proc",new string[2]{"1aab4b6de4a9d1142ff005f851788141","0c7d2f5517c903e990a33f6375b61fe6"}},
+            {"transaction_execute_non_query",new string[2]{"03bea2db2c1466311bce8d414f4a1352","913e7b15c54f936192d2b994a01111ff"}},
+            {"execute_select_sql",new string[2]{"6b87e3b7e245dfffe013250797097354","fad64e76ea98d4d34cf9e76ba95c16ab"}},
+            {"execute_non_query",new string[2]{"e729b46cceede1e136523729a7350ab3","6210fc1d82c23c55206a38e1b3d1857e"}},
+            {"get_all_entitys",new string[2]{"384e6022b7aa341aea392a523c7894ff","ec3d8c9e415d7c4d767160870065c217"}},
+            {"get_entity_count", new string[2]{"3794ac58797c5918ac4e404b5cdc94c7","d9fe1a63d430d5e38f0e4265acc9bb4d"}},
+            {"get_entity_by_id",new string[2]{"2cee9157d4237e645350a673c4f00fef","aaf01b968208caee7225653caf9fc0f1"}},
+            {"get_entitys_in_id",new string[2]{"eaa6f9c512a729b545179b7003ebad24","098dc75f718df71b50f49fdad34fc54f"}},
+            {"get_entitys_by_where_keys",new string[2]{"78a8e168c0eb60dc9b504a1465e944a1","b53029a02a6d1c7158897ac973d28a4e"}},
+            {"get_entitys_by_where_string",new string[2]{"1dfaefbf89d72d46d430252feda090d9","a03196003993a5e698c0a29cafabeb08"}},
+            {"insert_or_update_entity",new string[2]{"5cc99996656b8f999bb03968319c00da","7404bba1782ca1eb6fc75b106ffa980c"}},
+            {"insert_entity",new string[2]{"119ea80584a7727a6508641bd8c2c2ed","694572bfc706d65d047aad089d047ade"}},
+            {"insert_entitys",new string[2]{"1032d074d250ab42a347b3c45ee91f0b","5e8bd5a076f394eeaf07bf13ba3b6134"}},
+            {"update_entity_by_id",new string[2]{"b692830ec98ba63e5b90caf981a6d4c0","1efefa78c3098d41d11562f0f4067da1"}},
+            {"update_entity_by_where_keys",new string[2]{"8003ffdac234ff2f088aa603790b00f6","6b6d2b550dda2410c75025df0d4f0174"}},
+            {"delete_entity_by_id",new string[2]{"2a74003a59ea2895cdac71cbecf83ddb","beb03de2b0a906b27fc3bd385f408d18"}},
+            {"delete_entity_in_id",new string[2]{"47aefe32d5dd2198623fa1e72c6c5ee5","927cff6471034fa2e9c2fdc7eb690a49"}},
+            {"delete_entity_by_where_string",new string[2]{"c0fc39ac86282160fb3fd034e2287731","79e4dea231c0ef6c16d8e9a2d5db91c8"}},
+            {"delete_entity_by_where_keys",new string[2]{"0dd7189fd23f8ec0cf85759e8378d8d5","6fe0e757832ab307be00c5f9b8029f04"}}
         };
 
         /// <summary>
@@ -287,18 +288,23 @@ namespace rx
                   as
                   begin 
                   declare @row_countSql nvarchar(max)
-                  set @row_countSql = '(select ' + @field_string + ' from ' + @table_name + ' where 1 = 1 ' + @where_string + ') innerTable'
-                  set @row_countSql = 'select @row_count = count(*) from ' + @row_countSql
+                  set @row_countSql = '(select ' + @field_string + ' from ' + @table_name + ' where 1 = 1 ' + @where_string + ') innerTable
+                  '
+                  set @row_countSql = 'select @row_count = count(*) from 
+                  ' + @row_countSql
                   exec sp_executesql @row_countSql,N'@row_count nvarchar(50) output',@row_count output
 
                   declare @InnerTable nvarchar(max)
-                  set @InnerTable = 'select top 99999999 ' + @field_string + ' from ' + @table_name + ' where 1 = 1 ' + @where_string
+                  set @InnerTable = 'select top 99999999 ' + @field_string + ' from ' + @table_name + ' where 1 = 1 
+                  ' + @where_string
 
                   declare @OuterTable nvarchar(max)
-                  set @OuterTable = 'select ROW_NUMBER() over(order by ' + @order_identity_string + ') as row_index,* from (' + @InnerTable + ') InnerTable'
+                  set @OuterTable = 'select ROW_NUMBER() over(order by ' + @order_identity_string + ') as row_index,* from (' + @InnerTable + ') InnerTable
+                  '
 
                   declare @CurentTable nvarchar(max)
-                  set @CurentTable = 'select * from (' + @OuterTable + ') OuterTable where row_index > ' + CONVERT(varchar(100), @page_index * @page_size) + ' and row_index <= ' + CONVERT(varchar(100), (@page_index + 1) * @page_size)
+                  set @CurentTable = 'select * from (' + @OuterTable + ') OuterTable where row_index > ' + CONVERT(varchar(100), @page_index * @page_size) + ' and row_index <= 
+                  ' + CONVERT(varchar(100), (@page_index + 1) * @page_size)
                   print @CurentTable
                   exec(@CurentTable)
                   end";
@@ -2034,6 +2040,72 @@ namespace rx
         }
 
         /// <summary>
+        /// 获取这个实体对象的总数量
+        /// 会根据实体对象的where_keys产生查询条件
+        /// </summary>
+        /// <param name="entity">参与count计算的实体entity对象</param>
+        [mvc.HttpGet]
+        [mvc_api.HttpGet]
+        public static int get_entity_count(rx_entity entity)
+        {
+            entity = entity.clone();
+            filtrate_entity(entity);
+            List<string> where_keys = entity.where_keys;
+
+            if (where_keys != null && where_keys.Count > 0)
+            {
+                for (int i = 0; i < where_keys.Count; i++)
+                {
+                    if (!entity.Keys.Contains(where_keys[i]))
+                    {
+                        where_keys.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            else
+            {
+                where_keys = new List<string>();
+            }
+
+
+            StringBuilder where_query = new StringBuilder();
+
+            foreach (string key in where_keys)
+            {
+                if (where_query.Length == 0)
+                    where_query.Append(entity[key].build_query(false).Replace(entity[key].logic_symbol.ToString(), "where"));
+                else
+                    where_query.Append(entity[key].build_query(false));
+            }
+
+            string sql = string.Format("select count(*) count from {0} {1}", entity.entity_name, where_query.ToString());
+
+            return rx_dbhelper.instance().execute_sql_or_proc(sql, null, CommandType.Text, entity.entity_name)[0]["count"].value.to_int();
+        }
+
+        /// <summary>
+        /// 获取这个实体对象的总数量
+        /// </summary>
+        /// <param name="table_or_view_name">表或者视图的名字</param>
+        /// <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
+        [mvc.HttpGet]
+        [mvc_api.HttpGet]
+        public static int get_entity_count(string table_or_view_name, string where_string = "")
+        {
+            if (table_or_view_name == null)
+                throw new Exception("table_or_view_name 不能为空！");
+            if (!empty_entitys_and_view_entitys.Keys.Contains(table_or_view_name) && !empty_view_entitys.Keys.Contains(table_or_view_name))
+                throw new Exception(string.Format("表或者视图：{0}不存在", table_or_view_name));
+
+            where_string = where_string ?? "";
+
+            string sql = string.Format("select count(*) count from {0} where 1 = 1 {1}", table_or_view_name, where_string);
+
+            return rx_dbhelper.instance().execute_sql_or_proc(sql, null, CommandType.Text, table_or_view_name)[0]["count"].value.to_int();
+        }
+
+        /// <summary>
         /// <para>直接根据表名以及id获取对应实体的单个对象</para>
         /// <para>table_name不存在或为null会出现异常</para>
         /// <para>id为null会出现异常</para>
@@ -3593,6 +3665,7 @@ namespace rx
                 {
                     using (SqlCommand com = new SqlCommand(sql, conn))
                     {
+                        com.CommandTimeout = 1024;
                         if (param_array != null)
                         {
                             com.CommandType = sql_type;
@@ -3666,7 +3739,7 @@ namespace rx
                         }
                     }
 
-                    List<T> list = conn.Query<T>(sql, param_array == null ? null : dp, null, true, null, sql_type).ToList();
+                    List<T> list = conn.Query<T>(sql, param_array == null ? null : dp, null, true, 1024, sql_type).ToList();
 
                     if (param_array != null)
                     {
@@ -3752,6 +3825,7 @@ namespace rx
                 {
                     using (SqlCommand com = new SqlCommand(sql, conn))
                     {
+                        com.CommandTimeout = 1024;
                         if (param_array != null)
                         {
                             com.CommandType = sql_type;
@@ -3918,6 +3992,7 @@ namespace rx
                 {
                     using (OleDbCommand com = new OleDbCommand(sql, conn))
                     {
+                        com.CommandTimeout = 1024;
                         if (param_array != null)
                         {
                             com.CommandType = sql_type;

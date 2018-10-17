@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script src="Scripts/rx.js"></script>
+    <script src="Scripts/rx_manager.js"></script>
+
+
+    <script>
+        
+        new v_web_user_list()
+            .set_user_type_field({compare:compare_symbol.not_contain, value: 1})
+            .get_page_entitys(function (data) {
+            console.info(data);
+        }, 0, 10, "id desc");
+
+
+        //var str = "";
+        //for (var key in rx_manager) {
+        //    if (rx_manager[key] instanceof Function) {
+        //        str += "key:" + key + "　　　　　msd5:" + md5(rx_manager[key].toString().replace(/[ |\r|\n]/g, "")) + "<br />";
+        //    }
+        //}
+        //document.write(str);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

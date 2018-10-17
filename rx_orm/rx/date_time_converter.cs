@@ -10,7 +10,7 @@ namespace rx
     {
         public override bool CanConvert(Type object_type)
         {
-            return object_type == typeof(DateTime);
+            return object_type == typeof(DateTime) || object_type == typeof(DateTime?);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -20,6 +20,12 @@ namespace rx
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            if (value == null)
+            {
+                writer.WriteValue(value);
+                return;
+            }
+
             writer.WriteValue(Convert.ToDateTime(value).ToString("yyyy-MM-dd HH:mm:ss"));
         }
     }

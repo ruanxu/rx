@@ -261,7 +261,6 @@ namespace rx
         /// <param name="page_size">该页数据的行数</param>
         /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
         /// <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
-        /// <param name="date_time_format">date_format_type的枚举，用于对时间字段值进行指定的字符串输出格式化</param>
         public static List<T> get_entitys_by_page(int page_index, int page_size, string order_identity_string = "id asc", string where_string = "")
         {
             int row_count = 0;
@@ -276,7 +275,6 @@ namespace rx
         /// <param name="row_count">总数据的条数，ref引用传递</param>
         /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
         /// <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
-        /// <param name="date_time_format">date_format_type的枚举，用于对时间字段值进行指定的字符串输出格式化</param>
         public static List<T> get_entitys_by_page(int page_index, int page_size, ref int row_count, string order_identity_string = "id asc", string where_string = "")
         {
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_model<T>.entity_name, order_identity_string, "*", where_string);
@@ -321,6 +319,68 @@ namespace rx
             return base.clear_where_keys() as T;
         }
 
+        /// <summary>
+        /// 获取这个实体对象的总数量
+        /// </summary>
+        /// <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
+        public static int get_entity_count(string where_string = "")
+        {
+            return rx_manager.get_entity_count(entity_name, where_string);
+        }
+
+        /// <summary>
+        /// 分页获取实体对象的集合
+        /// <para>where条件根据实体字段的值与where_keys数据进行指定</para>
+        /// </summary>
+        /// <param name="page_index">页码（0开始）</param>
+        /// <param name="page_size">该页数据的行数</param>
+        /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
+        public List<T> get_page_entitys(int page_index, int page_size, string order_identity_string = "id asc")
+        {
+            //如果where_keys属性为空就根据不为空的字段进行条件查询
+            if (this.where_keys == null || this.where_keys.Count == 0)
+            {
+                string[] where_keys = this.Keys.Join(rx_manager.empty_entity_keys[rx_model<T>._entity_name], a => a, b => b, (a, b) => a).Where(a => this[a].value != null).ToArray();
+                this.set_where_keys(where_keys);
+            }
+
+            StringBuilder where_string = new StringBuilder();
+            List<string> do_where_keys = this.where_keys;
+            for (int i = 0; i < do_where_keys.Count; i++)
+            {
+                where_string.Append(this[do_where_keys[i]].build_query(false));
+            }
+
+            int row_count = 0;
+            return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_model<T>._entity_name, order_identity_string, "*", where_string.ToString());
+        }
+
+        /// <summary>
+        /// 分页获取实体对象的集合
+        /// <para>where条件根据实体字段的值与where_keys数据进行指定</para>
+        /// </summary>
+        /// <param name="page_index">页码（0开始）</param>
+        /// <param name="page_size">该页数据的行数</param>
+        /// <param name="row_count">总数据的条数，ref引用传递</param>
+        /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
+        public List<T> get_page_entitys(int page_index, int page_size, ref int row_count, string order_identity_string = "id asc")
+        {
+            //如果where_keys属性为空就根据不为空的字段进行条件查询
+            if (this.where_keys == null || this.where_keys.Count == 0)
+            {
+                string[] where_keys = this.Keys.Join(rx_manager.empty_entity_keys[rx_model<T>._entity_name], a => a, b => b, (a, b) => a).Where(a => this[a].value != null).ToArray();
+                this.set_where_keys(where_keys);
+            }
+
+            StringBuilder where_string = new StringBuilder();
+            List<string> do_where_keys = this.where_keys;
+            for (int i = 0; i < do_where_keys.Count; i++)
+            {
+                where_string.Append(this[do_where_keys[i]].build_query(false));
+            }
+
+            return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_model<T>._entity_name, order_identity_string, "*", where_string.ToString());
+        }
     }
 
 }

@@ -16,7 +16,7 @@ namespace rx
     {
         private static string _entity_name = typeof(T).Name;
 
-        private static string _view_first_column = rx_manager.execute_select_sql(string.Format("SELECT top 1 column_name FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME='{0}' order by ORDINAL_POSITION", typeof(T).Name))[0]["column_name"].value.ToString();
+        private static string _view_first_column = rx_manager.empty_view_entity_keys[_entity_name][0];//rx_manager.execute_select_sql(string.Format("SELECT top 1 column_name FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME='{0}' order by ORDINAL_POSITION", typeof(T).Name))[0]["column_name"].value.ToString();
         
         /// <summary>
         /// 实体名称
@@ -219,6 +219,72 @@ namespace rx
             return base.clear_where_keys() as T;
         }
 
+        /// <summary>
+        /// 获取这个实体对象的总数量
+        /// </summary>
+        /// <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
+        public static int get_entity_count(string where_string = "")
+        {
+            return rx_manager.get_entity_count(entity_name, where_string);
+        }
+
+        /// <summary>
+        /// 分页获取实体对象的集合
+        /// <para>where条件根据实体字段的值与where_keys数据进行指定</para>
+        /// </summary>
+        /// <param name="page_index">页码（0开始）</param>
+        /// <param name="page_size">该页数据的行数</param>
+        /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
+        public List<T> get_page_entitys(int page_index, int page_size, string order_identity_string = null)
+        {
+            order_identity_string = order_identity_string ?? rx_view<T>.view_first_column + " asc";
+
+            //如果where_keys参数为空且where_keys属性为空就根据不为空的字段进行条件查询
+            if (this.where_keys == null || this.where_keys.Count == 0)
+            {
+                string[] where_keys = this.Keys.Join(rx_manager.empty_entity_keys[rx_view<T>._entity_name], a => a, b => b, (a, b) => a).Where(a => this[a].value != null).ToArray();
+                this.set_where_keys(where_keys);
+            }
+
+            StringBuilder where_string = new StringBuilder();
+            List<string> do_where_keys = this.where_keys;
+            for (int i = 0; i < do_where_keys.Count; i++)
+            {
+                where_string.Append(this[do_where_keys[i]].build_query(false));
+            }
+
+            int row_count = 0;
+            return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_view<T>._entity_name, order_identity_string, "*", where_string.ToString());
+        }
+
+        /// <summary>
+        /// 分页获取实体对象的集合
+        /// <para>where条件根据实体字段的值与where_keys数据进行指定</para>
+        /// </summary>
+        /// <param name="page_index">页码（0开始）</param>
+        /// <param name="page_size">该页数据的行数</param>
+        /// <param name="row_count">总数据的条数，ref引用传递</param>
+        /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
+        public List<T> get_page_entitys(int page_index, int page_size, ref int row_count, string order_identity_string = null)
+        {
+            order_identity_string = order_identity_string ?? rx_view<T>.view_first_column + " asc";
+
+            //如果where_keys参数为空且where_keys属性为空就根据不为空的字段进行条件查询
+            if (this.where_keys == null || this.where_keys.Count == 0)
+            {
+                string[] where_keys = this.Keys.Join(rx_manager.empty_entity_keys[rx_view<T>._entity_name], a => a, b => b, (a, b) => a).Where(a => this[a].value != null).ToArray();
+                this.set_where_keys(where_keys);
+            }
+
+            StringBuilder where_string = new StringBuilder();
+            List<string> do_where_keys = this.where_keys;
+            for (int i = 0; i < do_where_keys.Count; i++)
+            {
+                where_string.Append(this[do_where_keys[i]].build_query(false));
+            }
+
+            return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_view<T>._entity_name, order_identity_string, "*", where_string.ToString());
+        }
     }
 
 }

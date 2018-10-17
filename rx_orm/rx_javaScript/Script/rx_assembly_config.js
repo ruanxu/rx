@@ -53,14 +53,31 @@
                             },
                         rx_message_box:
                             {
-                                box: "",
-                                box_icon: "",
-                                close: "",
-                                close_icon: "",
-                                onbtn: "",
-                                onbtn_icon: "",
-                                cancelbtn: "",
-                                cancelbtn_icon: ""
+                                //对话框的背景div
+                                box_back: "box_back",
+                                //对话框的div
+                                box: "box",
+                                //对话框标题div
+                                title: "title",
+                                //对话框标题的图标i
+                                title_icon: "title_icon",
+                                //对话框标题的取消按钮button
+                                title_close: "title_close",
+                                //对话框内容div
+                                content: "content",
+                                //对话框底部div
+                                foot: "foot",
+                                //对话框底部的确定按钮button
+                                okbtn: "okbtn",
+                                //对话框底部的取消按钮button
+                                cancelbtn: "cancelbtn",
+                            },
+                        rx_report:
+                            {
+                                //报表table的样式
+                                table: "rx_report",
+                                //单元格被选中的样式
+                                cell_selected: "cell_selected",
                             }
                     }
             }
