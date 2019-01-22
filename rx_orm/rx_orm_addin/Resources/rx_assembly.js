@@ -1586,7 +1586,14 @@ function rx_report(report_element, setting) {
                                 new_td.innerHTML = x_value.toFixed(setting.x_statis_fixed);
                                 break;
                             case "avg":
-                                new_td.innerHTML = (x_value / (setting.columns.length - 1)).toFixed(setting.x_statis_fixed);
+                                var c_tds = new_tr.querySelectorAll("td");
+                                var avg_count = 0;
+                                for (var o = 0; o < c_tds.length; o++) {
+                                    if (!isNaN(c_tds[o].innerText) && c_tds[o].innerText.trim() != "") {
+                                        avg_count++;
+                                    }
+                                }
+                                new_td.innerHTML = (x_value / avg_count).toFixed(setting.x_statis_fixed);
                                 break;
                             case "count":
                                 new_td.innerHTML = x_count - 1;
@@ -1682,8 +1689,8 @@ function rx_report(report_element, setting) {
             switch (setting.x_statis_type) {
                 case "avg":
                     var len = 0;
-                    for (var i = 0; i < x_value.length; i++) {
-                        if (!isNaN(x_value[i].innerHTML.trim()) && x_value[i].innerHTML.trim() != "") {
+                    for (var i = 0; i < x_statis.length; i++) {
+                        if (!isNaN(x_statis[i].innerHTML.trim()) && x_statis[i].innerHTML.trim() != "") {
                             len++;
                         }
                     }
@@ -2165,10 +2172,10 @@ function rx_report(report_element, setting) {
                     if (j > 0) {
                         row_span++;
                         if (text != tds[j].innerHTML || j == tds.length - 1) {
-                            if (j == tds.length - 1) row_span++;
+                            if (j == tds.length - 1 && tds[j].innerHTML == text) row_span++;
                             tds[index].setAttribute("rowspan", row_span);
                             row_span = 0;
-                            var last = (j == tds.length - 1 ? 1 : 0);
+                            var last = ((j == tds.length - 1 && tds[j].innerHTML == text) ? 1 : 0);
                             for (var k = index + 1; k < j + last; k++) {
                                 remove_element(tds[k])
                             }
@@ -2196,6 +2203,22 @@ function rx_report(report_element, setting) {
         //给所有行家height
         for (var i = 0; i < all_rows.length; i++) {
             all_rows[i].style.height = all_rows[i].offsetHeight + "px";
+        }
+
+        if (xy_statis_td != null) {
+            var a = xy_statis_td.clientWidth;
+            var b = xy_statis_td.clientHeight;
+            var c = Math.sqrt(a * a + b * b);
+            var angle = 180 / Math.PI * Math.atan(b / a);
+            xy_statis_td.querySelector("div").style.width = c + "px";
+            xy_statis_td.querySelector("div").style.left = -((c - a) / 2) + "px";
+            xy_statis_td.querySelector("div").style.transform = String.Format("rotate({0}deg)", angle);
+            xy_statis_td.setAttribute("style", xy_statis_td.getAttribute("style") + " xy_statis: on;");
+
+            xy_statis_td.querySelector("span[ident='x_statis']").style.bottom = (b / 1.6) + "px";
+            xy_statis_td.querySelector("span[ident='x_statis']").style.left = (a / 2.5) + "px";
+            xy_statis_td.querySelector("span[ident='y_statis']").style.top = (b / 1.6) + "px";
+            xy_statis_td.querySelector("span[ident='y_statis']").style.right = (a / 2.5) + "px";
         }
 
         //数据加载完毕事件
@@ -2370,6 +2393,8 @@ function message_box(setting) {
             url_in_iframe: setting.url_in_iframe == undefined ? false : setting.url_in_iframe,
             /* 动画的时间（毫秒）， 默认300 */
             animate_times: setting.animate_times || 300,
+            /* 是否能进行拖拽移动 */
+            is_move: setting.is_move == undefined ? true : setting.is_move
         };
     if (setting.width.toString().indexOf("px") == -1) setting.width += "px";
     if (!is_pc()) setting.width = "80%";
@@ -2524,67 +2549,71 @@ function message_box(setting) {
         if (call_back_result || call_back_result == undefined) { close(); }
     }
 
-    var last_x;
-    var last_y;
-    this.title.addEventListener("mousedown", function (event) {
-        last_x = event.x;
-        last_y = event.y;
-        window.addEventListener("mousemove", move_box);
-        window.addEventListener("mouseup", win_mouseup);
+    if (setting.is_move) {
+        var last_x;
+        var last_y;
+        this.title.addEventListener("mousedown", function (event) {
+            last_x = event.x;
+            last_y = event.y;
+            window.addEventListener("mousemove", move_box);
+            window.addEventListener("mouseup", win_mouseup);
 
-        box_tag.box_back.style.transition = "0s";
-        box_tag.box.style.transition = "0s";
-    });
+            box_tag.box_back.style.transition = "0s";
+            box_tag.box.style.transition = "0s";
+        });
 
-
-    var move_box = function (event) {
-        var x = event.x - last_x;
-        var y = event.y - last_y;
-        last_x = event.x;
-        last_y = event.y;
-        if (setting.is_dialog) {
-            box_tag.box.style.left = parseFloat(box_tag.box.style.left.replace("px")) + x + "px";
-            box_tag.box.style.top = parseFloat(box_tag.box.style.top.replace("px")) + y + "px";
-        }
-        else {
-            box_tag.box_back.style.left = parseFloat(box_tag.box_back.style.left.replace("px")) + x + "px";
-            box_tag.box_back.style.top = parseFloat(box_tag.box_back.style.top.replace("px")) + y + "px";
-        }
-    }
-    var win_mouseup = function (event) {
-        window.removeEventListener("mousemove", move_box);
-        window.removeEventListener("mouseup", win_mouseup);
-        box_tag.box_back.style.transition = (parseInt(setting.animate_times) / 1000).toFixed(3) + "s";
-        box_tag.box.style.transition = (parseInt(setting.animate_times) / 1000).toFixed(3) + "s";
-
-        setTimeout(function () {
+        var move_box = function (event) {
+            var x = event.x - last_x;
+            var y = event.y - last_y;
+            last_x = event.x;
+            last_y = event.y;
             if (setting.is_dialog) {
-                if (parseFloat(box_tag.box.style.top.replace("px", "")) <= 0)
-                    box_tag.box.style.top = "0px";
-
-                if (parseFloat(box_tag.box.style.top.replace("px", "")) + box_tag.box.offsetHeight >= window.innerHeight)
-                    box_tag.box.style.top = (window.innerHeight - box_tag.box.offsetHeight) + "px";
-
-                if (parseFloat(box_tag.box.style.left.replace("px", "")) <= 0)
-                    box_tag.box.style.left = "0px";
-
-                if (parseFloat(box_tag.box.style.left.replace("px", "")) + box_tag.box.offsetWidth >= window.innerWidth)
-                    box_tag.box.style.left = (window.innerWidth - box_tag.box.offsetWidth) + "px";
+                box_tag.box.style.left = parseFloat(box_tag.box.style.left.replace("px")) + x + "px";
+                box_tag.box.style.top = parseFloat(box_tag.box.style.top.replace("px")) + y + "px";
             }
             else {
-                if (parseFloat(box_tag.box_back.style.top.replace("px", "")) <= 0)
-                    box_tag.box_back.style.top = "0px";
-
-                if (parseFloat(box_tag.box_back.style.top.replace("px", "")) + box_tag.box_back.offsetHeight >= window.innerHeight)
-                    box_tag.box_back.style.top = (window.innerHeight - box_tag.box_back.offsetHeight) + "px";
-
-                if (parseFloat(box_tag.box_back.style.left.replace("px", "")) <= 0)
-                    box_tag.box_back.style.left = "0px";
-
-                if (parseFloat(box_tag.box_back.style.left.replace("px", "")) + box_tag.box_back.offsetWidth >= window.innerWidth)
-                    box_tag.box_back.style.left = (window.innerWidth - box_tag.box_back.offsetWidth) + "px";
+                box_tag.box_back.style.left = parseFloat(box_tag.box_back.style.left.replace("px")) + x + "px";
+                box_tag.box_back.style.top = parseFloat(box_tag.box_back.style.top.replace("px")) + y + "px";
             }
-        }, 30);
+        }
+        var win_mouseup = function (event) {
+            window.removeEventListener("mousemove", move_box);
+            window.removeEventListener("mouseup", win_mouseup);
+            box_tag.box_back.style.transition = (parseInt(setting.animate_times) / 1000).toFixed(3) + "s";
+            box_tag.box.style.transition = (parseInt(setting.animate_times) / 1000).toFixed(3) + "s";
+
+            setTimeout(function () {
+                if (setting.is_dialog) {
+                    if (parseFloat(box_tag.box.style.top.replace("px", "")) <= 0)
+                        box_tag.box.style.top = "0px";
+
+                    if (parseFloat(box_tag.box.style.top.replace("px", "")) + box_tag.box.offsetHeight >= window.innerHeight)
+                        box_tag.box.style.top = (window.innerHeight - box_tag.box.offsetHeight) + "px";
+
+                    if (parseFloat(box_tag.box.style.left.replace("px", "")) <= 0)
+                        box_tag.box.style.left = "0px";
+
+                    if (parseFloat(box_tag.box.style.left.replace("px", "")) + box_tag.box.offsetWidth >= window.innerWidth)
+                        box_tag.box.style.left = (window.innerWidth - box_tag.box.offsetWidth) + "px";
+                }
+                else {
+                    if (parseFloat(box_tag.box_back.style.top.replace("px", "")) <= 0)
+                        box_tag.box_back.style.top = "0px";
+
+                    if (parseFloat(box_tag.box_back.style.top.replace("px", "")) + box_tag.box_back.offsetHeight >= window.innerHeight)
+                        box_tag.box_back.style.top = (window.innerHeight - box_tag.box_back.offsetHeight) + "px";
+
+                    if (parseFloat(box_tag.box_back.style.left.replace("px", "")) <= 0)
+                        box_tag.box_back.style.left = "0px";
+
+                    if (parseFloat(box_tag.box_back.style.left.replace("px", "")) + box_tag.box_back.offsetWidth >= window.innerWidth)
+                        box_tag.box_back.style.left = (window.innerWidth - box_tag.box_back.offsetWidth) + "px";
+                }
+            }, 30);
+        }
+    }
+    else {
+        this.title.style.cursor = "default";
     }
 
     if (setting.auto_close_times != null) {

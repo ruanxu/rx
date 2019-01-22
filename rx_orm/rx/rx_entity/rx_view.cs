@@ -162,7 +162,7 @@ namespace rx
         public static List<T> get_entitys_by_page(int page_index, int page_size, string order_identity_string = null, string where_string = "")
         {
             order_identity_string = order_identity_string ?? rx_view<T>.view_first_column + " asc";
-            int row_count = 0;
+            long row_count = 0;
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_view<T>.entity_name, order_identity_string, "*", where_string);
         }
 
@@ -174,7 +174,7 @@ namespace rx
         /// <param name="row_count">总数据的条数，ref引用传递</param>
         /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
         /// <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
-        public static List<T> get_entitys_by_page(int page_index, int page_size, ref int row_count, string order_identity_string = null, string where_string = "")
+        public static List<T> get_entitys_by_page(int page_index, int page_size, ref long row_count, string order_identity_string = null, string where_string = "")
         {
             order_identity_string = order_identity_string ?? rx_view<T>.view_first_column + " asc";
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_view<T>.entity_name, order_identity_string, "*", where_string);
@@ -223,7 +223,7 @@ namespace rx
         /// 获取这个实体对象的总数量
         /// </summary>
         /// <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
-        public static int get_entity_count(string where_string = "")
+        public static long get_entity_count(string where_string = "")
         {
             return rx_manager.get_entity_count(entity_name, where_string);
         }
@@ -253,7 +253,7 @@ namespace rx
                 where_string.Append(this[do_where_keys[i]].build_query(false));
             }
 
-            int row_count = 0;
+            long row_count = 0;
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_view<T>._entity_name, order_identity_string, "*", where_string.ToString());
         }
 
@@ -265,7 +265,7 @@ namespace rx
         /// <param name="page_size">该页数据的行数</param>
         /// <param name="row_count">总数据的条数，ref引用传递</param>
         /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
-        public List<T> get_page_entitys(int page_index, int page_size, ref int row_count, string order_identity_string = null)
+        public List<T> get_page_entitys(int page_index, int page_size, ref long row_count, string order_identity_string = null)
         {
             order_identity_string = order_identity_string ?? rx_view<T>.view_first_column + " asc";
 

@@ -616,7 +616,7 @@
             </summary>
             <param name="key">key</param>
         </member>
-        <member name="M:rx.rx_strong_type.get_entity_count(System.String[])">
+        <member name="M:rx.rx_strong_type.get_count(System.String[])">
             <summary>
             获取这个实体对象的总数量
             会根据实体对象的where_keys产生查询条件
@@ -784,14 +784,14 @@
             </summary>
             <returns>实体的List集合</returns>
         </member>
-        <member name="M:rx.rx_model`1.get_entity_by_id(System.Int32)">
+        <member name="M:rx.rx_model`1.get_entity_by_id(System.Int64)">
             <summary>
             根据id获取一个实体对象,未找到数据返回结果为null
             </summary>
             <param name="id">实体的id</param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_model`1.get_entitys_in_id(System.Int32[])">
+        <member name="M:rx.rx_model`1.get_entitys_in_id(System.Int64[])">
             <summary>
             根据id的集合获取多个实体对象,未找到数据返回结果集合长度为0，id_array为传入返回结果为null
             </summary>
@@ -811,7 +811,7 @@
             <param name="entitys">实体的数组对象，params传参</param>
             <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
         </member>
-        <member name="M:rx.rx_model`1.delete_entity_in_id(System.Int32[])">
+        <member name="M:rx.rx_model`1.delete_entity_in_id(System.Int64[])">
             <summary>
             根据id的数组进行多行in删除操作
             <para>单行删除可以只传一个id</para>
@@ -828,7 +828,7 @@
             <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
             <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
         </member>
-        <member name="M:rx.rx_model`1.get_entitys_by_page(System.Int32,System.Int32,System.Int32@,System.String,System.String)">
+        <member name="M:rx.rx_model`1.get_entitys_by_page(System.Int32,System.Int32,System.Int64@,System.String,System.String)">
             <summary>
             分页获取实体对象的集合，可以ref总行数
             </summary>
@@ -880,7 +880,7 @@
             <param name="page_size">该页数据的行数</param>
             <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
         </member>
-        <member name="M:rx.rx_model`1.get_page_entitys(System.Int32,System.Int32,System.Int32@,System.String)">
+        <member name="M:rx.rx_model`1.get_page_entitys(System.Int32,System.Int32,System.Int64@,System.String)">
             <summary>
             分页获取实体对象的集合
             <para>where条件根据实体字段的值与where_keys数据进行指定</para>
@@ -1002,7 +1002,7 @@
             <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
             <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
         </member>
-        <member name="M:rx.rx_view`1.get_entitys_by_page(System.Int32,System.Int32,System.Int32@,System.String,System.String)">
+        <member name="M:rx.rx_view`1.get_entitys_by_page(System.Int32,System.Int32,System.Int64@,System.String,System.String)">
             <summary>
             分页获取实体对象的集合，可以ref总行数
             </summary>
@@ -1054,7 +1054,7 @@
             <param name="page_size">该页数据的行数</param>
             <param name="order_identity_string">排序字段字符串，例子：id acs,name desc,默认值或者null时就是第一列asc排序</param>
         </member>
-        <member name="M:rx.rx_view`1.get_page_entitys(System.Int32,System.Int32,System.Int32@,System.String)">
+        <member name="M:rx.rx_view`1.get_page_entitys(System.Int32,System.Int32,System.Int64@,System.String)">
             <summary>
             分页获取实体对象的集合
             <para>where条件根据实体字段的值与where_keys数据进行指定</para>
@@ -1152,11 +1152,6 @@
             rx_manager初始化
             </summary>
         </member>
-        <member name="F:rx.rx_manager.rx_managers">
-            <summary>
-            rx_manager子类对象的缓存
-            </summary>
-        </member>
         <member name="F:rx.rx_manager.rx_function_md5">
             <summary>
             前端orm用于验证的md5
@@ -1180,7 +1175,7 @@
             创建rx_manager所需的所有数据库对象
             </summary>
         </member>
-        <member name="M:rx.rx_manager.get_entitys_by_page(System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.String,rx.date_format_type)">
+        <member name="M:rx.rx_manager.get_entitys_by_page(System.Int32,System.Int32,System.Int64@,System.String,System.String,System.String,System.String,rx.date_format_type)">
             <summary>
             通用分页查询方法
             </summary>
@@ -1194,7 +1189,7 @@
             <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_manager.get_entitys_by_page``1(System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.String)">
+        <member name="M:rx.rx_manager.get_entitys_by_page``1(System.Int32,System.Int32,System.Int64@,System.String,System.String,System.String,System.String)">
             <summary>
             通用泛型分页查询方法
             </summary>
@@ -1404,7 +1399,7 @@
             <param name="table_or_view_name">表或者视图的名字</param>
             <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
         </member>
-        <member name="M:rx.rx_manager.get_entity_by_id(System.String,System.Nullable{System.Int32},rx.date_format_type)">
+        <member name="M:rx.rx_manager.get_entity_by_id(System.String,System.Nullable{System.Int64},rx.date_format_type)">
             <summary>
             <para>直接根据表名以及id获取对应实体的单个对象</para>
             <para>table_name不存在或为null会出现异常</para>
@@ -1415,7 +1410,7 @@
             <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_manager.get_entity_by_id``1(System.String,System.Nullable{System.Int32})">
+        <member name="M:rx.rx_manager.get_entity_by_id``1(System.String,System.Nullable{System.Int64})">
             <summary>
             <para>直接根据表名以及id获取对应实体的单个对象</para>
             <para>table_name不存在或为null会出现异常</para>
@@ -1427,7 +1422,7 @@
             <param name="date_time_format">字段值为DataTime类型时格式化输出的字符串（yyyy-MM-dd HH:mm:ss）</param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_manager.get_entity_by_id(System.String,System.Nullable{System.Int32},rx.date_format_type,System.String[])">
+        <member name="M:rx.rx_manager.get_entity_by_id(System.String,System.Nullable{System.Int64},rx.date_format_type,System.String[])">
             <summary>
             <para>直接根据表名以及id获取对应实体的单个对象</para>
             <para>table_name不存在或为null会出现异常</para>
@@ -1439,7 +1434,7 @@
             <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_manager.get_entitys_in_id(System.String,System.Int32[],rx.date_format_type,System.String[])">
+        <member name="M:rx.rx_manager.get_entitys_in_id(System.String,System.Int64[],rx.date_format_type,System.String[])">
             <summary>
             <para>直接根据表名以及id的数组进行in查询获取对应实体的集合对象</para>
             <para>table_name不存在或为null会出现异常</para>
@@ -1451,7 +1446,7 @@
             <param name="select_display_keys">指定需要显示的列名，空为*，不存在会出现异常</param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_manager.get_entitys_in_id``1(System.Int32[],rx.date_format_type,System.String[])">
+        <member name="M:rx.rx_manager.get_entitys_in_id``1(System.Int64[],rx.date_format_type,System.String[])">
             <summary>
             <para>直接根据表名以及id的数组进行in查询获取对应实体的集合对象</para>
             <para>table_name不存在或为null会出现异常</para>
@@ -1617,7 +1612,7 @@
             <param name="model">model对象的rx_entity中的where_keys不能为null</param>
             <returns>dml操作结果对象</returns>
         </member>
-        <member name="M:rx.rx_manager.delete_entity_by_id(System.String,System.Nullable{System.Int32})">
+        <member name="M:rx.rx_manager.delete_entity_by_id(System.String,System.Nullable{System.Int64})">
             <summary>
             <para>根据表名进行单行删除操作</para>
             <para>id为null会出现异常</para>
@@ -1627,7 +1622,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:rx.rx_manager.delete_entity_in_id(System.String,System.Int32[])">
+        <member name="M:rx.rx_manager.delete_entity_in_id(System.String,System.Int64[])">
             <summary>
             <para>根据表名进行多行in删除操作</para>
             <para>id_array为null或者长度为0会出现异常</para>
@@ -1688,6 +1683,16 @@
         <member name="P:rx.rx_manager.empty_view_entity_keys">
             <summary>
             包含整个数据库的视图名称与对应的字段名称
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.empty_entity_and_view_keys">
+            <summary>
+            包含整个数据库的表和视图的名称与对应的字段名称
+            </summary>
+        </member>
+        <member name="P:rx.rx_manager.proc_names">
+            <summary>
+            所有用户存储过程的名称
             </summary>
         </member>
         <member name="P:rx.rx_manager.method_list">

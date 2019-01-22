@@ -154,7 +154,7 @@ namespace rx
             {
                 return rx_manager.delete_entity_by_where_keys(this);
             }
-            return rx_manager.delete_entity_by_id(rx_model<T>.entity_name, this["id"].value.to_int());
+            return rx_manager.delete_entity_by_id(rx_model<T>.entity_name, this["id"].value.to_long());
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace rx
         /// </summary>
         /// <param name="id">实体的id</param>
         /// <returns></returns>
-        public static T get_entity_by_id(int id)
+        public static T get_entity_by_id(long id)
         {
             return rx_manager.get_entity_by_id<T>(rx_model<T>.entity_name, id);
         }
@@ -217,7 +217,7 @@ namespace rx
         /// 根据id的集合获取多个实体对象,未找到数据返回结果集合长度为0，id_array为传入返回结果为null
         /// </summary>
         /// <param name="id_array">实体的id的数组，params传参</param>
-        public static List<T> get_entitys_in_id(params int[] id_array)
+        public static List<T> get_entitys_in_id(params long[] id_array)
         {
             if (id_array == null || id_array.Length == 0) return null;
             return rx_manager.get_entitys_in_id<T>(id_array);
@@ -249,7 +249,7 @@ namespace rx
         /// </summary>
         /// <param name="id_array">id的int类型数组，params传参</param>
         /// <returns>dml_result结果，dml_result成员请参照注释摘要</returns>
-        public static dml_result delete_entity_in_id(params int[] id_array)
+        public static dml_result delete_entity_in_id(params long[] id_array)
         {
             return rx_manager.delete_entity_in_id(rx_model<T>.entity_name, id_array);
         }
@@ -263,7 +263,7 @@ namespace rx
         /// <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
         public static List<T> get_entitys_by_page(int page_index, int page_size, string order_identity_string = "id asc", string where_string = "")
         {
-            int row_count = 0;
+            long row_count = 0;
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_model<T>.entity_name, order_identity_string, "*", where_string);
         }
 
@@ -275,7 +275,7 @@ namespace rx
         /// <param name="row_count">总数据的条数，ref引用传递</param>
         /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
         /// <param name="where_string">条件字符串，例子： and id = 1 and name = 'jack' </param>
-        public static List<T> get_entitys_by_page(int page_index, int page_size, ref int row_count, string order_identity_string = "id asc", string where_string = "")
+        public static List<T> get_entitys_by_page(int page_index, int page_size, ref long row_count, string order_identity_string = "id asc", string where_string = "")
         {
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_model<T>.entity_name, order_identity_string, "*", where_string);
         }
@@ -323,7 +323,7 @@ namespace rx
         /// 获取这个实体对象的总数量
         /// </summary>
         /// <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
-        public static int get_entity_count(string where_string = "")
+        public static long get_entity_count(string where_string = "")
         {
             return rx_manager.get_entity_count(entity_name, where_string);
         }
@@ -351,7 +351,7 @@ namespace rx
                 where_string.Append(this[do_where_keys[i]].build_query(false));
             }
 
-            int row_count = 0;
+            long row_count = 0;
             return rx_manager.get_entitys_by_page<T>(page_index, page_size, ref row_count, rx_model<T>._entity_name, order_identity_string, "*", where_string.ToString());
         }
 
@@ -363,7 +363,7 @@ namespace rx
         /// <param name="page_size">该页数据的行数</param>
         /// <param name="row_count">总数据的条数，ref引用传递</param>
         /// <param name="order_identity_string">排序字段字符串，例子：id acs,name desc</param>
-        public List<T> get_page_entitys(int page_index, int page_size, ref int row_count, string order_identity_string = "id asc")
+        public List<T> get_page_entitys(int page_index, int page_size, ref long row_count, string order_identity_string = "id asc")
         {
             //如果where_keys属性为空就根据不为空的字段进行条件查询
             if (this.where_keys == null || this.where_keys.Count == 0)

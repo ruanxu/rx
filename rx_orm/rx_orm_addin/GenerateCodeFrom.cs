@@ -436,18 +436,21 @@ namespace rx_orm_addin
                 this.generateStatusLabel.Text = "正在引用rx.dll......";
                 import_rx_dll(this.active_project);
 
-                this.generateStatusLabel.Text = "正在清理项目路径......";
-                if (folder_array.Length > 0)
+                if (this.backChk.Checked)
                 {
-                    try
+                    this.generateStatusLabel.Text = "正在清理项目路径......";
+                    if (folder_array.Length > 0)
                     {
-                        this.active_project.ProjectItems.Item(folder_array[0]).Delete();
-                    }
-                    catch (Exception) { }
+                        try
+                        {
+                            this.active_project.ProjectItems.Item(folder_array[0]).Delete();
+                        }
+                        catch (Exception) { }
 
-                    if (Directory.Exists(projectFile.DirectoryName + "\\" + folder_array[0]))
-                    {
-                        Directory.Delete(projectFile.DirectoryName + "\\" + folder_array[0], true);
+                        if (Directory.Exists(projectFile.DirectoryName + "\\" + folder_array[0]))
+                        {
+                            Directory.Delete(projectFile.DirectoryName + "\\" + folder_array[0], true);
+                        }
                     }
                 }
 
@@ -1672,6 +1675,10 @@ namespace rx_orm_addin
                                     doc.GetElementsByTagName("configuration")[0].AppendChild(node);
                             }
                             catch (Exception) { }
+                        }
+                        else
+                        {
+                            //扩展DB类型
                         }
 
                         //连接字符串设置

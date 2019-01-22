@@ -305,7 +305,21 @@ namespace rx
                 }
                 else
                 {
-                    build_string = string.Format(" {0} dbo.rx_contains_arr({1},'{2}',',') = 1 ", this.logic_symbol.ToString(), (!show_entity_name ? "" : "[" + this.entity.entity_name + "].") + "[" + this.key + "]", this.value);
+                    //老版本 性能低
+                    //build_string = string.Format(" {0} dbo.rx_contains_arr({1},'{2}',',') = 1 ", this.logic_symbol.ToString(), (!show_entity_name ? "" : "[" + this.entity.entity_name + "].") + "[" + this.key + "]", this.value);
+
+
+                    string id_table_string = "";
+                    if (this.value.ToString().Split(',').Length <= 1)
+                    {
+                        id_table_string = string.Format(" '{0}' in (select * from dbo.rx_id_table({1}{2},','))", this.value.ToString() ,(!show_entity_name ? "" : "[" + this.entity.entity_name + "]."), this.key);
+                    }
+                    else
+                    {
+                        id_table_string = string.Format("exists(select * from dbo.rx_id_table('{0}',',') where id in (select * from dbo.rx_id_table({1}{2},',')))", this.value.ToString(), (!show_entity_name ? "" : "[" + this.entity.entity_name + "]."), this.key);
+                    }
+
+                    build_string = string.Format(" {0} {1} ", this.logic_symbol.ToString(), id_table_string);
                 }
             }
             else

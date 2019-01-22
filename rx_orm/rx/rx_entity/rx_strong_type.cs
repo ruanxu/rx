@@ -173,7 +173,7 @@ namespace rx
         /// 会根据实体对象的where_keys产生查询条件
         /// </summary>
         /// <param name="where_keys"></param>
-        public int get_entity_count(params string[] where_keys)
+        public long get_count(params string[] where_keys)
         {
             if (where_keys != null && where_keys.Length > 0)
             {

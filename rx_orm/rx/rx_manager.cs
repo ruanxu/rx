@@ -38,7 +38,7 @@ namespace rx
     /// </summary>
     public sealed class rx_manager
     {
-        internal const string version = "1.0.0.4";
+        internal const string version = "1.0.0.5";
 
         /// <summary>
         /// 性能模式
@@ -50,11 +50,6 @@ namespace rx
         /// rx_manager初始化
         /// </summary>
         private static int init = rx_manager_init();
-
-        /// <summary>
-        /// rx_manager子类对象的缓存
-        /// </summary>
-        private static Dictionary<string, rx_manager> rx_managers = new Dictionary<string, rx_manager>();
 
         /// <summary>
         /// 包含整个数据库的表名与对应的空实体
@@ -78,8 +73,14 @@ namespace rx
 
         public static Dictionary<string, rx_entity> empty_entitys_and_view_entitys { get; private set; }
 
+        /// <summary>
+        /// 包含整个数据库的表和视图的名称与对应的字段名称
+        /// </summary>
         public static Dictionary<string, string[]> empty_entity_and_view_keys { get; private set; }
 
+        /// <summary>
+        /// 所有用户存储过程的名称
+        /// </summary>
         public static List<string> proc_names { get; private set; }
 
         /// <summary>
@@ -280,7 +281,7 @@ namespace rx
             sql = @"CREATE proc [dbo].[pro_get_data_by_page]
                   @page_index int,
                   @page_size int,
-                  @row_count int output,
+                  @row_count bigint output,
                   @table_name varchar(max),
                   @order_identity_string varchar(max),
                   @field_string varchar(max) = '*',
@@ -513,6 +514,47 @@ namespace rx
                 is_create_log = true;
             }
 
+            //将逗号分隔字符串转换为只有一个id（string）列的table函数
+            sql = @"if  exists (select * from sys.objects where name = 'rx_id_table')
+                    drop function [rx_id_table]";
+            try
+            {
+                rx_dbhelper.instance().execute_non_query(sql, null);
+                result.Add("删除函数rx_id_table", "成功");
+            }
+            catch (Exception ex)
+            {
+                result.Add("删除函数rx_id_table", "失败：" + ex.Message);
+                is_create_log = true;
+            }
+            sql = @"create function rx_id_table(@str varchar(max),@split varchar(100))
+                    returns @tmp table
+                    (
+	                    id varchar(max)
+                    )
+                    as
+                    begin
+	                    declare @len int = dbo.get_str_array_length(@str, @split)
+	                    declare @i int = 1
+	                    while(@i <= @len)
+	                    begin
+		                    declare @id varchar(max) = dbo.get_str_array_str_of_index(@str, @split, @i)
+		                    set @i += 1
+		                    insert into @tmp values(@id)
+	                    end
+	                    return 
+                    end";
+            try
+            {
+                rx_dbhelper.instance().execute_non_query(sql, null);
+                result.Add("创建函数rx_id_table", "成功");
+            }
+            catch (Exception ex)
+            {
+                result.Add("创建函数rx_id_table", "失败：" + ex.Message);
+                is_create_log = true; 
+            }
+
             if (is_create_log)
             {
                 string log_path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"rx_manager_init_error\";
@@ -559,7 +601,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static List<rx_entity> get_entitys_by_page(int page_index, int page_size, ref int row_count, string table_or_view_name, string order_identity_string = "id desc", string field_string = "*", string where_string = "", date_format_type date_time_format = date_format_type.date_time)
+        public static List<rx_entity> get_entitys_by_page(int page_index, int page_size, ref long row_count, string table_or_view_name, string order_identity_string = "id desc", string field_string = "*", string where_string = "", date_format_type date_time_format = date_format_type.date_time)
         {
             string sql = "pro_get_data_by_page";
             SqlParameter outputPara = new SqlParameter("@row_count", row_count);
@@ -601,7 +643,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static List<T> get_entitys_by_page<T>(int page_index, int page_size, ref int row_count, string table_or_view_name, string order_identity_string = "id desc", string field_string = "*", string where_string = "")
+        public static List<T> get_entitys_by_page<T>(int page_index, int page_size, ref long row_count, string table_or_view_name, string order_identity_string = "id desc", string field_string = "*", string where_string = "")
             where T : rx_strong_type, new()
         {
             string sql = "pro_get_data_by_page";
@@ -655,7 +697,7 @@ namespace rx
                 page_size = int.Parse(HttpContext.Current.Request["page_size"]);
             }
             catch (Exception) { page_size = 10; }
-            int row_count = 0;
+            long row_count = 0;
             bool look_moreing = false;
             try
             {
@@ -814,7 +856,7 @@ namespace rx
         {
             if (!proc_names.Contains(proc_name))
             {
-                throw new Exception(string.Format("存储过程：{0} 不存在，proc_name必须是一个自定创建的存储过成名称"));
+                throw new Exception(string.Format("存储过程：{0} 不存在，proc_name必须是一个自定创建的存储过成名称", proc_name));
             }
 
             if (proc_params == null) proc_params = new SqlParameter[0];
@@ -2046,7 +2088,7 @@ namespace rx
         /// <param name="entity">参与count计算的实体entity对象</param>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static int get_entity_count(rx_entity entity)
+        public static long get_entity_count(rx_entity entity)
         {
             entity = entity.clone();
             filtrate_entity(entity);
@@ -2081,7 +2123,7 @@ namespace rx
 
             string sql = string.Format("select count(*) count from {0} {1}", entity.entity_name, where_query.ToString());
 
-            return rx_dbhelper.instance().execute_sql_or_proc(sql, null, CommandType.Text, entity.entity_name)[0]["count"].value.to_int();
+            return rx_dbhelper.instance().execute_sql_or_proc(sql, null, CommandType.Text, entity.entity_name)[0]["count"].value.to_long();
         }
 
         /// <summary>
@@ -2091,7 +2133,7 @@ namespace rx
         /// <param name="where_string">条件字符串 and id = 1 and name = 'jack'</param>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static int get_entity_count(string table_or_view_name, string where_string = "")
+        public static long get_entity_count(string table_or_view_name, string where_string = "")
         {
             if (table_or_view_name == null)
                 throw new Exception("table_or_view_name 不能为空！");
@@ -2102,7 +2144,7 @@ namespace rx
 
             string sql = string.Format("select count(*) count from {0} where 1 = 1 {1}", table_or_view_name, where_string);
 
-            return rx_dbhelper.instance().execute_sql_or_proc(sql, null, CommandType.Text, table_or_view_name)[0]["count"].value.to_int();
+            return rx_dbhelper.instance().execute_sql_or_proc(sql, null, CommandType.Text, table_or_view_name)[0]["count"].value.to_long();
         }
 
         /// <summary>
@@ -2116,7 +2158,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static rx_entity get_entity_by_id(string table_name, int? id, date_format_type date_time_format = date_format_type.date_time)
+        public static rx_entity get_entity_by_id(string table_name, long? id, date_format_type date_time_format = date_format_type.date_time)
         {
             if (table_name == null)
                 throw new Exception("表名（table_name）不能为空！");
@@ -2144,7 +2186,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static T get_entity_by_id<T>(string table_name, int? id)
+        public static T get_entity_by_id<T>(string table_name, long? id)
             where T : rx_strong_type, new()
         {
             if (table_name == null)
@@ -2173,7 +2215,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static rx_entity get_entity_by_id(string table_name, int? id, date_format_type date_time_format = date_format_type.date_time, params string[] select_display_keys)
+        public static rx_entity get_entity_by_id(string table_name, long? id, date_format_type date_time_format = date_format_type.date_time, params string[] select_display_keys)
         {
             if (table_name == null)
                 throw new Exception("表名（table_name）不能为空！");
@@ -2221,7 +2263,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static List<rx_entity> get_entitys_in_id(string table_name, int[] id_array, date_format_type date_time_format = date_format_type.date_time, params string[] select_display_keys)
+        public static List<rx_entity> get_entitys_in_id(string table_name, long[] id_array, date_format_type date_time_format = date_format_type.date_time, params string[] select_display_keys)
         {
             if (table_name == null)
                 throw new Exception("表名（table_name）不能为空！");
@@ -2269,7 +2311,7 @@ namespace rx
         /// <returns></returns>
         [mvc.HttpGet]
         [mvc_api.HttpGet]
-        public static List<T> get_entitys_in_id<T>(int[] id_array, date_format_type date_time_format = date_format_type.date_time, params string[] select_display_keys)
+        public static List<T> get_entitys_in_id<T>(long[] id_array, date_format_type date_time_format = date_format_type.date_time, params string[] select_display_keys)
             where T : rx_strong_type, new()
         {
             string table_name = typeof(T).Name;
@@ -2524,7 +2566,7 @@ namespace rx
 
             rx_entity entity = empty_entitys[table_name].clone().request_fill();
 
-            if (entity["id"].value == null || entity["id"].value.to_int() == 0)
+            if (entity["id"].value == null)
             {
                 return insert_entity(entity);
             }
@@ -2554,7 +2596,7 @@ namespace rx
                 throw new Exception(string.Format("实体的entity_name（表名）：{0}不存在", entity.entity_name));
 
             dml_result result = new dml_result(entity.entity_name, dml_command_type.vague);
-            if (entity["id"].value == null || entity["id"].value.to_int() == 0)
+            if (entity["id"].value == null)
             {
                 //result.command_type = dml_command_type.insert;
                 //sql = transaction_insert_string_build(entity, result);
@@ -2592,7 +2634,7 @@ namespace rx
                 throw new Exception(string.Format("实体的entity_name（表名）：{0}不存在", entity.entity_name));
 
             dml_result result = new dml_result(entity.entity_name, dml_command_type.vague);
-            if (entity["id"].value == null || entity["id"].value.to_int() == 0)
+            if (entity["id"].value == null)
             {
                 //result.command_type = dml_command_type.insert;
                 //sql = transaction_insert_string_build(entity, result);
@@ -3357,7 +3399,7 @@ namespace rx
         [mvc.HttpDelete]
         [mvc_api.HttpDelete]
         [rx_risk_delete]
-        public static dml_result delete_entity_by_id(string table_name, int? id)
+        public static dml_result delete_entity_by_id(string table_name, long? id)
         {
             if (table_name == null)
                 throw new Exception("表名（table_name）不能为空！");
@@ -3389,7 +3431,7 @@ namespace rx
         [mvc.HttpDelete]
         [mvc_api.HttpDelete]
         [rx_risk_delete]
-        public static dml_result delete_entity_in_id(string table_name, params int[] id_array)
+        public static dml_result delete_entity_in_id(string table_name, params long[] id_array)
         {
             if (table_name == null)
                 throw new Exception("表名（table_name）不能为空！");
@@ -3689,6 +3731,7 @@ namespace rx
                                         rx_entity entity = new rx_entity(entity_name);
                                         for (int i = 0; i < field_count; i++)
                                         {
+                                            var obj = reader[keys[i]];
                                             entity[keys[i]] = new rx_field(keys[i], reader[keys[i]], entity, date_time_format);
                                         }
                                         list.Add(entity);

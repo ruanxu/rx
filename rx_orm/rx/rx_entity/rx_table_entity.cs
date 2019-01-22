@@ -8,7 +8,7 @@ namespace rx
 {
     public class rx_table_entity
     {
-        public int row_count { get; set; }
+        public long row_count { get; set; }
 
         public List<rx_entity> rows { get; set; }
     }

@@ -36,7 +36,7 @@ function ArrayList() {
 ArrayList = Array;
 
 ArrayList.prototype.Add = function (obj) {
-    this[this.length] = obj;
+    this.push(obj);
     return true;
 }
 
@@ -66,7 +66,7 @@ ArrayList.prototype.Insert = function (index, obj) {
     }
 
     var length = this.length;
-    for (var i = length + 1; i > index ; i--) {
+    for (var i = length; i > index ; i--) {
         this[i] = this[i - 1];
     }
     this[index] = obj;
@@ -77,10 +77,7 @@ ArrayList.prototype.Remove = function (obj) {
     var reg = false;
     for (var i = 0; i < this.length; i++) {
         if (this[i] == obj) {
-            for (var j = i; j < this.length - 1; j++) {
-                this[j] = this[j + 1];
-            }
-            this.length -= 1;
+            this.RemoveAt(i, 1);
             reg = true;
             break;
         }
@@ -97,11 +94,12 @@ ArrayList.prototype.RemoveAt = function (index) {
         alert("集合内越界！");
         return false;
     }
-    for (var i = index; i < this.length - 1; i++) {
-        this[i] = this[i + 1];
-    }
-    this.length -= 1;
+    this.splice(index, 1)
     return true;
+}
+
+ArrayList.prototype.Clear = function () {
+    this.length = 0;
 }
 
 Array.prototype.Contains = function (value) {
